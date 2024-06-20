@@ -91,6 +91,9 @@ public class StatusConsoleAdapter {
         while (choice < 1 || choice > 6) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
+                if (choice > 6) {                    
+                    System.out.println("Ingrese una opcion valida (1 - 6).");
+                }
             } catch (Exception e) {
                 System.out.println("Ingrese una opcion valida (1 - 6).");
             }
