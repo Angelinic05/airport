@@ -62,8 +62,8 @@ public class RevisionMySQLRepository implements RevisionRepository{
                     if (resultSet.next()) {
                         Revision revision = new Revision(
                             resultSet.getInt("id"),
-                            resultSet.getDate("Revision Date"),
-                            resultSet.getInt("Revision Date")
+                            resultSet.getDate("revisionDate"),
+                            resultSet.getInt("idplane")
                         );
                         return Optional.of(revision);
                     }
@@ -97,9 +97,9 @@ public class RevisionMySQLRepository implements RevisionRepository{
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     Revision revision = new Revision(
-                        resultSet.getInt("id"),
-                            resultSet.getDate("Revision Date"),
-                            resultSet.getInt("Id plane")
+                            resultSet.getInt("id"),
+                            resultSet.getDate("revisionDate"),
+                            resultSet.getInt("idPlane")
                     );
                     revisions.add(revision);
                 }
