@@ -1,5 +1,5 @@
 package com.campuslands.moduls.customer.adapter.out;
 
-public class CustomerMySQLRespository {
+public class CustomerMySQLRepository {
 
 }
