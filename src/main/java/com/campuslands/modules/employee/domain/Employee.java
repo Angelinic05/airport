@@ -6,17 +6,17 @@ public class Employee {
     int id;
     String name;
     int idRol;
-    Date ingresesdate;
+    Date entryDate;
     int idAirline;
     int idAirport;
 
     public Employee(){} //Constructor vacio
 
-    public Employee(int id, String name, int idRol, Date ingresesdate, int idAirline, int idAirport){
+    public Employee(int id, String name, int idRol, Date entryDate, int idAirline, int idAirport){
         this.id = id;
         this.name = name;
         this.idRol = idRol;
-        this.ingresesdate = ingresesdate;
+        this.entryDate = entryDate;
         this.idAirline = idAirline;
         this.idAirport = idAirport;
     }
@@ -39,11 +39,11 @@ public class Employee {
     public void setIdRol(int idRol) {
         this.idRol = idRol;
     }
-    public Date getIngresesdate() {
-        return ingresesdate;
+    public Date getEntryDate() {
+        return entryDate;
     }
-    public void setIngresesdate(Date ingresesdate) {
-        this.ingresesdate = ingresesdate;
+    public void setEntryDate(Date entryDate) {
+        this.entryDate = entryDate;
     }
     public int getIdAirline() {
         return idAirline;

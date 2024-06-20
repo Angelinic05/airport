@@ -5,16 +5,16 @@ import java.util.Date;
 public class Plane {
     int id;
     int capacity;
-    Date fabrication_date;
+    Date fabricationDate;
     int idStatus;
     int idModel;
 
     public Plane(){}
 
-    public Plane(int id, int capacity, Date fabrication_date, int idStatus, int idModel){
+    public Plane(int id, int capacity, Date fabricationDate, int idStatus, int idModel){
         this.id = id;
         this.capacity = capacity;
-        this.fabrication_date = fabrication_date;
+        this.fabricationDate = fabricationDate;
         this.idStatus = idStatus;
         this.idModel = idModel;
     }
@@ -35,12 +35,12 @@ public class Plane {
         this.capacity = capacity;
     }
 
-    public Date getFabrication_date() {
-        return fabrication_date;
+    public Date getFabricationDate() {
+        return fabricationDate;
     }
 
-    public void setFabrication_date(Date fabrication_date) {
-        this.fabrication_date = fabrication_date;
+    public void setFabricationDate(Date fabricationDate) {
+        this.fabricationDate = fabricationDate;
     }
 
     public int getIdStatus() {
