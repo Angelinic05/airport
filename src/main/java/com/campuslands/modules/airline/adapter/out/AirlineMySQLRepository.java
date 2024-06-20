@@ -1,5 +1,9 @@
 package com.campuslands.modules.airline.adapter.out;
 
-public class AirlineMySQLRepository {
+import com.campuslands.modules.airline.infrastructure.AirlineRepository;
+
+public class AirlineMySQLRepository { 
     
+    // Implementation of AirlineRepository methods
+
 }
