@@ -2,17 +2,14 @@ package com.campuslands;
 
 import java.util.Scanner;
 
-
-import com.campuslands.moduls.revision.adapter.in.RevisionConsoleAdapter;
-import com.campuslands.moduls.revision.adapter.out.RevisionMySQLRepository;
-import com.campuslands.moduls.revision.application.RevisionService;
-import com.campuslands.moduls.revision.domain.Revision;
-
-
-import com.campuslands.moduls.status.adapter.in.StatusConsoleAdapter;
-import com.campuslands.moduls.status.adapter.out.StatusMySQLRepository;
-import com.campuslands.moduls.status.application.StatusService;
-import com.campuslands.moduls.status.domain.Status;
+import com.campuslands.modules.revision.adapter.in.RevisionConsoleAdapter;
+import com.campuslands.modules.revision.adapter.out.RevisionMySQLRepository;
+import com.campuslands.modules.revision.application.RevisionService;
+import com.campuslands.modules.revision.domain.Revision;
+import com.campuslands.modules.status.adapter.in.StatusConsoleAdapter;
+import com.campuslands.modules.status.adapter.out.StatusMySQLRepository;
+import com.campuslands.modules.status.application.StatusService;
+import com.campuslands.modules.status.domain.Status;
 
 public class Main {
     public static void main(String[] args) {
@@ -142,3 +139,8 @@ public class Main {
             }
     }
 }
+
+/*
+ *  Crear una funcion para imprimir el menu y crear una funcion para majear el ingreso de los datos.
+ * 
+ */
