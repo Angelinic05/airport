@@ -18,6 +18,11 @@ import com.campuslands.modules.status.adapter.out.StatusMySQLRepository;
 import com.campuslands.modules.status.application.StatusService;
 import com.campuslands.modules.status.domain.Status;
 
+import com.campuslands.modules.trip.adapter.in.TripConsoleAdapter;
+import com.campuslands.modules.trip.adapter.out.TripMySQLRepository;
+import com.campuslands.modules.trip.application.TripService;
+import com.campuslands.modules.trip.domain.Trip;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -28,6 +33,7 @@ public class Main {
         RevisionMySQLRepository revisionRepository = new RevisionMySQLRepository(url, username, password);
         RevisiondetailMySQLRepository revisiondetailRepository = new RevisiondetailMySQLRepository(url, username, password);
         StatusMySQLRepository statusRepository = new StatusMySQLRepository(url, username, password);
+        TripMySQLRepository tripRepository = new TripMySQLRepository(url, username, password);
 
         System.out.println("--------------- MENU PRINCIPAL ---------------");
         while (true) {
@@ -125,6 +131,9 @@ public class Main {
                     break;
                 case 19:
                     System.out.println("trip");
+                    TripService tripService = new TripService(tripRepository);
+                    TripConsoleAdapter tripConsoleAdapter = new TripConsoleAdapter(tripService);
+                    tripConsoleAdapter.start();
                     break;
                 case 20:
                     System.out.println("tripbooking");

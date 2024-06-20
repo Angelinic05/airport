@@ -58,11 +58,11 @@ public class StatusMySQLRepository implements StatusRepository{
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
-                        Status pais = new Status(
+                        Status status = new Status(
                             resultSet.getInt("id"),
                             resultSet.getString("name")
                         );
-                        return Optional.of(pais);
+                        return Optional.of(status);
                     }
                 }
             }
@@ -93,11 +93,11 @@ public class StatusMySQLRepository implements StatusRepository{
             try (PreparedStatement statement = connection.prepareStatement(query);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Status pais = new Status(
+                    Status status = new Status(
                         resultSet.getInt("id"),
                         resultSet.getString("name")
                     );
-                    ciudades.add(pais);
+                    ciudades.add(status);
                 }
             }
         } catch (SQLException e) {

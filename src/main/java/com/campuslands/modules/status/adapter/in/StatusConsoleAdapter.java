@@ -36,8 +36,6 @@ public class StatusConsoleAdapter {
                     System.out.print("Ingrese el nuevo nombre: ");
                     String updateName = scanner.nextLine();
 
-
-
                     Status updatedStatus = new Status(updateId, updateName);
                     statusService.updateStatus(updatedStatus);
                     break;

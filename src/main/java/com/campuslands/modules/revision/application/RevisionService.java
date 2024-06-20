@@ -7,7 +7,7 @@ import com.campuslands.modules.revision.domain.Revision;
 import com.campuslands.modules.revision.infraestructure.RevisionRepository;
 
 public class RevisionService {
-        private final RevisionRepository revisionRepository;
+    private final RevisionRepository revisionRepository;
 
     public RevisionService(RevisionRepository revisionRepository) {
         this.revisionRepository = revisionRepository;
