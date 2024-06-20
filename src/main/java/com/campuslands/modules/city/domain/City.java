@@ -4,17 +4,14 @@ public class City {
     
     protected int id;
     protected String name;
-    protected int age;
-    protected int idDocument;
+    protected int idCity;
     
     public City() {
     }
 
-    public City(int id, String name, int age, int idDocument) {
-        this.id = id;
+    public City(String name, int idCity) {
         this.name = name;
-        this.age = age;
-        this.idDocument = idDocument;
+        this.idCity = idCity;
     }
 
     public int getId() {
@@ -33,20 +30,12 @@ public class City {
         this.name = name;
     }
 
-    public int getAge() {
-        return age;
+    public int getIdCity() {
+        return idCity;
     }
 
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getIdDocument() {
-        return idDocument;
-    }
-
-    public void setIdDocument(int idDocument) {
-        this.idDocument = idDocument;
+    public void setIdCity(int idCity) {
+        this.idCity = idCity;
     }
 
     
