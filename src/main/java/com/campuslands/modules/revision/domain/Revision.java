@@ -12,15 +12,14 @@ public class Revision {
         this.revisionDate = revisionDate;
         this.idPlane = idPlane;
     }
-    public Revision() {}
 
-    public Revision(Date revisionDate){
+
+    public Revision(Date revisionDate, int idPlane){
         this.revisionDate = revisionDate;
-    }
-    
-    public Revision(int idPlane){
         this.idPlane = idPlane;
     }
+
+    public Revision() {}
 
     // Getters y setters
     public int getId() {

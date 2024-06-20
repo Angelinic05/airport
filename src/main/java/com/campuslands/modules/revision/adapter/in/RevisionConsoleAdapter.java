@@ -35,13 +35,11 @@ public class RevisionConsoleAdapter {
                     Date createFecha = Date.valueOf(scanner.nextLine());
 
                     System.out.print("Ingrese la nueva id plane: ");
-                    int updatePlane = scanner.nextInt();
+                    int idPlane = scanner.nextInt();
 
-                    Revision newRevisionDate = new Revision(createFecha);
-                    revisionService.createRevision(newRevisionDate);
-
-                    Revision newRevisionIdPlane = new Revision(updatePlane);
-                    revisionService.createRevision(newRevisionIdPlane);
+                    Revision newRevision = new Revision(createFecha, idPlane);
+                    
+                    revisionService.createRevision(newRevision);
                     break;
 
                 case 2:
