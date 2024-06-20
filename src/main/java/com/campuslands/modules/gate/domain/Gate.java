@@ -7,6 +7,12 @@ public class Gate {
     
     public Gate(){}
 
+    public Gate(int id, String gateNumber, int idAirport){
+        this.id = id;
+        this.gateNumber = gateNumber;
+        this.idAirport = idAirport;
+    }
+
     public int getId() {
         return id;
     }

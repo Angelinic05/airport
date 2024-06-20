@@ -7,6 +7,12 @@ public class Revemployee {
 
     public Revemployee (){}
 
+    public Revemployee (int id, int idEmployee, int idRevision){
+        this.id = id;
+        this.idEmployee = idEmployee;
+        this.idRevision = idRevision;
+    }
+
     public int getId() {
         return id;
     }

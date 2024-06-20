@@ -8,10 +8,18 @@ public class Employee {
     int idRol;
     Date ingresesdate;
     int idAirline;
-    int idAirpot;
+    int idAirport;
 
     public Employee(){} //Constructor vacio
 
+    public Employee(int id, String name, int idRol, Date ingresesdate, int idAirline, int idAirport){
+        this.id = id;
+        this.name = name;
+        this.idRol = idRol;
+        this.ingresesdate = ingresesdate;
+        this.idAirline = idAirline;
+        this.idAirport = idAirport;
+    }
 
     public int getId() {
         return id;
@@ -44,10 +52,10 @@ public class Employee {
         this.idAirline = idAirline;
     }
     public int getIdAirpot() {
-        return idAirpot;
+        return idAirport;
     }
     public void setIdAirpot(int idAirpot) {
-        this.idAirpot = idAirpot;
+        this.idAirport = idAirpot;
     }    
 
     

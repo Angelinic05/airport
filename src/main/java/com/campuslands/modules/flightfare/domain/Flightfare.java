@@ -7,6 +7,13 @@ public class Flightfare {
     double value;
 
     public Flightfare(){}
+
+    public Flightfare(int id, String descripcion, String text, double value){
+        this.id = id;
+        this.descripcion = descripcion;
+        this.text = text;
+        this.value = value;
+    }
     
     public int getId() {
         return id;

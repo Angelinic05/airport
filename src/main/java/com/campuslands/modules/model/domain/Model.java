@@ -7,6 +7,12 @@ public class Model {
 
     public Model (){}
 
+    public Model (int id, String name, int idManufactures){
+        this.id = id;
+        this.name = name;
+        this.idManufactures = idManufactures;
+    }
+
     public int getId() {
         return id;
     }
