@@ -1,7 +1,144 @@
 package com.campuslands;
 
+import java.util.Scanner;
+
+
+import com.campuslands.moduls.revision.adapter.in.RevisionConsoleAdapter;
+import com.campuslands.moduls.revision.adapter.out.RevisionMySQLRepository;
+import com.campuslands.moduls.revision.application.RevisionService;
+import com.campuslands.moduls.revision.domain.Revision;
+
+
+import com.campuslands.moduls.status.adapter.in.StatusConsoleAdapter;
+import com.campuslands.moduls.status.adapter.out.StatusMySQLRepository;
+import com.campuslands.moduls.status.application.StatusService;
+import com.campuslands.moduls.status.domain.Status;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Scanner scanner = new Scanner(System.in);
+        String url = "jdbc:mysql://localhost:3306/airport";
+        String username = "root";
+        String password = "root";
+
+        RevisionMySQLRepository revisionRepository = new RevisionMySQLRepository(url, username, password);
+        StatusMySQLRepository statusRepository = new StatusMySQLRepository(url, username, password);
+
+        System.out.println("--------------- MENU PRINCIPAL ---------------");
+        while (true) {
+            System.out.println("1. airline");
+            System.out.println("2. airport");
+            System.out.println("3. airportairline");
+            System.out.println("4. city");
+            System.out.println("5. country");
+            System.out.println("6. customer");
+            System.out.println("7. documenttype");
+            System.out.println("8. employee");
+            System.out.println("9. flightconnection");
+            System.out.println("10. flightfare");
+            System.out.println("11. gate");
+            System.out.println("12. manufacture");
+            System.out.println("13. model");
+            System.out.println("14. plane");
+            System.out.println("15. revemployee");
+            System.out.println("16. revision");
+            System.out.println("17. revisiondetail");
+            System.out.println("18. status");
+            System.out.println("19. trip");
+            System.out.println("20. tripbooking");
+            System.out.println("21. tripbookingdetail");
+            System.out.println("22. tripcrew");
+            System.out.println("23. tripulationrol");
+            System.out.println("");
+            System.out.print("Ingrese la opcion: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.println("airline");
+                    break;
+                case 2:
+                    System.out.println("airport");
+                    break;
+                case 3:
+                    System.out.println("airportairline");
+                    break;
+                case 4:
+                    System.out.println("city");
+                    break;
+                case 5:
+                    System.out.println("country");
+                    break;
+                case 6:
+                    System.out.println("customer");
+                    break;
+                case 7:
+                    System.out.println("documenttype");
+                    break;
+                case 8:
+                    System.out.println("employee");
+                    break;
+                case 9:
+                    System.out.println("flightconnection");
+                    break;
+                case 10:
+                    System.out.println("flightfare");
+                    break;
+                case 11:
+                    System.out.println("gate");
+                    break;
+                case 12:
+                    System.out.println("manufacture");
+                    break;
+                case 13:
+                    System.out.println("model");
+                    break;
+                case 14:
+                    System.out.println("plane");
+                    break;
+                case 15:
+                    System.out.println("revemployee");
+                    break;
+                case 16:
+                    System.out.println("revision");
+                    RevisionService revisionService = new RevisionService(revisionRepository);
+                    RevisionConsoleAdapter revisionConsoleAdapter = new RevisionConsoleAdapter(revisionService);
+                    revisionConsoleAdapter.start();
+                    break;
+                case 17:
+                    System.out.println("revisiondetail");
+                    break;
+                case 18:
+                    System.out.println("status");
+                    StatusService statusService = new StatusService(statusRepository);
+                    StatusConsoleAdapter statusConsoleAdapter = new StatusConsoleAdapter(statusService);
+                    statusConsoleAdapter.start();
+                    break;
+                case 19:
+                    System.out.println("trip");
+                    break;
+                case 20:
+                    System.out.println("tripbooking");
+                    break;
+                case 21:
+                    System.out.println("tripbookingdetail");
+                    break;
+                case 22:
+                    System.out.println("tripcrew");
+                    break;
+                case 23:
+                    System.out.println("tripulationrol");
+                    break;
+                case 24:
+                    scanner.close();
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Opcion invalida, intentelo de nuevo.");
+
+        
+                }
+            }
     }
 }

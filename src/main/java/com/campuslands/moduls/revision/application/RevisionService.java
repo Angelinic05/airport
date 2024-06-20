@@ -1,0 +1,36 @@
+package com.campuslands.moduls.revision.application;
+
+import java.util.List;
+import java.util.Optional;
+
+import com.campuslands.moduls.revision.domain.Revision;
+import com.campuslands.moduls.revision.infraestructure.RevisionRepository;
+
+public class RevisionService {
+        private final RevisionRepository revisionRepository;
+
+    public RevisionService(RevisionRepository revisionRepository) {
+        this.revisionRepository = revisionRepository;
+    }
+
+    public void createRevision(Revision revision) {
+        revisionRepository.save(revision);
+    }
+
+    public void updateRevision(Revision revision) {
+        revisionRepository.update(revision);
+    }
+
+    public Optional<Revision> getRevisionById(int id) {
+        return revisionRepository.findById(id);
+    }
+
+    public void deleteRevision(int id) {
+        revisionRepository.delete(id);
+    }
+
+    public List<Revision> getAllRevisions() {
+        return revisionRepository.findAll();
+    }
+}
+
