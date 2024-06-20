@@ -18,16 +18,7 @@ public class RevisionConsoleAdapter {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
-            System.out.println("1. Crear Revision");
-            System.out.println("2. Actualizar Revision");
-            System.out.println("3. Buscar Revision por ID");
-            System.out.println("4. Eliminar Revision");
-            System.out.println("5. Listar todos Paises");
-            System.out.println("6. Salir");
-            System.out.println("");
-            System.out.print("Ingrese la opcion: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            int choice = menu(scanner);
 
             switch (choice) {
                 case 1:
@@ -90,5 +81,28 @@ public class RevisionConsoleAdapter {
                     System.out.println("Opcion invalida, intentelo de nuevo.");
             }
         }
+    }
+
+    private int menu(Scanner scanner){
+        System.out.println("1. Crear Revision");
+        System.out.println("2. Actualizar Revision");
+        System.out.println("3. Buscar Revision por ID");
+        System.out.println("4. Eliminar Revision");
+        System.out.println("5. Listar todos Paises");
+        System.out.println("6. Salir");
+        System.out.println("");
+        System.out.print("Ingrese la opcion: ");
+        int choice = scanner.nextInt();
+        while (choice < 1 || choice > 6) {
+            try {
+                choice = Integer.parseInt(scanner.nextLine());
+                if (choice > 6) {                    
+                    System.out.println("Ingrese una opcion valida (1 - 6).");
+                }
+            } catch (Exception e) {
+                System.out.println("Ingrese una opcion valida (1 - 6).");
+            }
+        }
+        return choice;    
     }
 }
