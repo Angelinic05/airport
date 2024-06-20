@@ -1,5 +1,6 @@
 package com.campuslands.modules.revision.adapter.in;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -31,7 +32,7 @@ public class RevisionConsoleAdapter {
             switch (choice) {
                 case 1:
                     System.out.print("Ingrese la fecha de la revision: ");
-                    String createFecha = scanner.nextLine();
+                    Date createFecha = Date.valueOf(scanner.nextLine());
 
                     System.out.print("Ingrese la nueva id plane: ");
                     int updatePlane = scanner.nextInt();
@@ -48,7 +49,7 @@ public class RevisionConsoleAdapter {
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
                     System.out.print("Ingrese la nueva fecha: ");
-                    String updateFecha = scanner.nextLine();
+                    Date updateFecha = Date.valueOf(scanner.nextLine());
                     System.out.print("Ingrese la nueva id plane: ");
                     int updateIdPlane = scanner.nextInt();
                     scanner.nextLine();

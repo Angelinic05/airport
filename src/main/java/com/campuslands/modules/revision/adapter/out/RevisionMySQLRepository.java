@@ -28,7 +28,7 @@ public class RevisionMySQLRepository implements RevisionRepository{
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "INSERT INTO revision (revisionDate, idPlane) VALUES (?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, revision.getRevisionDate());
+                statement.setDate(1, revision.getRevisionDate());
                 statement.setInt(2, revision.getIdPlane());
                 statement.executeUpdate();
             }
@@ -43,7 +43,7 @@ public class RevisionMySQLRepository implements RevisionRepository{
             String query = "UPDATE revision SET revisionDate, idPlane = ?,? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, revision.getId());
-                statement.setString(2, revision.getRevisionDate());
+                statement.setDate(2, revision.getRevisionDate());
                 statement.setInt(3, revision.getIdPlane());
                 statement.executeUpdate();
             }
@@ -62,7 +62,7 @@ public class RevisionMySQLRepository implements RevisionRepository{
                     if (resultSet.next()) {
                         Revision revision = new Revision(
                             resultSet.getInt("id"),
-                            resultSet.getString("Revision Date"),
+                            resultSet.getDate("Revision Date"),
                             resultSet.getInt("Revision Date")
                         );
                         return Optional.of(revision);
@@ -98,7 +98,7 @@ public class RevisionMySQLRepository implements RevisionRepository{
                 while (resultSet.next()) {
                     Revision revision = new Revision(
                         resultSet.getInt("id"),
-                            resultSet.getString("Revision Date"),
+                            resultSet.getDate("Revision Date"),
                             resultSet.getInt("Id plane")
                     );
                     revisions.add(revision);

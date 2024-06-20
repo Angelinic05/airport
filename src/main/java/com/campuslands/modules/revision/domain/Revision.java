@@ -1,19 +1,20 @@
 package com.campuslands.modules.revision.domain;
 
+import java.sql.Date;
 
 public class Revision {
     private int id;
-    private String revisionDate;
+    private Date revisionDate;
     private int idPlane;
 
-    public Revision(int id, String revisionDate, int idPlane){
+    public Revision(int id, Date revisionDate, int idPlane){
         this.id = id;
         this.revisionDate = revisionDate;
         this.idPlane = idPlane;
     }
     public Revision() {}
 
-    public Revision(String revisionDate){
+    public Revision(Date revisionDate){
         this.revisionDate = revisionDate;
     }
     
@@ -30,11 +31,11 @@ public class Revision {
         this.id = id;
     }
 
-    public String getRevisionDate() {
+    public Date getRevisionDate() {
         return this.revisionDate;
     }
 
-    public void setRevisionDate(String revisionDate) {
+    public void setRevisionDate(Date revisionDate) {
         this.revisionDate = revisionDate;
     }
 
