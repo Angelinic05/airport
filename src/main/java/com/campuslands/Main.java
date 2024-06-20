@@ -6,6 +6,13 @@ import com.campuslands.modules.revision.adapter.in.RevisionConsoleAdapter;
 import com.campuslands.modules.revision.adapter.out.RevisionMySQLRepository;
 import com.campuslands.modules.revision.application.RevisionService;
 import com.campuslands.modules.revision.domain.Revision;
+
+import com.campuslands.modules.revisiondetail.adapter.in.RevisiondetailConsoleAdapter;
+import com.campuslands.modules.revisiondetail.adapter.out.RevisiondetailMySQLRepository;
+import com.campuslands.modules.revisiondetail.application.RevisiondetailService;
+import com.campuslands.modules.revisiondetail.domain.Revisiondetail;
+
+
 import com.campuslands.modules.status.adapter.in.StatusConsoleAdapter;
 import com.campuslands.modules.status.adapter.out.StatusMySQLRepository;
 import com.campuslands.modules.status.application.StatusService;
@@ -19,6 +26,7 @@ public class Main {
         String password = "root";
 
         RevisionMySQLRepository revisionRepository = new RevisionMySQLRepository(url, username, password);
+        RevisiondetailMySQLRepository revisiondetailRepository = new RevisiondetailMySQLRepository(url, username, password);
         StatusMySQLRepository statusRepository = new StatusMySQLRepository(url, username, password);
 
         System.out.println("--------------- MENU PRINCIPAL ---------------");
@@ -105,6 +113,9 @@ public class Main {
                     break;
                 case 17:
                     System.out.println("revisiondetail");
+                    RevisiondetailService revisiondetailService = new RevisiondetailService(revisiondetailRepository);
+                    RevisiondetailConsoleAdapter revisiondetailConsoleAdapter = new RevisiondetailConsoleAdapter(revisiondetailService);
+                    revisiondetailConsoleAdapter.start();
                     break;
                 case 18:
                     System.out.println("status");

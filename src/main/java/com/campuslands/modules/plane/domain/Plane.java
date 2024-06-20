@@ -11,6 +11,14 @@ public class Plane {
 
     public Plane(){}
 
+    public Plane(int id, int capacity, Date fabrication_date, int idStatus, int idModel){
+        this.id = id;
+        this.capacity = capacity;
+        this.fabrication_date = fabrication_date;
+        this.idStatus = idStatus;
+        this.idModel = idModel;
+    }
+
     public int getId() {
         return id;
     }

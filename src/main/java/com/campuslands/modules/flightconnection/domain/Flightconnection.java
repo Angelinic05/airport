@@ -8,6 +8,14 @@ public class Flightconnection {
     int idAirport;
 
     public Flightconnection(){}
+
+    public Flightconnection(int id, String connectionNumber, int idTrip, int idPlane, int idAirport){
+        this.id = id;
+        this.connectionNumber = connectionNumber;
+        this.idTrip = idTrip;
+        this.idPlane = idPlane;
+        this.idAirport = idAirport;
+    }
     
     public int getId() {
         return id;
