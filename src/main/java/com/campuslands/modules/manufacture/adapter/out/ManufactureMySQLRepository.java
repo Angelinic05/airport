@@ -94,7 +94,22 @@ public class ManufactureMySQLRepository implements ManufactureRepository{
     @Override
     public List<Manufacture> findAll(){
         List<Manufacture> manufacture = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT  id, name FROM manufacture";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Manufacture manufacture2 = new Manufacture(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name")
+                        );
+                        manufacture.add(manufacture2);
+                    }                    
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return manufacture;
     }
-    
 }

@@ -96,6 +96,23 @@ public class GateMySQLRepository implements GateRepository{
     @Override
     public List<Gate> findAll(){
         List<Gate> gate = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, gateNumber, idAirport FROM gate";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()){
+                        Gate gate2 = new Gate(
+                            resultSet.getInt("id"),
+                            resultSet.getString("gateNumber"),
+                            resultSet.getInt("idAirpot")
+                        );
+                        gate.add(gate2);
+                    }
+                } 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return gate;
     }
 

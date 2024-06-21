@@ -100,9 +100,25 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
     @Override
     public List<Flightconnection> findAll(){
         List<Flightconnection> flightconnection = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, connectionNumber, idTrip, idPlane, idAirport FROM flightconnection";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Flightconnection flightconnection2 = new Flightconnection(
+                            resultSet.getInt("id"),
+                            resultSet.getString("connectionNumbre"),
+                            resultSet.getInt("idTrip"),
+                            resultSet.getInt("idPlane"),
+                            resultSet.getInt("idAirport")
+                        );
+                        flightconnection.add(flightconnection2);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return flightconnection;
-    }
-
-
-    
+    } 
 }

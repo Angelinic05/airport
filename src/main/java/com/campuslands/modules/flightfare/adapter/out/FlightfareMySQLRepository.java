@@ -98,11 +98,24 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     @Override
     public List<Flightfare> findAll(){
         List<Flightfare> flightfare = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, description, details, values FROM flightfare";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()){
+                        Flightfare flightfare2 = new Flightfare(
+                            resultSet.getInt("id"),
+                            resultSet.getString("description"),
+                            resultSet.getString("details"),
+                            resultSet.getDouble("values")
+                        );
+                        flightfare.add(flightfare2);
+                    }
+                }                 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return flightfare;
-    }
-
-
-
-
-    
+    } 
 }
