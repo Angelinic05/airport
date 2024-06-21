@@ -27,7 +27,7 @@ public class AirportMySQLRepository implements AirportRepository {
     @Override
     public void save(Airport airport) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO airports (name, idCity, xPosition, yPosition) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO airport (name, idCity, xPosition, yPosition) VALUES (?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, airport.getName());
                 statement.setInt(2, airport.getIdCity());
@@ -43,7 +43,7 @@ public class AirportMySQLRepository implements AirportRepository {
     @Override
     public void update(Airport airport) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE airports SET name =?, idCity =?, xPosition =?, yPosition=? WHERE id=?";
+            String query = "UPDATE airport SET name =?, idCity =?, xPosition =?, yPosition=? WHERE id=?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, airport.getName());
                 statement.setInt(2, airport.getIdCity());
@@ -60,7 +60,7 @@ public class AirportMySQLRepository implements AirportRepository {
     @Override
     public Optional<Airport> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT * FROM airports WHERE id =?";
+            String query = "SELECT * FROM airport WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -84,7 +84,7 @@ public class AirportMySQLRepository implements AirportRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "DELETE FROM airports WHERE id =?";
+            String query = "DELETE FROM airport WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
@@ -98,7 +98,7 @@ public class AirportMySQLRepository implements AirportRepository {
     public List<Airport> findAll() {
         List<Airport> airports = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT * FROM airports";
+            String query = "SELECT * FROM airport";
             try (PreparedStatement statement = connection.prepareStatement(query);
                 ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
