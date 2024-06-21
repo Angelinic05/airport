@@ -5,22 +5,22 @@ import java.sql.Date;
 public class Trip {
     private int id;
     private Date tripDate;
-    private double princeTripe;
+    private double priceTripe;
     private int idAirportDestint;
     private int idAirportOrigen;
 
     
-    public Trip(int id, Date tripDate, double princeTripe, int idAirportOrigen, int idAirportDestint){
+    public Trip(int id, Date tripDate, double priceTripe, int idAirportOrigen, int idAirportDestint){
         this.id = id;
         this.tripDate = tripDate;
-        this.princeTripe = princeTripe;
+        this.priceTripe = priceTripe;
         this.idAirportOrigen = idAirportOrigen;
         this.idAirportDestint = idAirportDestint;
     }
 
-    public Trip(Date tripDate, double princeTripe, int idAirportOrigen, int idAirportDestint){
+    public Trip(Date tripDate, double priceTripe, int idAirportOrigen, int idAirportDestint){
         this.tripDate = tripDate;
-        this.princeTripe = princeTripe;
+        this.priceTripe = priceTripe;
         this.idAirportOrigen = idAirportOrigen;
         this.idAirportDestint = idAirportDestint;
     }
@@ -41,12 +41,12 @@ public class Trip {
         this.tripDate = tripDate;
     }
 
-    public double getPrinceTripe() {
-        return this.princeTripe;
+    public double getPriceTripe() {
+        return this.priceTripe;
     }
 
-    public void setPrinceTripe(double princeTripe) {
-        this.princeTripe = princeTripe;
+    public void setPriceTripe(double priceTripe) {
+        this.priceTripe = priceTripe;
     }
 
     public int getIdAirportDestint() {

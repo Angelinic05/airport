@@ -22,9 +22,11 @@ public class TripbookingConsoleAdapter {
 
             switch (choice) {
                 case 1:
+
                     System.out.print("Ingrese la fecha del tripbooking: ");
                     Date createDate = Date.valueOf(scanner.nextLine());
 
+                    System.out.println(createDate);
                     System.out.print("Ingrese el id del viaje: ");
                     int createIdTrip = scanner.nextInt();
 

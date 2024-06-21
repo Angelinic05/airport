@@ -28,7 +28,7 @@ public class TripConsoleAdapter {
                     Date createTrip_date = Date.valueOf(scanner.nextLine());
 
                     System.out.print("Ingrese el precio del viaje: ");
-                    int idPrince_tripe = scanner.nextInt();
+                    double idPrice_tripe = scanner.nextDouble();
 
                     System.out.print("Ingrese la id ciudad origen: ");
                     int idId_airport_origen = scanner.nextInt();
@@ -36,7 +36,7 @@ public class TripConsoleAdapter {
                     System.out.print("Ingrese la id ciudad destino: ");
                     int idId_airport_destint = scanner.nextInt();
 
-                    Trip newTrip = new Trip(createTrip_date, idPrince_tripe, idId_airport_origen, idId_airport_destint);
+                    Trip newTrip = new Trip(createTrip_date, idPrice_tripe, idId_airport_origen, idId_airport_destint);
                     
                     tripService.createTrip(newTrip);
                     break;
@@ -50,7 +50,7 @@ public class TripConsoleAdapter {
                     Date updateTrip_date = Date.valueOf(scanner.nextLine());
 
                     System.out.print("Ingrese el precio del viaje: ");
-                    int updatePrince_tripe = scanner.nextInt();
+                    double updatePrice_tripe = scanner.nextDouble();
 
                     System.out.print("Ingrese la id ciudad origen: ");
                     int updateId_airport_origen = scanner.nextInt();
@@ -60,7 +60,7 @@ public class TripConsoleAdapter {
 
                     scanner.nextLine();
 
-                    Trip updatedTrip = new Trip(updateId, updateTrip_date, updatePrince_tripe, updateId_airport_origen, updateId_airport_destint);
+                    Trip updatedTrip = new Trip(updateId, updateTrip_date, updatePrice_tripe, updateId_airport_origen, updateId_airport_destint);
                     tripService.updateTrip(updatedTrip);
                     break;
 
@@ -71,7 +71,7 @@ public class TripConsoleAdapter {
 
                     Optional<Trip> trip = tripService.getTripById(findId);
                     trip.ifPresentOrElse(
-                        p -> System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPrinceTripe() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint()),
+                        p -> System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPriceTripe() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint()),
                         () -> System.out.println("Viaje no encontrado")
                     );
                     break;
@@ -85,7 +85,7 @@ public class TripConsoleAdapter {
 
                 case 5:
                     tripService.getAllTrips().forEach(p -> {
-                        System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPrinceTripe() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint());
+                        System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPriceTripe() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint());
                     });
                     break;
 
@@ -108,7 +108,7 @@ public class TripConsoleAdapter {
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
-        int choice = scanner.nextInt();
+        int choice = -1;
         while (choice < 1 || choice > 6) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());

@@ -40,7 +40,7 @@ public class TripbookingMySQLRepository implements TripbookingRepository{
     @Override
     public void update(Tripbooking tripbooking) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE tripbooking SET date, idTrip = ?,? WHERE id = ?";
+            String query = "UPDATE tripbooking SET date = ?, idTrip = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, tripbooking.getId());
                 statement.setDate(2, tripbooking.getDate());

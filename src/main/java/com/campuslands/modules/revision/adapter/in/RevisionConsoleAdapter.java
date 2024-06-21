@@ -92,7 +92,7 @@ public class RevisionConsoleAdapter {
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
-        int choice = scanner.nextInt();
+        int choice = -1;
         while (choice < 1 || choice > 6) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
