@@ -1,9 +1,8 @@
 package com.campuslands.modules.plane.domain;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Plane {
-    int id;
     int capacity;
     Date fabricationDate;
     int idStatus;
@@ -11,20 +10,11 @@ public class Plane {
 
     public Plane(){}
 
-    public Plane(int id, int capacity, Date fabricationDate, int idStatus, int idModel){
-        this.id = id;
+    public Plane(int capacity, Date fabricationDate, int idStatus, int idModel){
         this.capacity = capacity;
         this.fabricationDate = fabricationDate;
         this.idStatus = idStatus;
         this.idModel = idModel;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getCapacity() {

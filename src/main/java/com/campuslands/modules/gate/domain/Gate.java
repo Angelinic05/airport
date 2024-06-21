@@ -1,24 +1,14 @@
 package com.campuslands.modules.gate.domain;
 
 public class Gate {
-    int id;
     String gateNumber;
     int idAirport;
     
     public Gate(){}
 
-    public Gate(int id, String gateNumber, int idAirport){
-        this.id = id;
+    public Gate(String gateNumber, int idAirport){
         this.gateNumber = gateNumber;
         this.idAirport = idAirport;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getGateNumber() {
@@ -35,7 +25,5 @@ public class Gate {
 
     public void setIdAirport(int idAirport) {
         this.idAirport = idAirport;
-    }
-
-    
+    }  
 }

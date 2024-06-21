@@ -3,9 +3,15 @@ package com.campuslands.modules.employee.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.sql.Date; 
 
 import com.campuslands.modules.employee.domain.Employee;
 import com.campuslands.modules.employee.infrastructure.EmployeeRepository;
+import com.campuslands.modules.status.domain.Status;
 
 public class EmployeeMySQLRepository implements EmployeeRepository{
 
@@ -22,28 +28,38 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
     @Override
     public void save(Employee employee) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-
             String query = "INSERT INTO employee(id, name, idRol, entryDate, idAirline, idAirport) VALUES (?,?,?,?,?)";
-            
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-
                 statement.setInt(1, employee.getId());
-                
+                statement.setString(2, employee.getName());
+                statement.setInt(3, employee.getIdRol());
+                statement.setDate(4, employee.getEntryDate());
+                statement.setInt(5, employee.getIdAirline());
+                statement.setInt(6, employee.getIdAirpot());
+                statement.executeUpdate(); //PREGUNTAR BIEN QUE ES ESTO
             } catch (Exception e) {
-                // TODO: handle exception
+                e.printStackTrace();
             }
             
-        } catch (Exception e) {
-            // TODO: handle exception
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-
     }
-        
 
+    @Override
+    public void update(Employee employee){}
     
-
-
-
-
+    @Override
+    public Optional<Employee> findById(int id){
+        return Optional.empty();
+    }
     
+    @Override
+    public void delete(int id){}
+    
+    @Override
+    public List<Employee> findAll(){
+        List<Employee> employee = new ArrayList<>();
+        return employee;
+    }
 }

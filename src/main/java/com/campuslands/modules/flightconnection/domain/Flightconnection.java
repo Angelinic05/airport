@@ -1,7 +1,6 @@
 package com.campuslands.modules.flightconnection.domain;
 
 public class Flightconnection {
-    int id;
     String connectionNumber;
     int idTrip;
     int idPlane;
@@ -9,20 +8,13 @@ public class Flightconnection {
 
     public Flightconnection(){}
 
-    public Flightconnection(int id, String connectionNumber, int idTrip, int idPlane, int idAirport){
-        this.id = id;
+    public Flightconnection(String connectionNumber, int idTrip, int idPlane, int idAirport){
         this.connectionNumber = connectionNumber;
         this.idTrip = idTrip;
         this.idPlane = idPlane;
         this.idAirport = idAirport;
     }
     
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
     public String getConnectionNumber() {
         return connectionNumber;
     }

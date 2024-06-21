@@ -1,22 +1,12 @@
 package com.campuslands.modules.manufacture.domain;
 
 public class Manufacture {
-    int id;
     String name;
 
     public Manufacture(){}
 
-    public Manufacture(int id, String name){
-        this.id = id;
+    public Manufacture(String name){
         this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

@@ -1,45 +1,38 @@
 package com.campuslands.modules.flightfare.domain;
 
 public class Flightfare {
-    int id;
     String descripcion;
-    String text;
+    String details;
     double value;
 
     public Flightfare(){}
 
-    public Flightfare(int id, String descripcion, String text, double value){
-        this.id = id;
+    public Flightfare(String descripcion, String details, double value){
         this.descripcion = descripcion;
-        this.text = text;
+        this.details = details;
         this.value = value;
     }
-    
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
+   
     public String getDescripcion() {
         return descripcion;
     }
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public String getText() {
-        return text;
+
+    public String getDetails(){
+        return details;
     }
-    public void setText(String text) {
-        this.text = text;
+
+    public void setDetails(String details){
+        this.details = details;
     }
+
     public double getValue() {
         return value;
     }
+
     public void setValue(double value) {
         this.value = value;
     }
-
-    
-    
 }

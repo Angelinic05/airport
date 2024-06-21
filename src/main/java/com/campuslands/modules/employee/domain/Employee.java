@@ -1,6 +1,6 @@
 package com.campuslands.modules.employee.domain;
 
-import java.util.Date; //importacion de fecha de java
+import java.sql.Date; //importacion de fecha en formato sql
 
 public class Employee {
     int id;
