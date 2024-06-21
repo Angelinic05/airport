@@ -9,6 +9,10 @@ public class Airline{
         this.name = name;
     }
 
+    public Airline(String name) {
+        this.name = name;
+    }
+
     public Airline() {
     }
 
@@ -26,6 +30,11 @@ public class Airline{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Airline id=%d, name='%s' ", id, name);
     }
 
 }

@@ -17,6 +17,12 @@ public class Airport {
         this.xPosition = xPosition;
         this.yPosition = yPosition;
     }
+    public Airport(String name, int idCity, double xPosition, double yPosition) {
+        this.name = name;
+        this.idCity = idCity;
+        this.xPosition = xPosition;
+        this.yPosition = yPosition;
+    }
 
     public int getId() {
         return id;
