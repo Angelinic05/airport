@@ -9,16 +9,16 @@ import com.campuslands.modules.status.infraestructure.StatusRepository;
 public class StatusService {
     private final StatusRepository statusRepository;
 
-    public StatusService(StatusRepository ciudadRepository) {
-        this.statusRepository = ciudadRepository;
+    public StatusService(StatusRepository statusRepository) {
+        this.statusRepository = statusRepository;
     }
 
-    public void createStatus(Status ciudad) {
-        statusRepository.save(ciudad);
+    public void createStatus(Status status) {
+        statusRepository.save(status);
     }
 
-    public void updateStatus(Status ciudad) {
-        statusRepository.update(ciudad);
+    public void updateStatus(Status status) {
+        statusRepository.update(status);
     }
 
     public Optional<Status> getStatusById(int id) {

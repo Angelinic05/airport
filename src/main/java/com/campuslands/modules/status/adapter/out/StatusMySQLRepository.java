@@ -87,7 +87,7 @@ public class StatusMySQLRepository implements StatusRepository{
 
     @Override
     public List<Status> findAll() {
-        List<Status> ciudades = new ArrayList<>();
+        List<Status> statuses = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT * FROM status";
             try (PreparedStatement statement = connection.prepareStatement(query);
@@ -97,12 +97,12 @@ public class StatusMySQLRepository implements StatusRepository{
                         resultSet.getInt("id"),
                         resultSet.getString("name")
                     );
-                    ciudades.add(status);
+                    statuses.add(status);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ciudades;
+        return statuses;
     }
 }

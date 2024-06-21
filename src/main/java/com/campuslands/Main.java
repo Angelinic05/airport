@@ -23,6 +23,16 @@ import com.campuslands.modules.trip.adapter.out.TripMySQLRepository;
 import com.campuslands.modules.trip.application.TripService;
 import com.campuslands.modules.trip.domain.Trip;
 
+import com.campuslands.modules.tripbooking.adapter.in.TripbookingConsoleAdapter;
+import com.campuslands.modules.tripbooking.adapter.out.TripbookingMySQLRepository;
+import com.campuslands.modules.tripbooking.application.TripbookingService;
+import com.campuslands.modules.tripbooking.domain.Tripbooking;
+
+import com.campuslands.modules.tripbookingdetail.adapter.in.TripbookingdetailConsoleAdapter;
+import com.campuslands.modules.tripbookingdetail.adapter.out.TripbookingdetailMySQLRepository;
+import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
+import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -34,6 +44,8 @@ public class Main {
         RevisiondetailMySQLRepository revisiondetailRepository = new RevisiondetailMySQLRepository(url, username, password);
         StatusMySQLRepository statusRepository = new StatusMySQLRepository(url, username, password);
         TripMySQLRepository tripRepository = new TripMySQLRepository(url, username, password);
+        TripbookingMySQLRepository tripbookingRepository = new TripbookingMySQLRepository(url, username, password);
+        TripbookingdetailMySQLRepository tripbookingdetailRepository = new TripbookingdetailMySQLRepository(url, username, password);
 
         System.out.println("--------------- MENU PRINCIPAL ---------------");
         while (true) {
@@ -137,9 +149,15 @@ public class Main {
                     break;
                 case 20:
                     System.out.println("tripbooking");
+                    TripbookingService tripbookingService = new TripbookingService(tripbookingRepository);
+                    TripbookingConsoleAdapter tripbookingConsoleAdapter = new TripbookingConsoleAdapter(tripbookingService);
+                    tripbookingConsoleAdapter.start();
                     break;
                 case 21:
-                    System.out.println("tripbookingdetail");
+                    System.out.println("tripboTripbooking");
+                    TripbookingdetailService tripbookingdetailService = new TripbookingdetailService(tripbookingdetailRepository);
+                    TripbookingdetailConsoleAdapter tripbookingdetailConsoleAdapter = new TripbookingdetailConsoleAdapter(tripbookingdetailService);
+                    tripbookingdetailConsoleAdapter.start();
                     break;
                 case 22:
                     System.out.println("tripcrew");
