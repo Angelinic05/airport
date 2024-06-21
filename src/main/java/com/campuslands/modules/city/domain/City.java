@@ -4,14 +4,20 @@ public class City {
     
     protected int id;
     protected String name;
-    protected int idCity;
+    protected int idCountry;
     
     public City() {
     }
 
-    public City(String name, int idCity) {
+    public City(String name, int idCountry) {
         this.name = name;
-        this.idCity = idCity;
+        this.idCountry = idCountry;
+    }
+
+    public City(int id, String name, int idCountry) {
+        this.id = id;
+        this.name = name;
+        this.idCountry = idCountry;
     }
 
     public int getId() {
@@ -30,12 +36,17 @@ public class City {
         this.name = name;
     }
 
-    public int getIdCity() {
-        return idCity;
+    public int getIdCountry() {
+        return idCountry;
     }
 
-    public void setIdCity(int idCity) {
-        this.idCity = idCity;
+    public void setIdCountry(int idCountry) {
+        this.idCountry = idCountry;
+    }
+
+    @Override
+    public String toString() {
+        return "City [id=" + id + ", name=" + name + ", idCountry=" + idCountry + "]";
     }
 
     

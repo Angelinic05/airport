@@ -33,9 +33,9 @@ public class CityMySQLRepository implements CityRepository {
                 statement.setInt(1, id);
                 ResultSet resultSet = statement.executeQuery();
                 if (resultSet.next()) {
-                    int idCity = resultSet.getInt("id");
+                    int idCountry = resultSet.getInt("id");
                     String name = resultSet.getString("name");
-                    return Optional.of(new City(name, idCity));
+                    return Optional.of(new City(name, idCountry));
                 }
             }
         } catch (SQLException e) {
@@ -47,9 +47,10 @@ public class CityMySQLRepository implements CityRepository {
     @Override
     public void save(City city) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "INSERT INTO cities (name) VALUES (?)";
+            String sql = "INSERT INTO cities (name, idCountry) VALUES (?,?)";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, city.getName());
+                statement.setInt(2, city.getIdCountry());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -60,9 +61,10 @@ public class CityMySQLRepository implements CityRepository {
     @Override
     public void update(City city) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "UPDATE cities SET name =? WHERE id =?";
+            String sql = "UPDATE cities SET name =?, idCountry = ? WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, city.getName());
+                statement.setInt(2, city.getIdCountry());
                 statement.setInt(2, city.getId());
                 statement.executeUpdate();    
             }
@@ -93,9 +95,10 @@ public class CityMySQLRepository implements CityRepository {
                 ResultSet resultSet = statement.executeQuery();
     
                 while (resultSet.next()) {
-                    int idCity = resultSet.getInt("id");
+                    int id = resultSet.getInt("id");
+                    int idCountry = resultSet.getInt("idCountry");
                     String name = resultSet.getString("name");
-                    cities.add(new City(name, idCity));
+                    cities.add(new City(id, name, idCountry));
                 }
             }
         } catch (SQLException e) {
