@@ -36,11 +36,7 @@ public class CountryMySQLRepository implements CountryRepository {
                         String name = resultSet.getString("name");
                         return Optional.of(new Country(idCountry, name));
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,13 +50,7 @@ public class CountryMySQLRepository implements CountryRepository {
             String sql = "INSERT INTO countries (name) VALUES (?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, country.getName());
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -74,13 +64,8 @@ public class CountryMySQLRepository implements CountryRepository {
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, country.getName());
                 statement.setInt(2, country.getId());
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
+               
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -93,13 +78,8 @@ public class CountryMySQLRepository implements CountryRepository {
             String sql = "DELETE FROM countries WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -118,11 +98,7 @@ public class CountryMySQLRepository implements CountryRepository {
                         String name = resultSet.getString("name");
                         countries.add(new Country(idCountry, name));
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();

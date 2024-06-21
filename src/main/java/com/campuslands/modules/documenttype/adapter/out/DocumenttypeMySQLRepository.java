@@ -38,11 +38,7 @@ public class DocumenttypeMySQLRepository implements DocumenttypeRepository {
                         String name = resultSet.getString("name");
                         return Optional.of(new Documenttype(idDocumenttype, name));
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();

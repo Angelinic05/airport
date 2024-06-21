@@ -40,11 +40,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                         int idDocument = resultSet.getInt("idDocument");
                         return Optional.of(new Customer(idCustomer, name, age, idDocument));
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -60,13 +56,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                 statement.setString(1, customer.getName());
                 statement.setInt(2, customer.getAge());
                 statement.setInt(3, customer.getIdDocument());
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,13 +72,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                 statement.setInt(2, customer.getAge());
                 statement.setInt(3, customer.getIdDocument());
                 statement.setInt(4, customer.getId());
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,13 +85,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
             String sql = "DELETE FROM customers WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,11 +106,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                         int idDocument = resultSet.getInt("idDocument");
                         customers.add(new Customer(idCustomer, name, age, idDocument));
                     }
-                } catch (SQLException e) {
-                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();

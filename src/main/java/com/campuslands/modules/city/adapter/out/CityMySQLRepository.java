@@ -37,8 +37,6 @@ public class CityMySQLRepository implements CityRepository {
                     String name = resultSet.getString("name");
                     return Optional.of(new City(name, idCity));
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,8 +51,6 @@ public class CityMySQLRepository implements CityRepository {
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, city.getName());
                 statement.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -65,10 +61,11 @@ public class CityMySQLRepository implements CityRepository {
     public void update(City city) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "UPDATE cities SET name =? WHERE id =?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, city.getName());
-            statement.setInt(2, city.getId());
-            statement.executeUpdate();
+            try (PreparedStatement statement = connection.prepareStatement(sql);) {
+                statement.setString(1, city.getName());
+                statement.setInt(2, city.getId());
+                statement.executeUpdate();    
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,9 +75,10 @@ public class CityMySQLRepository implements CityRepository {
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "DELETE FROM cities WHERE id =?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            statement.executeUpdate();
+            try (PreparedStatement statement = connection.prepareStatement(sql);) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,13 +89,14 @@ public class CityMySQLRepository implements CityRepository {
         List<City> cities = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT * FROM cities";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                int idCity = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                cities.add(new City(name, idCity));
+            try (PreparedStatement statement = connection.prepareStatement(sql);) {
+                ResultSet resultSet = statement.executeQuery();
+    
+                while (resultSet.next()) {
+                    int idCity = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    cities.add(new City(name, idCity));
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();

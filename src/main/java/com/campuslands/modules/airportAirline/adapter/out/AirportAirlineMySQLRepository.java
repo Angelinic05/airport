@@ -27,11 +27,13 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
     @Override
     public void save(AirportAirline airportAirline) {
         try (Connection connection = DriverManager.getConnection(url, user, password);){
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO airportairline (idAirport, idAirline) VALUES (?, ?)");
-            statement.setInt(1, airportAirline.getIdAirport());
-            statement.setInt(2, airportAirline.getIdAirline());
-            statement.executeUpdate();
-
+            try (PreparedStatement statement = connection.prepareStatement("INSERT INTO airportairline (idAirport, idAirline) VALUES (?, ?)");) {
+                
+                statement.setInt(1, airportAirline.getIdAirport());
+                statement.setInt(2, airportAirline.getIdAirline());
+                statement.executeUpdate();
+                
+            }
         } catch (SQLException e) {
            e.printStackTrace();
         }        
@@ -40,16 +42,19 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
     @Override
     public Optional<AirportAirline> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM airportairline WHERE id =?");
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM airportairline WHERE id =?");) {
+                
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+    
+                if (resultSet.next()) {
+                    return Optional.of(new AirportAirline(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("idAirport"),
+                            resultSet.getInt("idAirline")
+                    ));
+                }
 
-            if (resultSet.next()) {
-                return Optional.of(new AirportAirline(
-                        resultSet.getInt("id"),
-                        resultSet.getInt("idAirport"),
-                        resultSet.getInt("idAirline")
-                ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -61,16 +66,18 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
     public List<AirportAirline> findAll() {
         List<AirportAirline> airportAirlines = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM airportairline");
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                airportAirlines.add(new AirportAirline(
-                        resultSet.getInt("id"),
-                        resultSet.getInt("idAirport"),
-                        resultSet.getInt("idAirline")
-                ));
+            try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM airportairline");) {
+                ResultSet resultSet = statement.executeQuery();
+    
+                while (resultSet.next()) {
+                    airportAirlines.add(new AirportAirline(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("idAirport"),
+                            resultSet.getInt("idAirline")
+                    ));
+                }    
             }
+            
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,9 +87,11 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            PreparedStatement statement = connection.prepareStatement("DELETE FROM airportairline WHERE id =?");
-            statement.setInt(1, id);
-            statement.executeUpdate();
+            
+            try (PreparedStatement statement = connection.prepareStatement("DELETE FROM airportairline WHERE id =?");) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -91,11 +100,12 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
     @Override
     public void update(AirportAirline airportAirline) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            PreparedStatement statement = connection.prepareStatement("UPDATE airportairline SET idAirport =?, idAirline =? WHERE id =?");
-            statement.setInt(1, airportAirline.getIdAirport());
-            statement.setInt(2, airportAirline.getIdAirline());
-            statement.setInt(3, airportAirline.getId());
-            statement.executeUpdate();
+            try (PreparedStatement statement = connection.prepareStatement("UPDATE airportairline SET idAirport =?, idAirline =? WHERE id =?");) {
+                statement.setInt(1, airportAirline.getIdAirport());
+                statement.setInt(2, airportAirline.getIdAirline());
+                statement.setInt(3, airportAirline.getId());
+                statement.executeUpdate();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
