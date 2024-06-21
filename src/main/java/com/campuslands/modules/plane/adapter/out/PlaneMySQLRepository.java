@@ -3,6 +3,7 @@ package com.campuslands.modules.plane.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,26 @@ public class PlaneMySQLRepository implements PlaneRepository{
     
     @Override
     public Optional<Plane> findById(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, capacity, fabricationDate, idStatus, idModel FROM plane WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                        Plane plane = new Plane(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("capacity"),
+                            resultSet.getDate("fabricationDate"),
+                            resultSet.getInt("idStatus"),
+                            resultSet.getInt("idModel")
+                        );
+                        return Optional.of(plane);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
     

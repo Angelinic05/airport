@@ -3,6 +3,7 @@ package com.campuslands.modules.flightfare.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,26 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     
     @Override
     public Optional<Flightfare> findById(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, description, details, values FROM flightfare WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                        Flightfare flightfare = new Flightfare(
+                            resultSet.getInt("id"),
+                            resultSet.getString("description"),
+                            resultSet.getString("details"),
+                            resultSet.getDouble("values")
+                        );
+                        return Optional.of(flightfare);
+                    }
+                }
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
     

@@ -3,6 +3,7 @@ package com.campuslands.modules.gate.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,24 @@ public class GateMySQLRepository implements GateRepository{
     
     @Override
     public Optional<Gate> findById(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, gateNumber, idAirport FROM gate WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                        Gate gate = new Gate(
+                            resultSet.getInt("id"),
+                            resultSet.getString("gateNumber"),
+                            resultSet.getInt("idAirpot")
+                        );
+                        return Optional.of(gate);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
     

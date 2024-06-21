@@ -3,6 +3,7 @@ package com.campuslands.modules.revemployee.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +56,24 @@ public class RevemployeeMySQLRepository implements RevemployeeRepository {
     
     @Override
     public Optional<Revemployee> findById(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, idEmployee, idRevision FROM revemployee WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                        Revemployee revemployee = new Revemployee(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("idEmployee"),
+                            resultSet.getInt("idRevision")
+                        );
+                        return Optional.of(revemployee);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
     

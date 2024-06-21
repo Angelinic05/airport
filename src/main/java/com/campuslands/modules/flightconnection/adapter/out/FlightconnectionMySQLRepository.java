@@ -3,6 +3,7 @@ package com.campuslands.modules.flightconnection.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +61,26 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
     
     @Override
     public Optional<Flightconnection> findById(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+             String query = "SELECT id, connectionNumber, idTrip, idPlane, idAirport FROM flightconnection WHERE id = ?";
+             try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                        Flightconnection flightconnection = new Flightconnection(
+                            resultSet.getInt("id"),
+                            resultSet.getString("connectionNumbre"),
+                            resultSet.getInt("idTrip"),
+                            resultSet.getInt("idPlane"),
+                            resultSet.getInt("idAirport")
+                            );
+                            return Optional.of(flightconnection);
+                    }
+                }   
+            }     
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
     

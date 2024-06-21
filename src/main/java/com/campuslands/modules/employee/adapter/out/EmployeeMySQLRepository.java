@@ -3,10 +3,14 @@ package com.campuslands.modules.employee.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.naming.spi.DirStateFactory.Result;
+
 import java.sql.Date; 
 
 import com.campuslands.modules.employee.domain.Employee;
@@ -63,9 +67,34 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
     }
     
     @Override
+
+    //Opcional -> manejo de los errores
+
     public Optional<Employee> findById(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, name, idRol, entryDate, idAirline, idAirport FROM employee  WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                       Employee employee = new Employee(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getInt("idRol"),
+                            resultSet.getDate("entryDate"),
+                            resultSet.getInt("idAirline"),
+                            resultSet.getInt("idAirport")
+                            );
+                            return Optional.of(employee);   
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return Optional.empty();
     }
+    
     
     @Override
     public void delete(int id){

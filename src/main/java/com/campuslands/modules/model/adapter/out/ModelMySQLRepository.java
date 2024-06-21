@@ -3,6 +3,7 @@ package com.campuslands.modules.model.adapter.out;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,25 @@ public class ModelMySQLRepository implements ModelRepository {
     
     @Override
     public Optional<Model> findById(int id){
-        return Optional.empty();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, name, idManufactures FROM model WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if(resultSet.next()){
+                        Model model = new Model(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getInt("idManufactures")
+                        );
+                        return Optional.of(model);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    return Optional.empty();
     }
     
     @Override
