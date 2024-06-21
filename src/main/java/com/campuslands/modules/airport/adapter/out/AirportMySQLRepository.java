@@ -13,15 +13,20 @@ import java.util.List;
 import java.util.Optional;
 
 public class AirportMySQLRepository implements AirportRepository {
-    private final String url = "jdbc:mysql://localhost:3306/airport_db";
-    private final String username = "root";
-    private final String password = "root";
 
-    public AirportMySQLRepository() {}
+    private final String url;
+    private final String user;
+    private final String password;
+
+    public AirportMySQLRepository(String url, String user, String password) {
+        this.url = url;
+        this.user = user;
+        this.password = password;
+    }
 
     @Override
     public void save(Airport airport) {
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "INSERT INTO airports (name, idCity, xPosition, yPosition) VALUES (?,?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, airport.getName());
@@ -31,13 +36,13 @@ public class AirportMySQLRepository implements AirportRepository {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public void update(Airport airport) {
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "UPDATE airports SET name =?, idCity =?, xPosition =?, yPosition=? WHERE id=?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, airport.getName());
@@ -48,13 +53,13 @@ public class AirportMySQLRepository implements AirportRepository {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public Optional<Airport> findById(int id) {
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT * FROM airports WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
@@ -71,28 +76,28 @@ public class AirportMySQLRepository implements AirportRepository {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return Optional.empty();
     }
 
     @Override
     public void delete(int id) {
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "DELETE FROM airports WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public List<Airport> findAll() {
         List<Airport> airports = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url, username, password)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT * FROM airports";
             try (PreparedStatement statement = connection.prepareStatement(query);
                  ResultSet resultSet = statement.executeQuery()) {
@@ -107,7 +112,7 @@ public class AirportMySQLRepository implements AirportRepository {
                 }
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return airports;
     }

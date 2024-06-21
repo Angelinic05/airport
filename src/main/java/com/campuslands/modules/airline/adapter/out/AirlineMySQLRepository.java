@@ -15,11 +15,16 @@ import java.util.Optional;
 
 public class AirlineMySQLRepository implements AirlineRepository {
 
-    private final String url = "jdbc:mysql://localhost:3306/airport";
-    private final String user = "root";
-    private final String password = "root";
+    private final String url;
+    private final String user;
+    private final String password;
 
-    public AirlineMySQLRepository() {}
+    public AirlineMySQLRepository(String url, String user, String password) {
+        this.url = url;
+        this.user = user;
+        this.password = password;
+    }
+
     
     @Override
     public void save(Airline airline) {
@@ -28,7 +33,7 @@ public class AirlineMySQLRepository implements AirlineRepository {
             statement.setString(1, airline.getName());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -39,7 +44,7 @@ public class AirlineMySQLRepository implements AirlineRepository {
             statement.setString(1, airline.getName());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -57,7 +62,7 @@ public class AirlineMySQLRepository implements AirlineRepository {
                 ));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return Optional.empty();
     }
@@ -69,7 +74,7 @@ public class AirlineMySQLRepository implements AirlineRepository {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -86,7 +91,7 @@ public class AirlineMySQLRepository implements AirlineRepository {
                 ));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return airlines;
     }

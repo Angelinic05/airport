@@ -14,9 +14,15 @@ import java.util.Optional;
 
 public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
     
-    private String url = "jdbc:mysql://localhost:3306/airport";
-    private String user = "root";
-    private String password = "root";
+    private final String url;
+    private final String user;
+    private final String password;
+
+    public AirportAirlineMySQLRepository(String url, String user, String password) {
+        this.url = url;
+        this.user = user;
+        this.password = password;
+    }
 
     @Override
     public void save(AirportAirline airportAirline) {
@@ -27,7 +33,7 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+           e.printStackTrace();
         }        
     }
 
@@ -46,7 +52,7 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
                 ));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return Optional.empty();
     }
@@ -66,7 +72,7 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
                 ));
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return airportAirlines;
     }
@@ -78,7 +84,7 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
             statement.setInt(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 
@@ -91,7 +97,7 @@ public class AirportAirlineMySQLRepository implements AirportAirlineRepository {
             statement.setInt(3, airportAirline.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
 

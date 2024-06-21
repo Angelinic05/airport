@@ -15,22 +15,30 @@ import com.campuslands.modules.city.infrastructure.CityRepository;
 
 public class CityMySQLRepository implements CityRepository {
 
-    private static final String url = "jdbc:mysql://localhost:3306/campuslands";
-    private static final String user = "root";
-    private static final String password = "root";
+    private final String url;
+    private final String user;
+    private final String password;
+
+    public CityMySQLRepository(String url, String user, String password) {
+        this.url = url;
+        this.user = user;
+        this.password = password;
+    }
 
     @Override
     public Optional<City> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "SELECT * FROM cities WHERE id =?";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-
-            if (resultSet.next()) {
-                int idCity = resultSet.getInt("id");
-                String name = resultSet.getString("name");
-                return Optional.of(new City(name, idCity));
+            try (PreparedStatement statement = connection.prepareStatement(sql);) {
+                statement.setInt(1, id);
+                ResultSet resultSet = statement.executeQuery();
+                if (resultSet.next()) {
+                    int idCity = resultSet.getInt("id");
+                    String name = resultSet.getString("name");
+                    return Optional.of(new City(name, idCity));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -42,9 +50,12 @@ public class CityMySQLRepository implements CityRepository {
     public void save(City city) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String sql = "INSERT INTO cities (name) VALUES (?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, city.getName());
-            statement.executeUpdate();
+            try (PreparedStatement statement = connection.prepareStatement(sql);) {
+                statement.setString(1, city.getName());
+                statement.executeUpdate();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }

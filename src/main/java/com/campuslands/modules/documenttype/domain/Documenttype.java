@@ -1,5 +1,6 @@
 package com.campuslands.modules.documenttype.domain;
 
+
 public class Documenttype {
     
     protected int id;
@@ -10,6 +11,10 @@ public class Documenttype {
 
     public Documenttype(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Documenttype(String name){
         this.name = name;
     }
 
@@ -29,6 +34,5 @@ public class Documenttype {
         this.name = name;
     }
 
-    
 
 }
