@@ -7,8 +7,8 @@ import com.campuslands.modules.gate.domain.Gate;
 
 
 public interface GateRepository {
-    void save(Gate status);
-    void update(Gate status);
+    void save(Gate gate);
+    void update(Gate gate);
     Optional<Gate> findById(int id);
     void delete(int id);
     List<Gate> findAll();

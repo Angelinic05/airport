@@ -39,7 +39,19 @@ public class RevemployeeMySQLRepository implements RevemployeeRepository {
     }
 
     @Override
-    public void update(Revemployee revemployee){}
+    public void update(Revemployee revemployee){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE revemployee SET idEmployee = ?, idRevision = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, revemployee.getIdEmployee());
+                statement.setInt(2, revemployee.getIdRevision());
+                statement.setInt(3, revemployee.getId());
+                statement.executeUpdate();                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Revemployee> findById(int id){
@@ -47,7 +59,17 @@ public class RevemployeeMySQLRepository implements RevemployeeRepository {
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM revemployee WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }  
+        } catch (SQLException e) {
+            e.printStackTrace();;
+        }
+    }
     
     @Override
     public List<Revemployee> findAll(){

@@ -35,16 +35,28 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
                 statement.setInt(3, flightconnection.getIdPlane());
                 statement.setInt(4, flightconnection.getIdAirport());
                 statement.executeUpdate(); //PREGUNTAR BIEN QUE ES ESTO
-            } catch (Exception e) {
-                e.getStackTrace();
             }
         } catch (SQLException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void update(Flightconnection flightconnection){}
+    public void update(Flightconnection flightconnection){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE flightconnection SET connectionNumber = ?, idTrip = ?, idPlane = ?, idAirport = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, flightconnection.getConnectionNumber());
+                statement.setInt(2, flightconnection.getIdTrip());
+                statement.setInt(3, flightconnection.getIdPlane());
+                statement.setInt(4, flightconnection.getIdAirport());
+                statement.setInt(5, flightconnection.getId());
+                statement.executeUpdate(query);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }        
+    }
     
     @Override
     public Optional<Flightconnection> findById(int id){
@@ -52,7 +64,17 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM flightconnection WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public List<Flightconnection> findAll(){

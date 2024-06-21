@@ -26,25 +26,35 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     }
 
     @Override
-
     public void save(Flightfare flightfare){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO flightfare (descripcion,details,value) VALUES (?,?,?)";
+            String query = "INSERT INTO flightfare (description,details,value) VALUES (?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, flightfare.getDescripcion());
+                statement.setString(1, flightfare.getDescription());
                 statement.setString(2, flightfare.getDetails());
                 statement.setDouble(3, flightfare.getValue());
                 statement.executeUpdate(); //PREGUNTAR BIEN QUE ES ESTO
-            } catch (Exception e) {
-                e.getStackTrace();
             }
         } catch (SQLException e) {
-            e.getStackTrace();
+            e.printStackTrace();
         }
     }
 
     @Override
-    public void update(Flightfare flightfare){}
+    public void update(Flightfare flightfare){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE flightfare SET description = ?, details = ?, values = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, flightfare.getDescription());
+                statement.setString(2, flightfare.getDetails());
+                statement.setDouble(3, flightfare.getValue());
+                statement.setInt(4, flightfare.getId());
+                statement.executeUpdate();   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Flightfare> findById(int id){
@@ -52,7 +62,17 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM flightfare WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public List<Flightfare> findAll(){

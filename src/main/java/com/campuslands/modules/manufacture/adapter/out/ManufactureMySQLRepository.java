@@ -41,7 +41,18 @@ public class ManufactureMySQLRepository implements ManufactureRepository{
     }
 
     @Override
-    public void update(Manufacture manufacture){}
+    public void update(Manufacture manufacture){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE FROM manufacture SET name = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, manufacture.getName());
+                statement.setInt(2, manufacture.getId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Manufacture> findById(int id){
@@ -49,7 +60,18 @@ public class ManufactureMySQLRepository implements ManufactureRepository{
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM manufacture WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public List<Manufacture> findAll(){

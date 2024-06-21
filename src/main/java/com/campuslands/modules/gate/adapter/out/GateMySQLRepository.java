@@ -42,7 +42,19 @@ public class GateMySQLRepository implements GateRepository{
     }
 
     @Override
-    public void update(Gate gate){}
+    public void update(Gate gate){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE gate SET gateNumber = ?, idAirport = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, gate.getGateNumber());
+                statement.setInt(2, gate.getIdAirport());
+                statement.setInt(0, gate.getId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Gate> findById(int id){
@@ -50,7 +62,17 @@ public class GateMySQLRepository implements GateRepository{
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM gate WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public List<Gate> findAll(){

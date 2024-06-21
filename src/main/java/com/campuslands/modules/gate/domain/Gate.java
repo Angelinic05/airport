@@ -1,6 +1,7 @@
 package com.campuslands.modules.gate.domain;
 
 public class Gate {
+    int id;
     String gateNumber;
     int idAirport;
     
@@ -10,6 +11,20 @@ public class Gate {
         this.gateNumber = gateNumber;
         this.idAirport = idAirport;
     }
+
+    public Gate(int id, String gateNumber, int idAirport) {
+        this.id = id;
+        this.gateNumber = gateNumber;
+        this.idAirport = idAirport;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    } 
 
     public String getGateNumber() {
         return gateNumber;
@@ -25,5 +40,5 @@ public class Gate {
 
     public void setIdAirport(int idAirport) {
         this.idAirport = idAirport;
-    }  
+    } 
 }

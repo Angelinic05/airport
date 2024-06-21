@@ -6,8 +6,8 @@ import java.util.Optional;
 import com.campuslands.modules.model.domain.Model;
 
 public interface ModelRepository {
-    void save(Model status);
-    void update(Model status);
+    void save(Model model);
+    void update(Model model);
     Optional<Model> findById(int id);
     void delete(int id);
     List<Model> findAll();

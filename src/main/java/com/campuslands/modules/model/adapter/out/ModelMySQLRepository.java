@@ -41,7 +41,19 @@ public class ModelMySQLRepository implements ModelRepository {
     }
 
     @Override
-    public void update(Model model){}
+    public void update(Model model){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE model SET name = ?, idManufactures = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, model.getName());
+                statement.setInt(2, model.getIdManufactures());
+                statement.setInt(3, model.getId());
+                statement.executeUpdate();                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Model> findById(int id){
@@ -49,7 +61,17 @@ public class ModelMySQLRepository implements ModelRepository {
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM model WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }  
+        } catch (SQLException e) {
+            e.printStackTrace();;
+        }
+    }
     
     @Override
     public List<Model> findAll(){

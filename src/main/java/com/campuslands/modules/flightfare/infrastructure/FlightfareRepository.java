@@ -6,8 +6,8 @@ import java.util.Optional;
 import com.campuslands.modules.flightfare.domain.Flightfare;
 
 public interface FlightfareRepository {
-    void save(Flightfare status);
-    void update(Flightfare status);
+    void save(Flightfare flightfare);
+    void update(Flightfare flightfare);
     Optional<Flightfare> findById(int id);
     void delete(int id);
     List<Flightfare> findAll();

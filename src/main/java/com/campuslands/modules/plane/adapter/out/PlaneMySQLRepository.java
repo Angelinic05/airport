@@ -42,7 +42,21 @@ public class PlaneMySQLRepository implements PlaneRepository{
     }
 
     @Override
-    public void update(Plane plane){}
+    public void update(Plane plane){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE plane SET capacity = ?, fabricationDate = ?, idStatus = ?, idModel = ? WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, plane.getCapacity());
+                statement.setDate(2, plane.getFabricationDate());
+                statement.setInt(3, plane.getIdStatus());
+                statement.setInt(4, plane.getIdModel());
+                statement.setInt(5, plane.getId());
+                statement.executeUpdate();                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Plane> findById(int id){
@@ -50,7 +64,17 @@ public class PlaneMySQLRepository implements PlaneRepository{
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM plane WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }  
+        } catch (SQLException e) {
+            e.printStackTrace();;
+        }
+    }
     
     @Override
     public List<Plane> findAll(){

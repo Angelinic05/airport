@@ -37,17 +37,30 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
                 statement.setInt(5, employee.getIdAirline());
                 statement.setInt(6, employee.getIdAirpot());
                 statement.executeUpdate(); //PREGUNTAR BIEN QUE ES ESTO
-            } catch (Exception e) {
-                e.printStackTrace();
             }
-            
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void update(Employee employee){}
+    public void update(Employee employee){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "UPDATE employee SET id = ?, name = ?, idRol = ?, entryDate = ?, idAirline = ?, idAirport = ?  WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                 statement.setInt(1, employee.getId());
+                 statement.setString(2, employee.getName());
+                 statement.setInt(3, employee.getIdRol());
+                 statement.setDate(4, employee.getEntryDate());
+                 statement.setInt(5, employee.getIdAirline());
+                 statement.setInt(6, employee.getIdAirpot());
+                 statement.setInt(7, employee.getId());
+                 statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public Optional<Employee> findById(int id){
@@ -55,7 +68,17 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
     }
     
     @Override
-    public void delete(int id){}
+    public void delete(int id){
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "DELETE FROM employee WHERE id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     @Override
     public List<Employee> findAll(){

@@ -7,8 +7,8 @@ import com.campuslands.modules.employee.domain.Employee;
 import com.campuslands.modules.flightconnection.domain.Flightconnection;
 
 public interface FlightconnectionRepository {
-    void save(Flightconnection status);
-    void update(Flightconnection status);
+    void save(Flightconnection flightconnection);
+    void update(Flightconnection flightconnection);
     Optional<Flightconnection> findById(int id);
     void delete(int id);
     List<Flightconnection> findAll();
