@@ -33,6 +33,16 @@ import com.campuslands.modules.tripbookingdetail.adapter.out.TripbookingdetailMy
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
 import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
+import com.campuslands.modules.tripcrew.adapter.in.TripcrewConsoleAdapter;
+import com.campuslands.modules.tripcrew.adapter.out.TripcrewMySQLRepository;
+import com.campuslands.modules.tripcrew.application.TripcrewService;
+import com.campuslands.modules.tripcrew.domain.Tripcrew;
+
+import com.campuslands.modules.tripulationrol.adapter.in.TripulationrolConsoleAdapter;
+import com.campuslands.modules.tripulationrol.adapter.out.TripulationrolMySQLRepository;
+import com.campuslands.modules.tripulationrol.application.TripulationrolService;
+import com.campuslands.modules.tripulationrol.domain.Tripulationrol;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -46,6 +56,8 @@ public class Main {
         TripMySQLRepository tripRepository = new TripMySQLRepository(url, username, password);
         TripbookingMySQLRepository tripbookingRepository = new TripbookingMySQLRepository(url, username, password);
         TripbookingdetailMySQLRepository tripbookingdetailRepository = new TripbookingdetailMySQLRepository(url, username, password);
+        TripcrewMySQLRepository tripcrewRepository = new TripcrewMySQLRepository(url, username, password);
+        TripulationrolMySQLRepository tripulationrolRepository = new TripulationrolMySQLRepository(url, username, password);
 
         System.out.println("--------------- MENU PRINCIPAL ---------------");
         while (true) {
@@ -161,9 +173,15 @@ public class Main {
                     break;
                 case 22:
                     System.out.println("tripcrew");
+                    TripcrewService tripcrewService = new TripcrewService(tripcrewRepository);
+                    TripcrewConsoleAdapter tripcrewConsoleAdapter = new TripcrewConsoleAdapter(tripcrewService);
+                    tripcrewConsoleAdapter.start();
                     break;
                 case 23:
                     System.out.println("tripulationrol");
+                    TripulationrolService tripulationrolService = new TripulationrolService(tripulationrolRepository);
+                    TripulationrolConsoleAdapter tripulationrolConsoleAdapter = new TripulationrolConsoleAdapter(tripulationrolService);
+                    tripulationrolConsoleAdapter.start();
                     break;
                 case 24:
                     scanner.close();

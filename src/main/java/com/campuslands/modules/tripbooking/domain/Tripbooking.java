@@ -11,6 +11,7 @@ public class Tripbooking {
 
     public Tripbooking(int id, Date date, int idTrip) {
         this.id = id;
+        this.date = date;
         this.idTrip = idTrip;
 
     }

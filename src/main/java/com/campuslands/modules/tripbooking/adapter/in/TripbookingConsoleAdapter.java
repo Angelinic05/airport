@@ -54,8 +54,8 @@ public class TripbookingConsoleAdapter {
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
-                    Optional<Tripbooking> status = tripbookingService.getTripbookingById(findId);
-                        status.ifPresentOrElse(
+                    Optional<Tripbooking> tripbooking = tripbookingService.getTripbookingById(findId);
+                        tripbooking.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", fecha: " + p.getDate() + ", id del viaje: " + p.getIdTrip()),
                         () -> System.out.println("Tripbooking no encontrado")
                     );
