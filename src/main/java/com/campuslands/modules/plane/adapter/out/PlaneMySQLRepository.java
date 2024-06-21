@@ -100,9 +100,25 @@ public class PlaneMySQLRepository implements PlaneRepository{
     @Override
     public List<Plane> findAll(){
         List<Plane> plane = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url)) {
+            String query = "SELECT id, capacity, fabricationDate, idStatus, idModel FROM plane";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()){
+                        Plane plane2 = new Plane(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("capacity"),
+                            resultSet.getDate("fabricationDate"),
+                            resultSet.getInt("idStatus"),
+                            resultSet.getInt("idModel")
+                        );
+                        plane.add(plane2);
+                    }   
+                } 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return plane;
     }
-
-    
-    
 }

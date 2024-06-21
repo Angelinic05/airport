@@ -93,6 +93,23 @@ public class RevemployeeMySQLRepository implements RevemployeeRepository {
     @Override
     public List<Revemployee> findAll(){
         List<Revemployee> revemployee = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url)) {
+            String query = "SELECT id, idEmployee, idRevision FROM revemployee";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()){
+                        Revemployee revemployee2 = new Revemployee(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("idEmployee"),
+                            resultSet.getInt("idRevision")
+                        );
+                        revemployee.add(revemployee2);
+                    }   
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return revemployee;
     }
     

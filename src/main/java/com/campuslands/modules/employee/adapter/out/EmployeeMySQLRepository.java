@@ -112,6 +112,26 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
     @Override
     public List<Employee> findAll(){
         List<Employee> employee = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id,  name, idRol, entryDate, idAirline, idAirport FROM employee";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Employee employee2 = new Employee(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getInt("idRol"),
+                            resultSet.getDate("entryDate"),
+                            resultSet.getInt("idAirline"),
+                            resultSet.getInt("idAirport")
+                        );
+                        employee.add(employee2);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return employee;
     }
 }

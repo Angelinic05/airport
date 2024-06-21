@@ -95,9 +95,23 @@ public class ModelMySQLRepository implements ModelRepository {
     @Override
     public List<Model> findAll(){
         List<Model> model = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT id, name, idManufactures FROM model";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while(resultSet.next()){
+                        Model model2 = new Model(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getInt("idManufactures")
+                        );
+                        model.add(model2);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return model;
     }
-
-    
-    
 }
