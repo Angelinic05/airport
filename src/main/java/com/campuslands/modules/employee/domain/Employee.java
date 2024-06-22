@@ -21,6 +21,14 @@ public class Employee {
         this.idAirport = idAirport;
     }
 
+    public Employee(String name, int idRol, Date entryDate, int idAirline, int idAirport) {
+        this.name = name;
+        this.idRol = idRol;
+        this.entryDate = entryDate;
+        this.idAirline = idAirline;
+        this.idAirport = idAirport;
+    }
+
     public int getId() {
         return id;
     }
