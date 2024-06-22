@@ -40,13 +40,13 @@ public class FlightfareConsoleAdapter {
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Ingrese la descripcion de la tarifa de vuelo: ");
+                    System.out.print("Ingrese la nueva descripcion de la tarifa de vuelo: ");
                     String updateDescription = scanner.nextLine();
 
-                    System.out.print("Ingrese los detalles de la tarifa de vuelo: ");
+                    System.out.print("Ingrese los detalles nuevos de la tarifa de vuelo: ");
                     String updateDetails = scanner.nextLine();
 
-                    System.out.print("Ingrese el valor de la tarifa de vuelo: ");
+                    System.out.print("Ingrese el valor nuevo de la tarifa de vuelo: ");
                     double updateValue = scanner.nextDouble();
 
                     Flightfare flightfare2 = new Flightfare(updateId, updateDescription, updateDetails, updateValue);
