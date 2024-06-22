@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import com.campuslands.modules.plane.domain.Plane;
 import com.campuslands.modules.revemployee.domain.Revemployee;
 import com.campuslands.modules.revemployee.infrastructure.RevemployeeRepository;
 
