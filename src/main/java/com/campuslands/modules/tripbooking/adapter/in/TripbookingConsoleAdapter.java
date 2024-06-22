@@ -23,11 +23,11 @@ public class TripbookingConsoleAdapter {
             switch (choice) {
                 case 1:
 
-                    System.out.print("Ingrese la fecha del tripbooking: ");
+                    System.out.print("Ingrese la fecha de la reserva del viaje: ");
                     Date createDate = Date.valueOf(scanner.nextLine());
 
                     System.out.println(createDate);
-                    System.out.print("Ingrese el id del viaje: ");
+                    System.out.print("Ingrese el id de la reserva de viaje: ");
                     int createIdTrip = scanner.nextInt();
 
                     Tripbooking newTripbooking = new Tripbooking(createDate, createIdTrip);
@@ -39,10 +39,10 @@ public class TripbookingConsoleAdapter {
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Ingrese la fecha del tripbooking: ");
+                    System.out.print("Ingrese la fecha de la reserva de viaje: ");
                     Date updateDate = Date.valueOf(scanner.nextLine());
 
-                    System.out.print("Ingrese el id del viaje: ");
+                    System.out.print("Ingrese el id de la reserva de viaje: ");
                     int ipdateIdTrip = scanner.nextInt();
 
                     Tripbooking updatedTripbooking = new Tripbooking(updateId, updateDate, ipdateIdTrip);
@@ -50,19 +50,19 @@ public class TripbookingConsoleAdapter {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el Id del Tripbooking a buscar: ");
+                    System.out.print("Ingrese el Id de la reserva de viaje a buscar: ");
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
                     Optional<Tripbooking> tripbooking = tripbookingService.getTripbookingById(findId);
                         tripbooking.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", fecha: " + p.getDate() + ", id del viaje: " + p.getIdTrip()),
-                        () -> System.out.println("Tripbooking no encontrado")
+                        () -> System.out.println("Reserva de viaje no encontrada")
                     );
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del Tripbooking a borrar: ");
+                    System.out.print("Ingrese el Id de la reserva de viaje a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     tripbookingService.deleteTripbooking(deleteId);
@@ -86,11 +86,11 @@ public class TripbookingConsoleAdapter {
     }
 
     private int menu(Scanner scanner){
-        System.out.println("1. Crear Status");
-        System.out.println("2. Actualizar Status");
-        System.out.println("3. Buscar Status por ID");
-        System.out.println("4. Eliminar Status");
-        System.out.println("5. Listar todos Statuses");
+        System.out.println("1. Crear reserva de viaje");
+        System.out.println("2. Actualizar reserva de viaje");
+        System.out.println("3. Buscar reserva de viaje por ID");
+        System.out.println("4. Eliminar reserva de viaje");
+        System.out.println("5. Listar todas las reservas de viaje");
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");

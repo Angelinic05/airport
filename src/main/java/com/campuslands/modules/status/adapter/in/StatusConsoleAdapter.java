@@ -22,7 +22,7 @@ public class StatusConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese el nombre del status: ");
+                    System.out.print("Ingrese el nombre del estado: ");
                     String createName = scanner.nextLine();
 
                     Status newStatus = new Status(createName);
@@ -33,7 +33,7 @@ public class StatusConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Ingrese el nuevo nombre: ");
+                    System.out.print("Ingrese el nuevo nombre del estado: ");
                     String updateName = scanner.nextLine();
 
                     Status updatedStatus = new Status(updateId, updateName);
@@ -41,19 +41,19 @@ public class StatusConsoleAdapter {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el Id del status a buscar: ");
+                    System.out.print("Ingrese el Id del estado a buscar: ");
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
                     Optional<Status> status = statusService.getStatusById(findId);
                         status.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", Nombre: " + p.getNombre()),
-                        () -> System.out.println("Status no encontrado")
+                        () -> System.out.println("Estado no encontrado")
                     );
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del status a borrar: ");
+                    System.out.print("Ingrese el Id del estado a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     statusService.deleteStatus(deleteId);
@@ -77,11 +77,11 @@ public class StatusConsoleAdapter {
     }
 
     private int menu(Scanner scanner){
-        System.out.println("1. Crear Status");
-        System.out.println("2. Actualizar Status");
-        System.out.println("3. Buscar Status por ID");
-        System.out.println("4. Eliminar Status");
-        System.out.println("5. Listar todos Statuses");
+        System.out.println("1. Crear estado");
+        System.out.println("2. Actualizar estado");
+        System.out.println("3. Buscar estado por ID");
+        System.out.println("4. Eliminar estado");
+        System.out.println("5. Listar todos los estados");
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");

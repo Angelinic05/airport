@@ -21,7 +21,7 @@ public class TripulationrolConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese el nombre del status: ");
+                    System.out.print("Ingrese el rol de tripulacion: ");
                     String createName = scanner.nextLine();
 
                     Tripulationrol newTripulationrol = new Tripulationrol(createName);
@@ -32,7 +32,7 @@ public class TripulationrolConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Ingrese el nuevo nombre: ");
+                    System.out.print("Ingrese el nuevo rol de tripulacion: ");
                     String updateName = scanner.nextLine();
 
                     Tripulationrol updatedTripulationrol = new Tripulationrol(updateId, updateName);
@@ -40,19 +40,19 @@ public class TripulationrolConsoleAdapter {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el Id del status a buscar: ");
+                    System.out.print("Ingrese el Id del rol de tripulacion a buscar: ");
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
                     Optional<Tripulationrol> tripulationrol = tripulationrolService.getTripulationrolById(findId);
                         tripulationrol.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", Nombre: " + p.getName()),
-                        () -> System.out.println("Status no encontrado")
+                        () -> System.out.println("Rol de tripulacion no encontrado")
                     );
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del status a borrar: ");
+                    System.out.print("Ingrese el Id del rol de tripulacion a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     tripulationrolService.deleteTripulationrol(deleteId);
@@ -76,11 +76,11 @@ public class TripulationrolConsoleAdapter {
     }
 
     private int menu(Scanner scanner){
-        System.out.println("1. Crear Status");
-        System.out.println("2. Actualizar Status");
-        System.out.println("3. Buscar Status por ID");
-        System.out.println("4. Eliminar Status");
-        System.out.println("5. Listar todos Statuses");
+        System.out.println("1. Crear rol de tripulacion");
+        System.out.println("2. Actualizar rol de tripulacion");
+        System.out.println("3. Buscar rol de tripulacion por ID");
+        System.out.println("4. Eliminar rol de tripulacion");
+        System.out.println("5. Listar todos los roles de tripulacion");
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");

@@ -21,10 +21,10 @@ public class TripcrewConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese el nombre del idEmployee: ");
+                    System.out.print("Ingrese el id del empleado: ");
                     int createIdEmployee = scanner.nextInt();
 
-                    System.out.print("Ingrese el nombre del idConnection: ");
+                    System.out.print("Ingrese el id de la coneccion: ");
                     int createIdConnection = scanner.nextInt();
 
                     Tripcrew newTripcrew = new Tripcrew(createIdEmployee, createIdConnection);
@@ -36,10 +36,10 @@ public class TripcrewConsoleAdapter {
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Ingrese el nombre del idEmployee: ");
+                    System.out.print("Ingrese el id del empleado a actualizar: ");
                     int updateIdEmployee = scanner.nextInt();
 
-                    System.out.print("Ingrese el nombre del idConnection: ");
+                    System.out.print("Ingrese el id de la coneccion a actualizar: ");
                     int updateIdConnection = scanner.nextInt();
 
                     Tripcrew updatedTripcrew = new Tripcrew(updateId, updateIdEmployee, updateIdConnection);
@@ -47,19 +47,19 @@ public class TripcrewConsoleAdapter {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el Id del status a buscar: ");
+                    System.out.print("Ingrese el Id de la tripulacion de viaje a buscar: ");
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
                     Optional<Tripcrew> tripcrew = tripcrewService.getTripcrewById(findId);
                         tripcrew.ifPresentOrElse(
-                        p -> System.out.println("ID: " + p.getId() + ", IdEmployee: " + p.getIdEmployee() + ", IdConnection: " + p.getIdConnection()),
-                        () -> System.out.println("Status no encontrado")
+                        p -> System.out.println("ID: " + p.getId() + ", Id empleado: " + p.getIdEmployee() + ", Id coneccion: " + p.getIdConnection()),
+                        () -> System.out.println("Tripulacion de viaje no encontrado")
                     );
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del status a borrar: ");
+                    System.out.print("Ingrese el Id de la tripulacion de viaje a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     tripcrewService.deleteTripcrew(deleteId);
@@ -67,7 +67,7 @@ public class TripcrewConsoleAdapter {
 
                 case 5:
                     tripcrewService.getAllTripcrews().forEach(p -> {
-                        System.out.println("ID: " + p.getId() + ", IdEmployee: " + p.getIdEmployee() + ", IdConnection: " + p.getIdConnection());
+                        System.out.println("ID: " + p.getId() + ", Id empelado: " + p.getIdEmployee() + ", Id coneccion: " + p.getIdConnection());
                     });
                     break;
 
@@ -83,11 +83,11 @@ public class TripcrewConsoleAdapter {
     }
 
     private int menu(Scanner scanner){
-        System.out.println("1. Crear Status");
-        System.out.println("2. Actualizar Status");
-        System.out.println("3. Buscar Status por ID");
-        System.out.println("4. Eliminar Status");
-        System.out.println("5. Listar todos Statuses");
+        System.out.println("1. Crear tripulacion de viaje");
+        System.out.println("2. Actualizar tripulacion de viaje");
+        System.out.println("3. Buscar tripulacion de viaje por ID");
+        System.out.println("4. Eliminar tripulacion de viaje");
+        System.out.println("5. Listar todas las tripulaciones de viaje");
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");

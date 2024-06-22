@@ -22,7 +22,7 @@ public class TripbookingdetailConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese la Id trip booking: ");
+                    System.out.print("Ingrese la Id del detalle de la reserva de viaje: ");
                     int createIdTripbooking = scanner.nextInt();
 
                     System.out.print("Ingrese la Id customers: ");
@@ -40,7 +40,7 @@ public class TripbookingdetailConsoleAdapter {
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Ingrese la Id trip booking: ");
+                    System.out.print("Ingrese la Id del detalle de la reserva de viaje: ");
                     int updateIdTripbooking = scanner.nextInt();
 
                     System.out.print("Ingrese la Id customers: ");
@@ -54,19 +54,19 @@ public class TripbookingdetailConsoleAdapter {
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el Id del Tripbooking a buscar: ");
+                    System.out.print("Ingrese el Id del detalle de la reserva de viaje a buscar: ");
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
                     Optional<Tripbookingdetail> status = tripbookingdetailService.getTripbookingdetailById(findId);
                         status.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", Id trip booking: " + p.getIdTripbooking() + ", Id customers: " + p.getIdCustomers() + ", Id Fares " + p.getIdFares()),
-                        () -> System.out.println("Tripbookingdetail no encontrado")
+                        () -> System.out.println("Detalle de la reserva de viaje no encontrada")
                     );
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del Tripbooking a borrar: ");
+                    System.out.print("Ingrese el Id del detalle de la reserva de viaje a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     tripbookingdetailService.deleteTripbookingdetail(deleteId);
@@ -90,11 +90,11 @@ public class TripbookingdetailConsoleAdapter {
     }
 
     private int menu(Scanner scanner){
-        System.out.println("1. Crear Status");
-        System.out.println("2. Actualizar Status");
-        System.out.println("3. Buscar Status por ID");
-        System.out.println("4. Eliminar Status");
-        System.out.println("5. Listar todos Statuses");
+        System.out.println("1. Crear detalle de la reserva de viaje");
+        System.out.println("2. Actualizar detalle de la reserva de viaje");
+        System.out.println("3. Buscar detalle de la reserva de viaje por ID");
+        System.out.println("4. Eliminar detalle de la reserva de viaje");
+        System.out.println("5. Listar todos los detalles de las reservas de viaje");
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");

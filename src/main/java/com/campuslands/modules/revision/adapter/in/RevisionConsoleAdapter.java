@@ -25,7 +25,7 @@ public class RevisionConsoleAdapter {
                     System.out.print("Ingrese la fecha de la revision: ");
                     Date createFecha = Date.valueOf(scanner.nextLine());
 
-                    System.out.print("Ingrese la nueva id plane: ");
+                    System.out.print("Ingrese la id del avion: ");
                     int idPlane = scanner.nextInt();
 
                     Revision newRevision = new Revision(createFecha, idPlane);
@@ -37,9 +37,9 @@ public class RevisionConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Ingrese la nueva fecha: ");
+                    System.out.print("Ingrese la nueva fecha de la revision: ");
                     Date updateFecha = Date.valueOf(scanner.nextLine());
-                    System.out.print("Ingrese la nueva id plane: ");
+                    System.out.print("Ingrese la nueva id del avion: ");
                     int updateIdPlane = scanner.nextInt();
                     scanner.nextLine();
 
@@ -60,7 +60,7 @@ public class RevisionConsoleAdapter {
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del pais a borrar: ");
+                    System.out.print("Ingrese el Id de la revision a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     revisionService.deleteRevision(deleteId);
@@ -88,7 +88,7 @@ public class RevisionConsoleAdapter {
         System.out.println("2. Actualizar Revision");
         System.out.println("3. Buscar Revision por ID");
         System.out.println("4. Eliminar Revision");
-        System.out.println("5. Listar todos Paises");
+        System.out.println("5. Listar todas las revisiones");
         System.out.println("6. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
