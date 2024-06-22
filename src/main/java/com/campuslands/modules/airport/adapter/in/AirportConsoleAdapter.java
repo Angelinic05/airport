@@ -1,6 +1,5 @@
 package com.campuslands.modules.airport.adapter.in;
 
-import java.text.ParseException;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -54,7 +53,7 @@ public class AirportConsoleAdapter {
                         optSubMenu = Integer.parseInt(submen);
                         switch (optSubMenu) {
                             case 1:
-                                System.out.print("Ingrese el nuevo nombre: ");
+                                System.out.print("Ingrese el nuevo nombr: ");
                                 updatedAirport.setName(scanner.nextLine());
                                 break;
                             case 2:

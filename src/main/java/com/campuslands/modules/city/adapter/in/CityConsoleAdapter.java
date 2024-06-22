@@ -16,22 +16,43 @@ public class CityConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
+        int id;
+        String name;
+        int idCountry;
         while (true) {
             int choice = menu(scanner);
             
             switch (choice) {
                 case 1:
-                    getAllCities();
+                    List<City> cities = cityRepository.findAll();
+                    cities.forEach(System.out::println);
                     break;
                 case 2:
-                    saveCity(scanner);
+                    System.out.print("Ingrese el nombre de la ciudad: ");
+                    name = scanner.nextLine();
+                    System.out.print("Ingrese el ID del pais: ");
+                    idCountry = scanner.nextInt();
+                    scanner.nextLine();
+                    City city = new City(name, idCountry);
+                    cityRepository.save(city);
                     break;
                 case 3:
-                    updateCity(scanner);
+                    System.out.print("Ingrese el ID de la ciudad a actualizar: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Ingrese el nuevo nombre de la ciudad: ");
+                    name = scanner.nextLine();
+                    System.out.print("Ingrese el nuevo ID del pais: ");
+                    idCountry = scanner.nextInt();
+                    scanner.nextLine();
+                    City updatedCity = new City(id, name, idCountry);
+                    cityRepository.update(updatedCity);
                     break;
                 case 4:
-                    deleteCity(scanner);
+                    System.out.print("Ingrese el ID de la ciudad a eliminar: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    cityRepository.delete(id);
                     break;
                 case 5:
                     System.out.println("Saliendo...");
@@ -41,44 +62,6 @@ public class CityConsoleAdapter {
                     System.out.println("Ingrese una opcion valida (1 - 5).");
             }
         }
-    }
-    public void saveCity(Scanner scanner) {
-        System.out.print("Ingrese el nombre de la ciudad: ");
-        String name = scanner.nextLine();
-        System.out.print("Ingrese el ID del pais: ");
-        int idCountry = scanner.nextInt();
-        scanner.nextLine();
-        City city = new City(name, idCountry);
-        cityRepository.save(city);
-    }
-    public void updateCity(Scanner scanner) {
-        System.out.print("Ingrese el ID de la ciudad a actualizar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Ingrese el nuevo nombre de la ciudad: ");
-        String name = scanner.nextLine();
-        System.out.print("Ingrese el nuevo ID del pais: ");
-        int idCountry = scanner.nextInt();
-        scanner.nextLine();
-        //hacer submenu para seleccionar el campo a actualizar en una funcion aparte
-        City city = cityRepository.findById(id).orElse(null);
-        if (city == null) {
-            System.out.println("No se encontro la ciudad.");
-            return;
-        }
-        city.setName(name);
-        cityRepository.update(city);
-    }
-    public void deleteCity(Scanner scanner) {
-        System.out.print("Ingrese el ID de la ciudad a eliminar: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        cityRepository.findById(id).ifPresent(city -> cityRepository.delete(id));
-    }
-
-    public void getAllCities() {
-        List<City> cities = cityRepository.findAll();
-        cities.forEach(System.out::println);
     }
 
     public int menu(Scanner scanner) {

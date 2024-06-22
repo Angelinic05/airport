@@ -14,22 +14,57 @@ public class AirportAirlineConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-        
+        int id;
+        int airlineId;
+        int airportId;
         while (true) {
             int choice = menu(scanner);
             
             switch (choice) {
                 case 1:
-                    listAirlines(scanner);
+                    List<AirportAirline> airportAirlines = airportAirlineService.getAllAirportAirlines();
+                    System.out.println("Listado de Airport-Airline:");
+                    for (AirportAirline airportAirline : airportAirlines) {
+                        System.out.println(airportAirline);
+                    }
                     break;
                 case 2:
-                    addAirportAirline(scanner);
+                    System.out.println("Agregar Airport-Airline:");
+                    System.out.print("Id: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Airline ID: ");
+                    airlineId = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Airport ID: ");
+                    airportId = scanner.nextInt();
+                    scanner.nextLine();
+                    
+                    AirportAirline airportAirline = new AirportAirline(id, airlineId, airportId);
+                    airportAirlineService.createAirportAirline(airportAirline);
                     break;
                 case 3:
-                    updateAirportAirline(scanner);
+                    System.out.println("Actualizar Airport-Airline:");
+                    System.out.print("Id: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Airline ID: ");
+                    airlineId = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.print("Airport ID: ");
+                    airportId = scanner.nextInt();
+                    scanner.nextLine();
+                    
+                    AirportAirline updatedAirportAirline = new AirportAirline(id, airlineId, airportId);
+                    airportAirlineService.updateAirportAirline(updatedAirportAirline);
                     break;
                 case 4:
-                    deleteAirportAirline(scanner);
+                    System.out.println("Borrar Airport-Airline:");
+                    System.out.print("Id: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    
+                    airportAirlineService.deleteAirportAirline(id);
                     break;
                 case 5:
                     System.out.println("Saliendo...");
@@ -42,11 +77,11 @@ public class AirportAirlineConsoleAdapter {
     }
 
     private int menu(Scanner scanner) {
-        System.out.println("Airport Airline Management");
-        System.out.println("1. List Airlines");
-        System.out.println("2. Add Airport-Airline");
-        System.out.println("3. Update Airline-Airport");
-        System.out.println("4. Delete Airport-Airline");
+        System.out.println("Gestor de Aerolinea - Aeropuerto:");
+        System.out.println("1. Listar Aerolinea - Aeropuerto");
+        System.out.println("2. Agregar Aerolinea - Aeropuerto");
+        System.out.println("3. Actualizar Aerolinea - Aeropuerto");
+        System.out.println("4. Borrar Aerolinea - Aeropuerto");
         System.out.println("5. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
@@ -62,54 +97,5 @@ public class AirportAirlineConsoleAdapter {
             }
         }
         return choice;
-    }
-
-    private void listAirlines(Scanner scanner) {
-        List<AirportAirline> airportAirlines = airportAirlineService.getAllAirportAirlines();
-        System.out.println("Listado de Airport-Airline:");
-        for (AirportAirline airportAirline : airportAirlines) {
-            System.out.println(airportAirline);
-        }
-    }
-    
-    private void addAirportAirline(Scanner scanner) {
-        System.out.println("Agregar Airport-Airline:");
-        System.out.print("Id: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Airline ID: ");
-        int airlineId = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Airport ID: ");
-        int airportId = scanner.nextInt();
-        scanner.nextLine();
-        
-        AirportAirline airportAirline = new AirportAirline(id, airlineId, airportId);
-        airportAirlineService.createAirportAirline(airportAirline);
-    }
-
-    private void updateAirportAirline(Scanner scanner) {
-        System.out.println("Actualizar Airport-Airline:");
-        System.out.print("Id: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Airline ID: ");
-        int airlineId = scanner.nextInt();
-        scanner.nextLine();
-        System.out.print("Airport ID: ");
-        int airportId = scanner.nextInt();
-        scanner.nextLine();
-        
-        AirportAirline airportAirline = new AirportAirline(id, airlineId, airportId);
-        airportAirlineService.updateAirportAirline(airportAirline);
-    }
-
-    private void deleteAirportAirline(Scanner scanner) {
-        System.out.println("Borrar Airport-Airline:");
-        System.out.print("Id: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
-        
-        airportAirlineService.deleteAirportAirline(id);
     }
 }

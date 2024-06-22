@@ -46,9 +46,10 @@ import com.campuslands.modules.tripulationrol.domain.Tripulationrol;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        String url = "jdbc:mysql://localhost:3306/airport";
-        String username = "root";
-        String password = "root";
+        // String url = "jdbc:mysql://localhost:3306/airport";
+        String url = "jdbc:mysql://javaairportdb.cfecucemoghu.us-east-2.rds.amazonaws.com:3306/airport";
+        String username = "airportDB";
+        String password = "AngeliKikeMichi";
 
         RevisionMySQLRepository revisionRepository = new RevisionMySQLRepository(url, username, password);
         RevisiondetailMySQLRepository revisiondetailRepository = new RevisiondetailMySQLRepository(url, username, password);

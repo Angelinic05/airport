@@ -14,15 +14,15 @@ public class DocumenttypeService {
         this.documenttypeRepository = documenttypeRepository;
     }
 
-    public List<Documenttype> getAllDocumenttypes() {
+    public List<Documenttype> finAllDocumenttypes() {
         return documenttypeRepository.findAll();
     }
 
-    public Optional<Documenttype> getDocumenttypeById(int id) {
+    public Optional<Documenttype> findDocumenttypeById(int id) {
         return documenttypeRepository.findById(id);
     }
 
-    public void createDocumenttype(Documenttype documenttype) {
+    public void saveDocumenttype(Documenttype documenttype) {
         documenttypeRepository.save(documenttype);
     }
 
