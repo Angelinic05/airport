@@ -26,6 +26,7 @@ public class FlightconnectionConsoleAdapter {
 
                     System.out.print("Ingrese el numero de connexión: ");
                     String createConnectionNumber = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el ID del viaje: ");
                     int createIdTrip = scanner.nextInt();
@@ -37,7 +38,6 @@ public class FlightconnectionConsoleAdapter {
                     int createIdAirport = scanner.nextInt();
 
                     Flightconnection flightconnection = new Flightconnection(createConnectionNumber, createIdTrip, createIdPlane, createIdAirport);
-
                     flightconnectionService.saveFlightconnection(flightconnection);
                     break;
 
@@ -49,6 +49,7 @@ public class FlightconnectionConsoleAdapter {
 
                     System.out.print("Ingrese el numero numero de connexión: ");
                     String updateConnectionNumber = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el nuevo ID del viaje: ");
                     int updateIdTrip = scanner.nextInt();
@@ -66,8 +67,6 @@ public class FlightconnectionConsoleAdapter {
                 case 3:
                     System.out.print("Ingrese el Id de la conexión de vuelo a buscar: ");
                     int findId = scanner.nextInt();
-                    scanner.nextLine();
-
                     Optional<Flightconnection> flightconnection1 = flightconnectionService.findByIdFlightconnection(findId);
                     flightconnection1.ifPresentOrElse( 
                         p -> System.out.println("ID:" + p.getId() + ", numero de connexión : " + p.getConnectionNumber() + ", idTrip: " + p.getIdTrip() + ", idPlane: " + p.getIdPlane() + ", idAirport: " + p.getIdAirport()), 
@@ -77,7 +76,6 @@ public class FlightconnectionConsoleAdapter {
                 case 4:
                     System.out.print("Ingrese el Id de la conexión de vuelo a borrar: ");
                     int deleteId = scanner.nextInt();
-                    scanner.nextLine();
                     flightconnectionService.deleteFlightconnection(deleteId);
                     break;
 

@@ -25,6 +25,7 @@ public class GateConsoleAdapter {
                 case 1:
                     System.out.print("Ingrese el numero de puerta: ");
                     String createGateNumber = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el ID de aeropuerto: ");
                     int createId = scanner.nextInt();
@@ -41,6 +42,7 @@ public class GateConsoleAdapter {
 
                     System.out.print("Ingrese el nuevo numero de puerta: ");
                     String updateGateNumber = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el nuevo ID de aeropuerto: ");
                     int updateIdAirport = scanner.nextInt();
@@ -52,8 +54,6 @@ public class GateConsoleAdapter {
                 case 3:
                     System.out.print("Ingrese el Id de la puerta a buscar: ");
                     int findId = scanner.nextInt();
-                    scanner.nextLine();
-
                     Optional<Gate> gate1 = gateService.findByIdGate(findId);
                     gate1.ifPresentOrElse( 
                         p -> System.out.println("ID:" + p.getId() + ", numero de puerta: " + p.getGateNumber() + ", idAirport: " + p.getIdAirport()), 

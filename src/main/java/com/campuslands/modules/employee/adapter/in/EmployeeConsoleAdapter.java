@@ -24,16 +24,20 @@ public class EmployeeConsoleAdapter {
                 case 1:
                     System.out.print("Ingrese el id del empleado: ");
                     int createId = scanner.nextInt();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el nombre del empleado: ");
                     String createName = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el ID del rol del empleado: ");
                     int createIdRol = scanner.nextInt();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese la fecha de entrada del empleado (formato: yyyy-mm-dd): ");
                     String createEntryDate = scanner.nextLine();
                     Date sqlDate = Date.valueOf(createEntryDate);
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el ID de la aerolinea del empleado: ");
                     int createIdAirline = scanner.nextInt();

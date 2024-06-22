@@ -26,6 +26,7 @@ public class FlightfareConsoleAdapter {
 
                     System.out.print("Ingrese los detalles del de la Tarifa de vuelo: ");
                     String createDetails = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el valor de la Tarifa de vuelo: ");
                     double createValue = scanner.nextDouble();
@@ -45,6 +46,7 @@ public class FlightfareConsoleAdapter {
 
                     System.out.print("Ingrese los detalles nuevos de la tarifa de vuelo: ");
                     String updateDetails = scanner.nextLine();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el valor nuevo de la tarifa de vuelo: ");
                     double updateValue = scanner.nextDouble();

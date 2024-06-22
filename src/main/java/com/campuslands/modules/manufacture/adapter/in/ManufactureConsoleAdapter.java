@@ -31,6 +31,7 @@ public class ManufactureConsoleAdapter {
                     System.out.print("Ingrese ID del fabricante a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
+                    
                     System.out.print("Ingrese el nuevo nombre: ");
                     String updateName = scanner.nextLine();
 
@@ -41,8 +42,6 @@ public class ManufactureConsoleAdapter {
                 case 3:
                     System.out.print("Ingrese el Id del fabricante a buscar: ");
                     int findId = scanner.nextInt();
-                    scanner.nextLine();
-
                     Optional<Manufacture> manufacture1 = manufactureService.findByIdManufacture(findId);
                         manufacture1.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", Nombre: " + p.getName()),
