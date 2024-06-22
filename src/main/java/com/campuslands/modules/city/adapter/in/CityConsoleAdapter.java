@@ -1,17 +1,17 @@
 package com.campuslands.modules.city.adapter.in;
 
-import com.campuslands.modules.city.infrastructure.CityRepository;
-
 import java.util.List;
 import java.util.Scanner;
 
+import com.campuslands.modules.city.application.CityService;
 import com.campuslands.modules.city.domain.City;
 
 public class CityConsoleAdapter {
-    private CityRepository cityRepository;
+    
+    private CityService cityService;
 
-    public CityConsoleAdapter(CityRepository cityRepository) {
-        this.cityRepository = cityRepository;
+    public CityConsoleAdapter(CityService cityService) {
+        this.cityService = cityService;
     }
 
     public void start() {
@@ -24,7 +24,7 @@ public class CityConsoleAdapter {
             
             switch (choice) {
                 case 1:
-                    List<City> cities = cityRepository.findAll();
+                    List<City> cities = cityService.findAllCities();
                     cities.forEach(System.out::println);
                     break;
                 case 2:
@@ -34,7 +34,7 @@ public class CityConsoleAdapter {
                     idCountry = scanner.nextInt();
                     scanner.nextLine();
                     City city = new City(name, idCountry);
-                    cityRepository.save(city);
+                    cityService.saveCity(city);
                     break;
                 case 3:
                     System.out.print("Ingrese el ID de la ciudad a actualizar: ");
@@ -46,13 +46,13 @@ public class CityConsoleAdapter {
                     idCountry = scanner.nextInt();
                     scanner.nextLine();
                     City updatedCity = new City(id, name, idCountry);
-                    cityRepository.update(updatedCity);
+                    cityService.updateCity(updatedCity);
                     break;
                 case 4:
                     System.out.print("Ingrese el ID de la ciudad a eliminar: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
-                    cityRepository.delete(id);
+                    cityService.deleteCity(id);
                     break;
                 case 5:
                     System.out.println("Saliendo...");

@@ -14,19 +14,19 @@ public class CountryService {
         this.countryRepository = countryRepository;
     }
 
-    public void createCountry(Country country) {
+    public void saveCountry(Country country) {
         countryRepository.save(country);
     }
     public void updateCountry(Country country) {
         countryRepository.update(country);
     }
-    public Optional<Country> getCountryById(int id) {
+    public Optional<Country> findCountryById(int id) {
         return countryRepository.findById(id);
     }
     public void deleteCountry(int id) {
         countryRepository.delete(id);
     }
-    public List<Country> getAllCountries() {
+    public List<Country> findAllCountries() {
         return countryRepository.findAll();
     }
 

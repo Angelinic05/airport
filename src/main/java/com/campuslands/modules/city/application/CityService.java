@@ -13,19 +13,19 @@ public class CityService {
         this.cityRepository = cityRepository;
     }
 
-    public void createCity(City city) {
+    public void saveCity(City city) {
         cityRepository.save(city);
     }
     public void updateCity(City city) {
         cityRepository.update(city);
     }
-    public Optional<City> getCityById(int id) {
+    public Optional<City> findtCityById(int id) {
         return cityRepository.findById(id);
     }
     public void deleteCity(int id) {
         cityRepository.delete(id);
     }
-    public List<City> getAllCities() {
+    public List<City> findAllCities() {
         return cityRepository.findAll();
     }
     

@@ -1,16 +1,16 @@
 package com.campuslands.modules.country.adapter.in;
 
 import java.util.Scanner;
-import com.campuslands.modules.country.infrastructure.CountryRepository;
+import com.campuslands.modules.country.application.CountryService;
 import com.campuslands.modules.country.domain.Country;
 import java.util.List;
 
 public class CountryConsoleAdapter {
 
-    private CountryRepository countryRepository;
+    private CountryService countryService;
 
-    public CountryConsoleAdapter(CountryRepository countryRepository) {
-        this.countryRepository = countryRepository;
+    public CountryConsoleAdapter(CountryService countryService) {
+        this.countryService = countryService;
     }
 
     public void start() {
@@ -22,7 +22,7 @@ public class CountryConsoleAdapter {
             
             switch (choice) {
                 case 1:
-                    List<Country> cities = countryRepository.findAll();
+                    List<Country> cities = countryService.findAllCountries();
                     cities.forEach(System.out::println);
                     break;
                 case 2:
@@ -32,7 +32,7 @@ public class CountryConsoleAdapter {
                     id = scanner.nextInt();
                     scanner.nextLine();
                     Country country = new Country(id, name);
-                    countryRepository.save(country);
+                    countryService.saveCountry(country);
                     break;
                 case 3:
                     System.out.print("Ingrese el ID del pais a actualizar: ");
@@ -42,13 +42,13 @@ public class CountryConsoleAdapter {
                     name = scanner.nextLine();
                     scanner.nextLine();
                     Country updatedCountry = new Country(id, name);
-                    countryRepository.update(updatedCountry);
+                    countryService.updateCountry(updatedCountry);
                     break;
                 case 4:
                     System.out.print("Ingrese el ID del pais a eliminar: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
-                    countryRepository.delete(id);
+                    countryService.deleteCountry(id);
                     break;
                 case 5:
                     System.out.println("Saliendo...");

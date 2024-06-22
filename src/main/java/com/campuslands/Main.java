@@ -2,6 +2,19 @@ package com.campuslands;
 
 import java.util.Scanner;
 
+import com.campuslands.modules.airline.adapter.in.AirlineConsoleAdapter;
+import com.campuslands.modules.airline.adapter.out.AirlineMySQLRepository;
+import com.campuslands.modules.airline.application.AirlineService;
+
+import com.campuslands.modules.airport.adapter.in.AirportConsoleAdapter;
+import com.campuslands.modules.airport.adapter.out.AirportMySQLRepository;
+import com.campuslands.modules.airport.application.AirportService;
+import com.campuslands.modules.airport.domain.Airport;
+
+import com.campuslands.modules.airportAirline.adapter.in.AirportAirlineConsoleAdapter;
+import com.campuslands.modules.airportAirline.adapter.out.AirportAirlineMySQLRepository;
+import com.campuslands.modules.airportAirline.application.AirportAirlineService;
+
 import com.campuslands.modules.revision.adapter.in.RevisionConsoleAdapter;
 import com.campuslands.modules.revision.adapter.out.RevisionMySQLRepository;
 import com.campuslands.modules.revision.application.RevisionService;
@@ -42,6 +55,14 @@ import com.campuslands.modules.tripulationrol.adapter.in.TripulationrolConsoleAd
 import com.campuslands.modules.tripulationrol.adapter.out.TripulationrolMySQLRepository;
 import com.campuslands.modules.tripulationrol.application.TripulationrolService;
 import com.campuslands.modules.tripulationrol.domain.Tripulationrol;
+
+import com.campuslands.modules.city.adapter.in.CityConsoleAdapter;
+import com.campuslands.modules.city.adapter.out.CityMySQLRepository;
+import com.campuslands.modules.city.application.CityService;
+
+import com.campuslands.modules.country.adapter.in.CountryConsoleAdapter;
+import com.campuslands.modules.country.adapter.out.CountryMySQLRepository;
+import com.campuslands.modules.country.application.CountryService;
 
 public class Main {
     public static void main(String[] args) {
@@ -93,18 +114,38 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("airline");
+                    AirlineMySQLRepository airlineMySQLRepository = new AirlineMySQLRepository(url, username, password);
+                    AirlineService airlineService = new AirlineService(airlineMySQLRepository);
+                    AirlineConsoleAdapter airlineConsoleAdapter = new AirlineConsoleAdapter(airlineService);
+                    airlineConsoleAdapter.start();
                     break;
                 case 2:
                     System.out.println("airport");
+                    AirportMySQLRepository airportMySQLRepository = new AirportMySQLRepository(url, username, password);
+                    AirportService airportService = new AirportService(airportMySQLRepository);
+                    AirportConsoleAdapter airportConsoleAdapter = new AirportConsoleAdapter(airportService);
+                    airportConsoleAdapter.start();
                     break;
                 case 3:
                     System.out.println("airportairline");
+                    AirportAirlineMySQLRepository airportAirlineMySQLRepository = new AirportAirlineMySQLRepository(url, username, password);
+                    AirportAirlineService airportAirlineService = new AirportAirlineService(airportAirlineMySQLRepository);
+                    AirportAirlineConsoleAdapter airportAirlineConsoleAdapter = new AirportAirlineConsoleAdapter(airportAirlineService);
+                    airportAirlineConsoleAdapter.start();
                     break;
                 case 4:
                     System.out.println("city");
+                    CityMySQLRepository cityMySQLRepository = new CityMySQLRepository(url, username, password);
+                    CityService cityService = new CityService(cityMySQLRepository);
+                    CityConsoleAdapter cityConsoleAdapter = new CityConsoleAdapter(cityService);
+                    cityConsoleAdapter.start();
                     break;
                 case 5:
                     System.out.println("country");
+                    CountryMySQLRepository countryMySQLRepository = new CountryMySQLRepository(url, username, password);
+                    CountryService countryService = new CountryService(countryMySQLRepository);
+                    CountryConsoleAdapter countryConsoleAdapter = new CountryConsoleAdapter(countryService);
+                    countryConsoleAdapter.start();
                     break;
                 case 6:
                     System.out.println("customer");
