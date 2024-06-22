@@ -9,6 +9,10 @@ import com.campuslands.modules.flightfare.domain.Flightfare;
 public class FlightfareService {
     private FlightfareRepository flightfareRepository;
 
+    public FlightfareService(FlightfareRepository flightfareRepository){
+        this.flightfareRepository = flightfareRepository;
+    }
+
     public void saveFlightfare(Flightfare flightfare){
         flightfareRepository.save(flightfare);
     }

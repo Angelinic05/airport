@@ -8,6 +8,10 @@ import java.util.List;
 public class GateService {
     private GateRepository gateRepository;
 
+    public GateService(GateRepository gateRepository){
+        this.gateRepository = gateRepository;
+    }
+
     public void saveGate(Gate gate){
         gateRepository.save(gate);
     }

@@ -64,6 +64,46 @@ import com.campuslands.modules.country.adapter.in.CountryConsoleAdapter;
 import com.campuslands.modules.country.adapter.out.CountryMySQLRepository;
 import com.campuslands.modules.country.application.CountryService;
 
+import com.campuslands.modules.customer.adapter.in.CustomerConsoleAdapter;
+import com.campuslands.modules.customer.application.CustomerService;
+import com.campuslands.modules.customer.adapter.out.CustomerMySQLRepository;
+
+import com.campuslands.modules.documenttype.adapter.in.DocumenttypeConsoleAdapter;
+import com.campuslands.modules.documenttype.adapter.out.DocumenttypeMySQLRepository;
+import com.campuslands.modules.documenttype.application.DocumenttypeService;
+
+import com.campuslands.modules.employee.adapter.in.EmployeeConsoleAdapter;
+import com.campuslands.modules.employee.adapter.out.EmployeeMySQLRepository;
+import com.campuslands.modules.employee.application.EmployeeService;
+
+import com.campuslands.modules.flightconnection.adapter.in.FlightconnectionConsoleAdapter;
+import com.campuslands.modules.flightconnection.application.FlightconnectionService;
+import com.campuslands.modules.flightconnection.adapter.out.FlightconnectionMySQLRepository;
+
+import com.campuslands.modules.flightfare.adapter.in.FlightfareConsoleAdapter;
+import com.campuslands.modules.flightfare.application.FlightfareService;
+import com.campuslands.modules.flightfare.adapter.out.FlightfareMySQLRepository;
+
+import com.campuslands.modules.gate.adapter.in.GateConsoleAdapter;
+import com.campuslands.modules.gate.adapter.out.GateMySQLRepository;
+import com.campuslands.modules.gate.application.GateService;
+
+import com.campuslands.modules.manufacture.adapter.in.ManufactureConsoleAdapter;
+import com.campuslands.modules.manufacture.adapter.out.ManufactureMySQLRepository;
+import com.campuslands.modules.manufacture.application.ManufactureService;
+
+import com.campuslands.modules.model.application.ModelService;
+import com.campuslands.modules.model.adapter.out.ModelMySQLRepository;
+import com.campuslands.modules.model.adapter.in.ModelConsoleAdapter;
+
+import com.campuslands.modules.plane.application.PlaneService;
+import com.campuslands.modules.plane.adapter.out.PlaneMySQLRepository;
+import com.campuslands.modules.plane.adapter.in.PlaneConsoleAdapter;
+
+import com.campuslands.modules.revemployee.adapter.in.RevemployeeConsoleAdapter;
+import com.campuslands.modules.revemployee.adapter.out.RevemployeeMySQLRepository;
+import com.campuslands.modules.revemployee.application.RevemployeeService;
+
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -149,33 +189,73 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("customer");
+                    CustomerMySQLRepository customerMySQLRepository = new CustomerMySQLRepository(url, username, password);
+                    CustomerService customerService = new CustomerService(customerMySQLRepository);
+                    CustomerConsoleAdapter customerConsoleAdapter = new CustomerConsoleAdapter(customerService);
+                    customerConsoleAdapter.start();
                     break;
                 case 7:
                     System.out.println("documenttype");
+                    DocumenttypeMySQLRepository documenttypeMySQLRepository = new DocumenttypeMySQLRepository(url, username, password);
+                    DocumenttypeService documenttypeService = new DocumenttypeService(documenttypeMySQLRepository);
+                    DocumenttypeConsoleAdapter documenttypeConsoleAdapter = new DocumenttypeConsoleAdapter(documenttypeService);
+                    documenttypeConsoleAdapter.start();
                     break;
                 case 8:
                     System.out.println("employee");
+                    EmployeeMySQLRepository employeeMySQLRepository = new EmployeeMySQLRepository(url, username, password);
+                    EmployeeService employeeService = new EmployeeService(employeeMySQLRepository);
+                    EmployeeConsoleAdapter employeeConsoleAdapter = new EmployeeConsoleAdapter(employeeService);
+                    employeeConsoleAdapter.start();
                     break;
                 case 9:
                     System.out.println("flightconnection");
+                    FlightconnectionMySQLRepository flightconnectionMySQLRepository = new FlightconnectionMySQLRepository(url, username, password);
+                    FlightconnectionService flightconnectionService = new FlightconnectionService(flightconnectionMySQLRepository);
+                    FlightconnectionConsoleAdapter flightconnectionConsoleAdapter = new FlightconnectionConsoleAdapter(flightconnectionService);
+                    flightconnectionConsoleAdapter.start();
                     break;
                 case 10:
                     System.out.println("flightfare");
+                    FlightfareMySQLRepository flightfareMySQLRepository = new FlightfareMySQLRepository(url, username, password);
+                    FlightfareService flightfareService = new FlightfareService(flightfareMySQLRepository);
+                    FlightfareConsoleAdapter flightfareConsoleAdapter = new FlightfareConsoleAdapter(flightfareService);
+                    flightfareConsoleAdapter.start();
                     break;
                 case 11:
                     System.out.println("gate");
+                    GateMySQLRepository gateMySQLRepository = new GateMySQLRepository(url, username, password);
+                    GateService gateService = new GateService(gateMySQLRepository);
+                    GateConsoleAdapter gateConsoleAdapter = new GateConsoleAdapter(gateService);
+                    gateConsoleAdapter.start();
                     break;
                 case 12:
                     System.out.println("manufacture");
+                    ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
+                    ManufactureService manufactureService = new ManufactureService(manufactureMySQLRepository);
+                    ManufactureConsoleAdapter manufactureConsoleAdapter = new ManufactureConsoleAdapter(manufactureService);
+                    manufactureConsoleAdapter.start();
                     break;
                 case 13:
                     System.out.println("model");
+                    ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
+                    ModelService modelService = new ModelService(modelMySQLRepository);
+                    ModelConsoleAdapter modelConsoleAdapter = new ModelConsoleAdapter(modelService);
+                    modelConsoleAdapter.start();
                     break;
                 case 14:
                     System.out.println("plane");
+                    PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
+                    PlaneService planeService = new PlaneService(planeMySQLRepository);
+                    PlaneConsoleAdapter planeConsoleAdapter = new PlaneConsoleAdapter(planeService);
+                    planeConsoleAdapter.start();
                     break;
                 case 15:
                     System.out.println("revemployee");
+                    RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
+                    RevemployeeService revemployeeService = new RevemployeeService(revemployeeMySQLRepository);
+                    RevemployeeConsoleAdapter revemployeeConsoleAdapter = new RevemployeeConsoleAdapter(revemployeeService);
+                    revemployeeConsoleAdapter.start();
                     break;
                 case 16:
                     System.out.println("revision");
