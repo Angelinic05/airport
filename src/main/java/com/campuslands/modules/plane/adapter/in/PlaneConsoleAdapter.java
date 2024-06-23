@@ -29,13 +29,14 @@ public class PlaneConsoleAdapter {
                     System.out.print("Ingrese la fecha de fabricacion (formato: yyyy-mm-dd): ");
                     String createfabricationDate = scanner.nextLine();
                     Date createfabricanteDate = Date.valueOf(createfabricationDate);
-                    scanner.nextLine();
 
                     System.out.print("Ingrese el ID del estado del avion: ");
                     int crateIdStatus = scanner.nextInt();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el planeo del avion: ");
                     int crateIdPlane = scanner.nextInt();
+                    scanner.nextLine();
 
                     Plane plane = new Plane(crateCapacity, createfabricanteDate, crateIdStatus, crateIdPlane );
                     planeService.savePlane(plane);
@@ -53,13 +54,14 @@ public class PlaneConsoleAdapter {
                     System.out.print("Ingrese la nueva fecha de fabricacion (formato: yyyy-mm-dd): ");
                     String updatefabricationDate = scanner.nextLine();
                     Date updatefabricanteDate = Date.valueOf(updatefabricationDate);
-                    scanner.nextLine();
 
                     System.out.print("Ingrese el nuevo ID del estado del avion: ");
                     int updateIdStatus = scanner.nextInt();
+                    scanner.nextLine();
 
                     System.out.print("Ingrese el nuevo planeo del avion: ");
                     int updateIdPlane = scanner.nextInt();
+                    scanner.nextLine();
 
                     Plane updatedPlane = new Plane(updateId, updateCapacity, updatefabricanteDate, updateIdStatus,updateIdPlane);
                     planeService.updatePlane(updatedPlane);
@@ -78,12 +80,13 @@ public class PlaneConsoleAdapter {
                 case 4:
                     System.out.print("Ingrese el Id del avion a borrar: ");
                     int deleteId = scanner.nextInt();
+                    scanner.nextLine();
                     planeService.deletePlane(deleteId);
                     break;
 
                 case 5:
                     planeService.findAll().forEach(p -> {
-                        System.out.println("ID: " + p.getId() + ", capacidad:" + p.getCapacity() + ", fecha de fabricacion:" + p.getFabricationDate() + ", idEstatus:" + p.getIdStatus() + "idModelo" + p.getIdModel());
+                        System.out.println("ID: " + p.getId() + ", capacidad:" + p.getCapacity() + ", fecha de fabricacion:" + p.getFabricationDate() + ", idEstatus:" + p.getIdStatus() + ", idModelo" + p.getIdModel());
                     });
                     break;
 

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.campuslands.modules.model.domain.Model;
 import com.campuslands.modules.plane.domain.Plane;
 import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 
@@ -100,7 +99,7 @@ public class PlaneMySQLRepository implements PlaneRepository{
     @Override
     public List<Plane> findAll(){
         List<Plane> plane = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT id, capacity, fabricationDate, idStatus, idModel FROM plane";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
