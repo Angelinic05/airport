@@ -8,6 +8,10 @@ import com.campuslands.modules.model.infrastructure.ModelRepository;
 public class ModelService {
     private ModelRepository modelRepository;
 
+    public ModelService(ModelRepository modelRepository) {
+        this.modelRepository = modelRepository;
+    }
+
     public void saveModel(Model model){
         modelRepository.save(model);
     }

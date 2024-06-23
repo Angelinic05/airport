@@ -2,8 +2,6 @@ package com.campuslands.modules.employee.application;
 
 import java.util.List;
 import java.util.Optional;
-
-import com.campuslands.modules.employee.adapter.out.EmployeeMySQLRepository;
 import com.campuslands.modules.employee.domain.Employee;
 import com.campuslands.modules.employee.infrastructure.EmployeeRepository;
 
@@ -33,8 +31,4 @@ public class EmployeeService {
     public List<Employee> findAllEmployee(){
         return employeeRepository.findAll();
     }
-
-
-
-    
 }

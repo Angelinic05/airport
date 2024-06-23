@@ -9,6 +9,10 @@ import com.campuslands.modules.revemployee.infrastructure.RevemployeeRepository;
 public class RevemployeeService {
     private RevemployeeRepository revemployeeRepository;
 
+    public RevemployeeService(RevemployeeRepository revemployeeRepository) {
+        this.revemployeeRepository = revemployeeRepository;
+    }
+
     public void saveRevemployee(Revemployee revemployee){
         revemployeeRepository.save(revemployee);
     }

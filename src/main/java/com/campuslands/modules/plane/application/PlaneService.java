@@ -8,6 +8,10 @@ import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 public class PlaneService {
     private PlaneRepository planeRepository;
 
+    public PlaneService(PlaneRepository planeRepository) {
+        this.planeRepository = planeRepository;
+    }
+
     public void savePlane(Plane plane){
         planeRepository.save(plane);
     }

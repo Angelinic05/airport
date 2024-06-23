@@ -45,7 +45,7 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
     @Override
     public void update(Flightconnection flightconnection){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE flightconnection SET connectionNumber = ?, idTrip = ?, idPlane = ?, idAirport = ? WHERE id = ?";
+            String query = "UPDATE flightconnection SET connectionNumber = ?, idTrip = ?, idPlane = ?, idAirport = ? WHERE id = ?";  
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, flightconnection.getConnectionNumber());
                 statement.setInt(2, flightconnection.getIdTrip());

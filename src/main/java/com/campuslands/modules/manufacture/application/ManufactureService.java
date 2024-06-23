@@ -8,6 +8,10 @@ import java.util.List;
 public class ManufactureService {
     private ManufactureRepository manufactureRepository;
 
+    public ManufactureService(ManufactureRepository manufactureRepository) {
+        this.manufactureRepository = manufactureRepository;
+    }
+
     public void saveManufacture(Manufacture manufacture){
         manufactureRepository.save(manufacture);
     }
