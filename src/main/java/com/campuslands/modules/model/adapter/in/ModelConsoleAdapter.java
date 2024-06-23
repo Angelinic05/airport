@@ -24,7 +24,6 @@ public class ModelConsoleAdapter {
                 case 1:
                     System.out.print("Ingrese el nombre del modelo: ");
                     String createName = scanner.nextLine();
-                    scanner.nextLine();
 
                     System.out.print("Ingrese el ID de manufacturas del modelo: ");
                     int crateIdManufacturas = scanner.nextInt();
@@ -40,7 +39,6 @@ public class ModelConsoleAdapter {
 
                     System.out.print("Ingrese el nuevo nombre: ");
                     String updateName = scanner.nextLine();
-                    scanner.nextLine();
 
                     System.out.print("Ingrese el nuevo ID de manufacturas del modelo: ");
                     int updateIdManufacturas = scanner.nextInt();
@@ -67,7 +65,7 @@ public class ModelConsoleAdapter {
 
                 case 5:
                     modelService.findAllModel().forEach(p -> {
-                        System.out.println("ID: " + p.getId() + ", Nombre: " + p.getName() + "IdManufacturas: " + p.getIdManufactures());
+                        System.out.println("ID: " + p.getId() + ", Nombre: " + p.getName() + " IdManufacturas: " + p.getIdManufactures());
                     });
                     break;
 

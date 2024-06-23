@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.campuslands.modules.manufacture.domain.Manufacture;
 import com.campuslands.modules.model.domain.Model;
 import com.campuslands.modules.model.infrastructure.ModelRepository;
 

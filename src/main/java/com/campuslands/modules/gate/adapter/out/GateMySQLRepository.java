@@ -49,7 +49,7 @@ public class GateMySQLRepository implements GateRepository{
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, gate.getGateNumber());
                 statement.setInt(2, gate.getIdAirport());
-                statement.setInt(0, gate.getId());
+                statement.setInt(3, gate.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -104,7 +104,7 @@ public class GateMySQLRepository implements GateRepository{
                         Gate gate2 = new Gate(
                             resultSet.getInt("id"),
                             resultSet.getString("gateNumber"),
-                            resultSet.getInt("idAirpot")
+                            resultSet.getInt("idAirport")
                         );
                         gate.add(gate2);
                     }

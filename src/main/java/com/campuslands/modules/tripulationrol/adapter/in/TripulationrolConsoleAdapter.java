@@ -6,6 +6,13 @@ import java.util.Scanner;
 import com.campuslands.modules.tripulationrol.application.TripulationrolService;
 import com.campuslands.modules.tripulationrol.domain.Tripulationrol;
 
+
+/*
+Error en el actualizar java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the 
+manual that corresponds to your MySQL server version for the right syntax to 
+use near '?, idTrip = ?, idPlane = ?, idAirport = ? WHERE id = ?' at line 1 
+*/
+
 public class TripulationrolConsoleAdapter {
     private final TripulationrolService tripulationrolService;
 

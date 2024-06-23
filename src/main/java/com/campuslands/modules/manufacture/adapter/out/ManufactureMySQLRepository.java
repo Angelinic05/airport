@@ -28,7 +28,7 @@ public class ManufactureMySQLRepository implements ManufactureRepository{
 
     public void save(Manufacture manufacture){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSER INTO manufacture (name) VALUES (?)";
+            String query = "INSERT INTO manufacture (name) VALUES (?)";
 
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setNString(1, manufacture.getName());
@@ -44,7 +44,7 @@ public class ManufactureMySQLRepository implements ManufactureRepository{
     @Override
     public void update(Manufacture manufacture){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE FROM manufacture SET name = ? WHERE id = ?";
+            String query = "UPDATE manufacture SET name = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, manufacture.getName());
                 statement.setInt(2, manufacture.getId());
