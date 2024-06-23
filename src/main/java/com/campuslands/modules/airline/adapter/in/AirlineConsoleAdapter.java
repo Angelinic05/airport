@@ -16,8 +16,8 @@ public class AirlineConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -37,7 +37,7 @@ public class AirlineConsoleAdapter {
                     System.out.print("Ingrese el nombre de la aerolinea: ");
                     String nombre = scanner.nextLine();
 
-                    Airline updatedAirline = new Airline(nombre);
+                    Airline updatedAirline = new Airline(updateId, nombre);
 
                     airlineService.updateAirline(updatedAirline);
                     break;
@@ -47,8 +47,8 @@ public class AirlineConsoleAdapter {
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
-                    Optional<Airline> status = airlineService.getAirlineById(findId);
-                        status.ifPresentOrElse(
+                    Optional<Airline> airline = airlineService.getAirlineById(findId);
+                    airline.ifPresentOrElse(
                         p -> System.out.println(p),
                         () -> System.out.println("Aerolinea no encontrado")
                     );
@@ -68,8 +68,8 @@ public class AirlineConsoleAdapter {
                     });
                     break;
 
-                case 6:
-                    System.exit(0);
+                case 0:
+                    flag = false;
                     break;
 
                 default:
@@ -84,11 +84,11 @@ public class AirlineConsoleAdapter {
         System.out.println("3. Buscar Aerolinea por ID");
         System.out.println("4. Eliminar Aerolinea");
         System.out.println("5. Listar todos Aerolineas");
-        System.out.println("6. Salir");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 1 || choice > 6) {
+        while (choice < 0 || choice > 6) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    

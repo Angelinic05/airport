@@ -62,10 +62,10 @@ public class ManufactureConsoleAdapter {
                     });
                     break;
 
-                case 6:
-                    scanner.close();
-                    System.exit(0);
-                    break;
+                case 0:
+                    System.out.println("Saliendo...");
+                    scanner.nextLine();
+                    return;
 
                 default:
                     System.out.println("Opcion invalida, intentelo de nuevo.");
@@ -79,18 +79,18 @@ public class ManufactureConsoleAdapter {
         System.out.println("3. Buscar un fabricante por ID");
         System.out.println("4. Eliminar un fabricante");
         System.out.println("5. Listar todos los fabricantes");
-        System.out.println("6. Salir");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 1 || choice > 6) {
+        while (choice < 0 || choice > 5) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    
-                    System.out.println("Ingrese una opcion valida (1 - 6).");
+                    System.out.println("Ingrese una opcion valida (1 - 5).");
                 }
             } catch (Exception e) {
-                System.out.println("Ingrese una opcion valida (1 - 6).");
+                System.out.println("Ingrese una opcion valida (1 - 5).");
             }
         }
         return choice;

@@ -36,9 +36,9 @@ public class CustomerConsoleAdapter {
                     scanner.nextLine();
                     System.out.print("Nombre: ");
                     name = scanner.nextLine();
-                    scanner.nextLine();
                     System.out.print("Edad: ");
                     age = scanner.nextInt();
+                    scanner.nextLine();
                     System.out.print("id Tipo de documento: ");
                     idDocumenttype = scanner.nextInt();
                     scanner.nextLine();
@@ -89,6 +89,13 @@ public class CustomerConsoleAdapter {
                     customerService.deleteCustomer(id);
                     break;
                 case 5:
+                    System.out.println("Buscar cliente:");
+                    System.out.print("Id: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    customerService.findCustomerById(id).ifPresent(System.out::println);
+                    break;
+                case 0:
                     System.out.println("Saliendo...");
                     return;
                 default:
@@ -103,11 +110,12 @@ public class CustomerConsoleAdapter {
         System.out.println("2. Agregar Cliente");
         System.out.println("3. Actualizar Cliente");
         System.out.println("4. Borrar Cliente");
-        System.out.println("5. Salir");
+        System.out.println("5. Buscar Cliente");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 1 || choice > 5) {
+        while (choice < 0 || choice > 5) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    

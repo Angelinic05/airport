@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import java.sql.Date; 
 
 import com.campuslands.modules.employee.domain.Employee;
@@ -32,7 +30,7 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
     @Override
     public void save(Employee employee) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO employee(id, name, idRol, entryDate, idAirline, idAirport) VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO employee(id, name, idRol, entryDate, idAirline, idAirport) VALUES (?,?,?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, employee.getId());
                 statement.setString(2, employee.getName());

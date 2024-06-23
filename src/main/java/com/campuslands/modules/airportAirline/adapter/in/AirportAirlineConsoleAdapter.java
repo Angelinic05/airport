@@ -79,9 +79,15 @@ public class AirportAirlineConsoleAdapter {
                     airportAirlineService.deleteAirportAirline(id);
                     break;
                 case 5:
+                    System.out.println("Seleccionar por id Airport-Airline:");
+                    System.out.print("Id: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    airportAirlineService.getAirportAirlineById(id).ifPresent(System.out::println);
+                    break;
+                case 0:
                     System.out.println("Saliendo...");
                     scanner.nextLine();
-                    // scanner.close();
                     return;
                 default:
                     System.out.println("Ingrese una opcion valida (1 - 5).");
@@ -95,18 +101,19 @@ public class AirportAirlineConsoleAdapter {
         System.out.println("2. Agregar Aerolinea - Aeropuerto");
         System.out.println("3. Actualizar Aerolinea - Aeropuerto");
         System.out.println("4. Borrar Aerolinea - Aeropuerto");
-        System.out.println("5. Salir");
+        System.out.println("5. Seleccionar por id Aerolinea - Aeropuerto");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 1 || choice > 5) {
+        while (choice < 0 || choice > 5) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    
-                    System.out.println("Ingrese una opcion valida (1 - 5).");
+                    System.out.println("Ingrese una opcion valida (1 - 4).");
                 }
             } catch (Exception e) {
-                System.out.println("Ingrese una opcion valida (1 - 5).");
+                System.out.println("Ingrese una opcion valida (1 - 4).");
             }
         }
         return choice;

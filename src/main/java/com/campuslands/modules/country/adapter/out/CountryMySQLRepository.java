@@ -27,7 +27,7 @@ public class CountryMySQLRepository implements CountryRepository {
     @Override
     public Optional<Country> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT * FROM countries WHERE id = ?";
+            String sql = "SELECT * FROM country WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -47,7 +47,7 @@ public class CountryMySQLRepository implements CountryRepository {
     @Override
     public void save(Country country) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "INSERT INTO countries (name) VALUES (?)";
+            String sql = "INSERT INTO country (name) VALUES (?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, country.getName());
                 statement.executeUpdate();
@@ -60,7 +60,7 @@ public class CountryMySQLRepository implements CountryRepository {
     @Override
     public void update(Country country) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "UPDATE countries SET name = ? WHERE id = ?";
+            String sql = "UPDATE country SET name = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, country.getName());
                 statement.setInt(2, country.getId());
@@ -75,7 +75,7 @@ public class CountryMySQLRepository implements CountryRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "DELETE FROM countries WHERE id = ?";
+            String sql = "DELETE FROM country WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
@@ -90,7 +90,7 @@ public class CountryMySQLRepository implements CountryRepository {
     public List<Country> findAll() {
         List<Country> countries = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT id, name FROM countries";
+            String sql = "SELECT id, name FROM country";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {

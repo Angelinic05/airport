@@ -73,6 +73,12 @@ public class CityConsoleAdapter {
                     cityService.deleteCity(id);
                     break;
                 case 5:
+                    System.out.print("Ingrese el ID de la ciudad a buscar: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    cityService.findtCityById(id).ifPresent(System.out::println);
+                    break;
+                case 0:
                     System.out.println("Saliendo...");
                     return;
                 default:
@@ -87,11 +93,12 @@ public class CityConsoleAdapter {
         System.out.println("2. Agregar una nueva ciudad");
         System.out.println("3. Actualizar una ciudad");
         System.out.println("4. Eliminar una ciudad");
-        System.out.println("5. Salir");
+        System.out.println("5. Buscar una ciudad por id");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese una opcion: ");
         int choice = -1;
-        while (choice < 1 || choice > 5) {
+        while (choice < 0 || choice > 5) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 5) {                    

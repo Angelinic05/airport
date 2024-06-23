@@ -28,14 +28,14 @@ public class CityMySQLRepository implements CityRepository {
     @Override
     public Optional<City> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT * FROM cities WHERE id =?";
+            String sql = "SELECT * FROM city WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setInt(1, id);
                 ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    int idCountry = resultSet.getInt("id");
+                if (resultSet.next()) { 
+                    int idCountry = resultSet.getInt("idCountry");
                     String name = resultSet.getString("name");
-                    return Optional.of(new City(name, idCountry));
+                    return Optional.of(new City(id, name, idCountry));
                 }
             }
         } catch (SQLException e) {
@@ -47,7 +47,7 @@ public class CityMySQLRepository implements CityRepository {
     @Override
     public void save(City city) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "INSERT INTO cities (name, idCountry) VALUES (?,?)";
+            String sql = "INSERT INTO city (name, idCountry) VALUES (?,?)";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, city.getName());
                 statement.setInt(2, city.getIdCountry());
@@ -61,11 +61,11 @@ public class CityMySQLRepository implements CityRepository {
     @Override
     public void update(City city) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "UPDATE cities SET name =?, idCountry = ? WHERE id =?";
+            String sql = "UPDATE city SET name =?, idCountry = ? WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setString(1, city.getName());
                 statement.setInt(2, city.getIdCountry());
-                statement.setInt(2, city.getId());
+                statement.setInt(3, city.getId());
                 statement.executeUpdate();    
             }
         } catch (SQLException e) {
@@ -76,7 +76,7 @@ public class CityMySQLRepository implements CityRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "DELETE FROM cities WHERE id =?";
+            String sql = "DELETE FROM city WHERE id =?";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
@@ -90,7 +90,7 @@ public class CityMySQLRepository implements CityRepository {
     public List<City> findAll() {
         List<City> cities = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT * FROM cities";
+            String sql = "SELECT * FROM city";
             try (PreparedStatement statement = connection.prepareStatement(sql);) {
                 ResultSet resultSet = statement.executeQuery();
     

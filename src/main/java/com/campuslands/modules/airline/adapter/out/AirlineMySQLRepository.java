@@ -43,6 +43,7 @@ public class AirlineMySQLRepository implements AirlineRepository {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             try (PreparedStatement statement = connection.prepareStatement("UPDATE airline SET name =? WHERE id =?");) {
                 statement.setString(1, airline.getName());
+                statement.setInt(2,airline.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {

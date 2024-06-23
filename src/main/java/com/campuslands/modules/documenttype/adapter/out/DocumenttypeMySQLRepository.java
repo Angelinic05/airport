@@ -29,7 +29,7 @@ public class DocumenttypeMySQLRepository implements DocumenttypeRepository {
     @Override
     public Optional<Documenttype> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT * FROM documenttypes WHERE id = ?";
+            String sql = "SELECT * FROM documenttype WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -49,7 +49,7 @@ public class DocumenttypeMySQLRepository implements DocumenttypeRepository {
     @Override
     public void save(Documenttype documenttype) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "INSERT INTO documenttypes (name) VALUES (?)";
+            String sql = "INSERT INTO documenttype (name) VALUES (?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, documenttype.getName());
                 try {
@@ -68,17 +68,11 @@ public class DocumenttypeMySQLRepository implements DocumenttypeRepository {
     @Override
     public void update(Documenttype documenttype) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "UPDATE documenttypes SET name = ? WHERE id = ?";
+            String sql = "UPDATE documenttype SET name = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, documenttype.getName());
                 statement.setInt(2, documenttype.getId());
-                try {
-                    statement.executeUpdate();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,7 +82,7 @@ public class DocumenttypeMySQLRepository implements DocumenttypeRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "DELETE FROM documenttypes WHERE id = ?";
+            String sql = "DELETE FROM documenttype WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
                 try {
@@ -108,7 +102,7 @@ public class DocumenttypeMySQLRepository implements DocumenttypeRepository {
     public List<Documenttype> findAll() {
         List<Documenttype> documenttypes = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT * FROM documenttypes";
+            String sql = "SELECT * FROM documenttype";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {

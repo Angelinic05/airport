@@ -44,7 +44,7 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     @Override
     public void update(Flightfare flightfare){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE flightfare SET description = ?, details = ?, values = ? WHERE id = ?";
+            String query = "UPDATE flightfare SET description = ?, details = ?, value = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, flightfare.getDescription());
                 statement.setString(2, flightfare.getDetails());
@@ -60,7 +60,7 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     @Override
     public Optional<Flightfare> findById(int id){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT id, description, details, values FROM flightfare WHERE id = ?";
+            String query = "SELECT id, description, details, value FROM flightfare WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -69,7 +69,7 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
                             resultSet.getInt("id"),
                             resultSet.getString("description"),
                             resultSet.getString("details"),
-                            resultSet.getDouble("values")
+                            resultSet.getDouble("value")
                         );
                         return Optional.of(flightfare);
                     }
@@ -99,7 +99,7 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
     public List<Flightfare> findAll(){
         List<Flightfare> flightfare = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT id, description, details, values FROM flightfare";
+            String query = "SELECT id, description, details, value FROM flightfare";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while(resultSet.next()){
@@ -107,7 +107,7 @@ public class FlightfareMySQLRepository implements FlightfareRepository {
                             resultSet.getInt("id"),
                             resultSet.getString("description"),
                             resultSet.getString("details"),
-                            resultSet.getDouble("values")
+                            resultSet.getDouble("value")
                         );
                         flightfare.add(flightfare2);
                     }

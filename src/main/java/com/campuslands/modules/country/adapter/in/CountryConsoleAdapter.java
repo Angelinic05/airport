@@ -27,11 +27,8 @@ public class CountryConsoleAdapter {
                     break;
                 case 2:
                     System.out.print("Ingrese el nombre del pais: ");
-                    name = scanner.nextLine();
-                    System.out.print("Ingrese el ID del pais: ");
-                    id = scanner.nextInt();
-                    scanner.nextLine();
-                    Country country = new Country(id, name);
+                    name = scanner.nextLine();;
+                    Country country = new Country(name);
                     countryService.saveCountry(country);
                     break;
                 case 3:
@@ -40,7 +37,6 @@ public class CountryConsoleAdapter {
                     scanner.nextLine();
                     System.out.print("Ingrese el nuevo nombre del pais: ");
                     name = scanner.nextLine();
-                    scanner.nextLine();
                     Country updatedCountry = new Country(id, name);
                     countryService.updateCountry(updatedCountry);
                     break;
@@ -51,7 +47,12 @@ public class CountryConsoleAdapter {
                     countryService.deleteCountry(id);
                     break;
                 case 5:
-                    scanner.close();
+                    System.out.print("Ingrese el ID del pais a buscar: ");
+                    id = scanner.nextInt();
+                    scanner.nextLine();
+                    countryService.findCountryById(id).ifPresent(System.out::println);
+                    break;
+                case 0:
                     return;
                 default:
                     System.out.println("Ingrese una opcion valida (1 - 5).");
@@ -65,11 +66,12 @@ public class CountryConsoleAdapter {
         System.out.println("2. Agregar pais");
         System.out.println("3. Actualizar pais");
         System.out.println("4. Eliminar pais");
-        System.out.println("5. Salir");
+        System.out.println("5. Buscar pais");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese una opcion: ");
         int choice = -1;
-        while (choice < 1 || choice > 5) {
+        while (choice < 0 || choice > 5) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 5) {                    

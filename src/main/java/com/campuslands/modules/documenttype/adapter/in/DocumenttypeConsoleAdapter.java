@@ -34,7 +34,8 @@ public class DocumenttypeConsoleAdapter {
                     scanner.nextLine();
                     Documenttype updatedDocumenttype = documenttypeService.findDocumenttypeById(updateId).orElse(null);
                     if(updatedDocumenttype != null){
-                        desc = scanner.nextLine();
+                        System.out.println("Ingrese el nombre del tipo de documento:");
+                        updatedDocumenttype.setName(scanner.nextLine());
                     }
                     documenttypeService.updateDocumenttype(updatedDocumenttype);
                     break;
@@ -63,10 +64,10 @@ public class DocumenttypeConsoleAdapter {
                     documenttypeService.finAllDocumenttypes().forEach(System.out::println);
                     break;
 
-                case 6:
-                    System.exit(0);
-                    break;
-
+                case 0:
+                    System.out.println("Saliendo...");
+                    scanner.nextLine();
+                    return;
                 default:
                     System.out.println("Opcion invalida, intentelo de nuevo.");
             }
@@ -79,7 +80,7 @@ public class DocumenttypeConsoleAdapter {
         System.out.println("3. Buscar tipos de documento por ID");
         System.out.println("4. Eliminar tipos de documento");
         System.out.println("5. Listar todos los tipos de documento");
-        System.out.println("6. Salir");
+        System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
@@ -87,10 +88,10 @@ public class DocumenttypeConsoleAdapter {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    
-                    System.out.println("Ingrese una opcion valida (1 - 6).");
+                    System.out.println("Ingrese una opcion valida (1 -5).");
                 }
             } catch (Exception e) {
-                System.out.println("Ingrese una opcion valida (1 - 6).");
+                System.out.println("Ingrese una opcion valida (1 - 5).");
             }
         }
         return choice;

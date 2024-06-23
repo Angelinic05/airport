@@ -29,7 +29,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public Optional<Customer> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT * FROM customers WHERE id = ?";
+            String sql = "SELECT * FROM customer WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
@@ -51,11 +51,12 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public void save(Customer customer) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "INSERT INTO customers (name, age, idDocument) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO customer (id, name, age, idDocument) VALUES (?, ?, ?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
-                statement.setString(1, customer.getName());
-                statement.setInt(2, customer.getAge());
-                statement.setInt(3, customer.getIdDocument());
+                statement.setInt(1, customer.getId());
+                statement.setString(2, customer.getName());
+                statement.setInt(3, customer.getAge());
+                statement.setInt(4, customer.getIdDocument());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -66,7 +67,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public void update(Customer customer) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "UPDATE customers SET name = ?, age = ?, idDocument = ? WHERE id = ?";
+            String sql = "UPDATE customer SET name = ?, age = ?, idDocument = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setString(1, customer.getName());
                 statement.setInt(2, customer.getAge());
@@ -82,7 +83,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "DELETE FROM customers WHERE id = ?";
+            String sql = "DELETE FROM customer WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
@@ -96,7 +97,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
     public List<Customer> findAll() {
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String sql = "SELECT id, name, age, idDocumenttype FROM customers";
+            String sql = "SELECT id, name, age, idDocument FROM customer";
             try (PreparedStatement statement = connection.prepareStatement(sql)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {

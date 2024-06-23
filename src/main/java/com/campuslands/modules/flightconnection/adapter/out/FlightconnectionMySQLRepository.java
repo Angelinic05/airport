@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.campuslands.modules.employee.domain.Employee;
 import com.campuslands.modules.flightconnection.domain.Flightconnection;
 import com.campuslands.modules.flightconnection.infrastructure.FlightconnectionRepository;
 
@@ -69,7 +68,7 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
                     if(resultSet.next()){
                         Flightconnection flightconnection = new Flightconnection(
                             resultSet.getInt("id"),
-                            resultSet.getString("connectionNumbre"),
+                            resultSet.getString("connectionNumber"),
                             resultSet.getInt("idTrip"),
                             resultSet.getInt("idPlane"),
                             resultSet.getInt("idAirport")
@@ -107,7 +106,7 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
                     while (resultSet.next()) {
                         Flightconnection flightconnection2 = new Flightconnection(
                             resultSet.getInt("id"),
-                            resultSet.getString("connectionNumbre"),
+                            resultSet.getString("connectionNumber"),
                             resultSet.getInt("idTrip"),
                             resultSet.getInt("idPlane"),
                             resultSet.getInt("idAirport")

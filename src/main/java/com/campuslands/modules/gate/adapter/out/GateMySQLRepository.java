@@ -29,7 +29,7 @@ public class GateMySQLRepository implements GateRepository{
 
     public void save(Gate gate){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO gate (gateNumber, idAirport)";
+            String query = "INSERT INTO gate (gateNumber, idAirport) values (?, ?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, gate.getGateNumber());
                 statement.setInt(2, gate.getIdAirport());
