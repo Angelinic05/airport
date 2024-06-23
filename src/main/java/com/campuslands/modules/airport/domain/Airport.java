@@ -64,6 +64,9 @@ public class Airport {
         this.yPosition = yPosition;
     }
 
-    
+    @Override
+    public String toString(){
+        return String.format("Airport %s[ID: %d -- IDCity: %d -- XPosition: %f -- YPosition %f],",name, id, idCity, xPosition, yPosition);
+    }
     
 }

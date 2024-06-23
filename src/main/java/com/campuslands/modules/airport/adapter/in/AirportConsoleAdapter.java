@@ -42,38 +42,40 @@ public class AirportConsoleAdapter {
                 case 2:
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
-                    Airport updatedAirport = airportService.findAirportById(updateId).orElse(null);
+                    Optional<Airport> optionalUpdatedAirport = airportService.findAirportById(updateId);
                     scanner.nextLine();
-
-                    int optSubMenu = -1;
-                    String submen = "Que desea actualizar\n1.name\n2.idCity\n3.xPosition\n4.yPosition\n0. Salir";
-                    
-                    while (optSubMenu != 0) {
-                        System.out.println(submen);
-                        optSubMenu = Integer.parseInt(submen);
-                        switch (optSubMenu) {
-                            case 1:
-                                System.out.print("Ingrese el nuevo nombr: ");
-                                updatedAirport.setName(scanner.nextLine());
-                                break;
-                            case 2:
-                                System.out.print("Ingrese el nuevo id de la ciudad: ");
-                                idCity = Integer.parseInt(scanner.nextLine());
-                                updatedAirport.setIdCity(idCity);
-                                break;
-                            case 3:
-                                System.out.print("Ingrese la nueva coordenada x: ");
-                                xPosition = Double.parseDouble(scanner.nextLine());
-                                updatedAirport.setxPosition(xPosition);
-                                break;
-                            case 4:
-                                System.out.print("Ingrese la nueva coordenada y: ");
-                                yPosition = Double.parseDouble(scanner.nextLine());
-                                updatedAirport.setyPosition(yPosition);
-                                break;
+                    optionalUpdatedAirport.ifPresentOrElse(updatedAirport -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. name\n2. idCity\n3. xPosition\n4. yPosition\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el nuevo nombre: ");
+                                    updatedAirport.setName(scanner.nextLine());
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo id de la ciudad: ");
+                                    int idCityUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedAirport.setIdCity(idCityUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese la nueva coordenada x: ");
+                                    Double xPositionUpdated = Double.parseDouble(scanner.nextLine());
+                                    updatedAirport.setxPosition(xPositionUpdated);
+                                    break;
+                                case 4:
+                                    System.out.print("Ingrese la nueva coordenada y: ");
+                                    Double yPositionUpdated = Double.parseDouble(scanner.nextLine());
+                                    updatedAirport.setyPosition(yPositionUpdated);
+                                    break;
+                            }
                         }
-                    }
-                    airportService.updateAirport(updatedAirport);
+                        airportService.updateAirport(updatedAirport);
+                    }, () -> System.out.println("No se encontró el aeropuerto con ID: " + updateId));
                     break;
 
                 case 3:

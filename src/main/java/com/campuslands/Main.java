@@ -229,34 +229,34 @@ public class Main {
                     GateConsoleAdapter gateConsoleAdapter = new GateConsoleAdapter(gateService);
                     gateConsoleAdapter.start();
                     break;
-                case 12:
-                    System.out.println("manufacture");
-                    ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
-                    ManufactureService manufactureService = new ManufactureService(manufactureMySQLRepository);
-                    ManufactureConsoleAdapter manufactureConsoleAdapter = new ManufactureConsoleAdapter(manufactureService);
-                    manufactureConsoleAdapter.start();
-                    break;
-                case 13:
-                    System.out.println("model");
-                    ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
-                    ModelService modelService = new ModelService(modelMySQLRepository);
-                    ModelConsoleAdapter modelConsoleAdapter = new ModelConsoleAdapter(modelService);
-                    modelConsoleAdapter.start();
-                    break;
-                case 14:
-                    System.out.println("plane");
-                    PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
-                    PlaneService planeService = new PlaneService(planeMySQLRepository);
-                    PlaneConsoleAdapter planeConsoleAdapter = new PlaneConsoleAdapter(planeService);
-                    planeConsoleAdapter.start();
-                    break;
-                case 15:
-                    System.out.println("revemployee");
-                    RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
-                    RevemployeeService revemployeeService = new RevemployeeService(revemployeeMySQLRepository);
-                    RevemployeeConsoleAdapter revemployeeConsoleAdapter = new RevemployeeConsoleAdapter(revemployeeService);
-                    revemployeeConsoleAdapter.start();
-                    break;
+                // case 12:
+                //     System.out.println("manufacture");
+                //     ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
+                //     ManufactureService manufactureService = new ManufactureService(manufactureMySQLRepository);
+                //     ManufactureConsoleAdapter manufactureConsoleAdapter = new ManufactureConsoleAdapter(manufactureService);
+                //     manufactureConsoleAdapter.start();
+                //     break;
+                // case 13:
+                //     System.out.println("model");
+                //     ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
+                //     ModelService modelService = new ModelService(modelMySQLRepository);
+                //     ModelConsoleAdapter modelConsoleAdapter = new ModelConsoleAdapter(modelService);
+                //     modelConsoleAdapter.start();
+                //     break;
+                // case 14:
+                //     System.out.println("plane");
+                //     PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
+                //     PlaneService planeService = new PlaneService(planeMySQLRepository);
+                //     PlaneConsoleAdapter planeConsoleAdapter = new PlaneConsoleAdapter(planeService);
+                //     planeConsoleAdapter.start();
+                //     break;
+                // case 15:
+                //     System.out.println("revemployee");
+                //     RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
+                //     RevemployeeService revemployeeService = new RevemployeeService(revemployeeMySQLRepository);
+                //     RevemployeeConsoleAdapter revemployeeConsoleAdapter = new RevemployeeConsoleAdapter(revemployeeService);
+                //     revemployeeConsoleAdapter.start();
+                //     break;
                 case 16:
                     System.out.println("revision");
                     RevisionService revisionService = new RevisionService(revisionRepository);

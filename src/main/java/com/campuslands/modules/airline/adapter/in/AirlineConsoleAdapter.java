@@ -37,7 +37,7 @@ public class AirlineConsoleAdapter {
                     System.out.print("Ingrese el nombre de la aerolinea: ");
                     String nombre = scanner.nextLine();
 
-                    Airline updatedAirline = new Airline(updateId, nombre);
+                    Airline updatedAirline = new Airline(nombre);
 
                     airlineService.updateAirline(updatedAirline);
                     break;
