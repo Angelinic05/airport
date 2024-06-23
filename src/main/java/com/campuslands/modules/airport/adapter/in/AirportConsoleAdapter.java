@@ -25,7 +25,6 @@ public class AirportConsoleAdapter {
             int idCity;
             switch (choice) {
                 case 1:
-
                     System.out.print("Ingrese el nombre del aeropuerto: ");
                     name = scanner.nextLine();
                     System.out.print("Ingrese el id de la ciudad: ");
@@ -42,8 +41,8 @@ public class AirportConsoleAdapter {
                 case 2:
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
-                    Optional<Airport> optionalUpdatedAirport = airportService.findAirportById(updateId);
                     scanner.nextLine();
+                    Optional<Airport> optionalUpdatedAirport = airportService.findAirportById(updateId);
                     optionalUpdatedAirport.ifPresentOrElse(updatedAirport -> {
                         int optSubMenu = -1;
                         String submenu = "¿Qué desea actualizar?\n1. name\n2. idCity\n3. xPosition\n4. yPosition\n0. Salir\n";

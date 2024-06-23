@@ -18,43 +18,42 @@ public class DocumenttypeConsoleAdapter {
 
         while (true) {
             int choice = menu(scanner);
-            String name;
+            String desc;
             int id;
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese el nombre del aeropuerto: ");
-                    name = scanner.nextLine();
-                    System.out.print("Ingrese el id de la ciudad: ");
-                    id =Integer.parseInt(scanner.nextLine());
-
-                    Documenttype newDocumenttype = new Documenttype(id, name);
+                    System.out.print("Ingrese el nombre dele tipo de doc: ");
+                    desc = scanner.nextLine();
+                    Documenttype newDocumenttype = new Documenttype(desc);
                     documenttypeService.saveDocumenttype(newDocumenttype);
 
                     break;
                 case 2:
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
-                    Documenttype updatedDocumenttype = documenttypeService.findDocumenttypeById(updateId).orElse(null);
                     scanner.nextLine();
-
+                    Documenttype updatedDocumenttype = documenttypeService.findDocumenttypeById(updateId).orElse(null);
+                    if(updatedDocumenttype != null){
+                        desc = scanner.nextLine();
+                    }
                     documenttypeService.updateDocumenttype(updatedDocumenttype);
                     break;
 
                 case 3:
-                    System.out.print("Ingrese el Id del aeropuerto a buscar: ");
+                    System.out.print("Ingrese el Id del tipo de documento a buscar: ");
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
                     Optional<Documenttype> status = documenttypeService.findDocumenttypeById(findId);
                         status.ifPresentOrElse(
                         p -> System.out.println(p),
-                        () -> System.out.println("Aeropuerto no encontrado")
+                        () -> System.out.println("Tipo de documento  no encontrado")
                     );
 
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del Aeropuerto a borrar: ");
+                    System.out.print("Ingrese el Id del tipo de documento a borrar: ");
                     int deleteId = scanner.nextInt();
                     scanner.nextLine();
                     documenttypeService.deleteDocumenttype(deleteId);

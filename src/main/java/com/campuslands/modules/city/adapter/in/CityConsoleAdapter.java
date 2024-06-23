@@ -1,6 +1,7 @@
 package com.campuslands.modules.city.adapter.in;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.city.application.CityService;
@@ -27,7 +28,7 @@ public class CityConsoleAdapter {
                     List<City> cities = cityService.findAllCities();
                     cities.forEach(System.out::println);
                     break;
-                case 2:
+                case 2:;
                     System.out.print("Ingrese el nombre de la ciudad: ");
                     name = scanner.nextLine();
                     System.out.print("Ingrese el ID del pais: ");
@@ -37,16 +38,33 @@ public class CityConsoleAdapter {
                     cityService.saveCity(city);
                     break;
                 case 3:
-                    System.out.print("Ingrese el ID de la ciudad a actualizar: ");
-                    id = scanner.nextInt();
+                    System.out.println("Ingrese el id del pais a actualizar");
+                    int idToUpdate = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Ingrese el nuevo nombre de la ciudad: ");
-                    name = scanner.nextLine();
-                    System.out.print("Ingrese el nuevo ID del pais: ");
-                    idCountry = scanner.nextInt();
-                    scanner.nextLine();
-                    City updatedCity = new City(id, name, idCountry);
-                    cityService.updateCity(updatedCity);
+                    Optional <City> ciyToUpdate = cityService.findtCityById(idToUpdate);
+                    ciyToUpdate.ifPresentOrElse(updatedCity  ->{
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. Nombre de la ciudad\n2. id del pais\n0.Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el nombre de la ciudad: ");
+                                    String nameUpdate = scanner.nextLine();
+                                    updatedCity.setName(nameUpdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el id del pais: ");
+                                    int idCountryUpdate = Integer.parseInt(scanner.nextLine());
+                                    updatedCity.setIdCountry(idCountryUpdate);
+                                    break;
+                            }
+                        }
+                        cityService.updateCity(updatedCity);
+                    }, () -> System.out.println("No se encontro el id" + idToUpdate));
                     break;
                 case 4:
                     System.out.print("Ingrese el ID de la ciudad a eliminar: ");

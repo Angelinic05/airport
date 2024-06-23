@@ -5,6 +5,7 @@ import com.campuslands.modules.customer.domain.Customer;
 
 import java.util.Scanner;
 import java.util.List;
+import java.util.Optional;
 
 public class CustomerConsoleAdapter {
     private CustomerService customerService;
@@ -24,7 +25,7 @@ public class CustomerConsoleAdapter {
             
             switch (choice) {
                 case 1:
-                    List<Customer> customers = customerService.getAllCustomers();
+                    List<Customer> customers = customerService.findAllCustomers();
                     System.out.println("Listado de clientes:");
                     for (Customer customer : customers) {
                         System.out.println(customer);
@@ -49,21 +50,39 @@ public class CustomerConsoleAdapter {
                     break;
                 case 3:
                     System.out.println("Actualizar cliente:");
-                    System.out.print("Id: ");
-                    id = scanner.nextInt();
+                    System.out.print("Ingrese el id del cliente a actualizar: ");
+                    int idToUpdate = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Nuevo Nombre: ");
-                    name = scanner.nextLine();
-                    scanner.nextLine();
-                    System.out.print("Nueva Edad: ");
-                    age = scanner.nextInt();
-                    System.out.print("Nuevo id Tipo de documento: ");
-                    idDocumenttype = scanner.nextInt();
-                    scanner.nextLine();
-                    
-                    Customer updatedCustomer = new Customer(id, name, age, idDocumenttype);
-                    customerService.updateCustomer(updatedCustomer);
-                    break;
+                    Optional<Customer> customerToUpdate = customerService.findCustomerById(idToUpdate);
+                    customerToUpdate.ifPresentOrElse(updatedCustomer -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. Nombre\n2. Edad\n3. id Tipo de documento\n0. Salir\n";
+                        
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                            
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Nuevo Nombre: ");
+                                    String nameUpdate = scanner.nextLine();
+                                    updatedCustomer.setName(nameUpdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Nueva Edad: ");
+                                    int ageUpdate = Integer.parseInt(scanner.nextLine());
+                                    updatedCustomer.setAge(ageUpdate);
+                                    break;
+                                case 3:
+                                    System.out.print("Nuevo id Tipo de documento: ");
+                                    int idDocumenttypeUpdate = Integer.parseInt(scanner.nextLine());
+                                    updatedCustomer.setIdDocument(idDocumenttypeUpdate);
+                                    break;
+                            }
+                        }
+                        customerService.updateCustomer(updatedCustomer);
+                    }, () -> System.out.println("No se encontró el cliente con id " + idToUpdate));
+                                        break;
                 case 4:
                     System.out.println("Borrar cliente:");
                     System.out.print("Id: ");
@@ -82,11 +101,11 @@ public class CustomerConsoleAdapter {
     }
 
     private int menu(Scanner scanner) {
-        System.out.println("Gestor de Aerolinea - Aeropuerto:");
-        System.out.println("1. Listar Aerolinea - Aeropuerto");
-        System.out.println("2. Agregar Aerolinea - Aeropuerto");
-        System.out.println("3. Actualizar Aerolinea - Aeropuerto");
-        System.out.println("4. Borrar Aerolinea - Aeropuerto");
+        System.out.println("Gestor de Cliente:");
+        System.out.println("1. Listar Cliente");
+        System.out.println("2. Agregar Cliente");
+        System.out.println("3. Actualizar Cliente");
+        System.out.println("4. Borrar Cliente");
         System.out.println("5. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");

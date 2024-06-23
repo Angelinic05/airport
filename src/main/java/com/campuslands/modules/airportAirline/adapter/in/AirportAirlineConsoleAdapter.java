@@ -1,6 +1,7 @@
 package com.campuslands.modules.airportAirline.adapter.in;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.airportAirline.application.AirportAirlineService;
@@ -45,18 +46,34 @@ public class AirportAirlineConsoleAdapter {
                     break;
                 case 3:
                     System.out.println("Actualizar Airport-Airline:");
-                    System.out.print("Id: ");
-                    id = scanner.nextInt();
+                    System.out.print("Ingrese el Id a actualizar: ");
+                    int idToUpdate = scanner.nextInt();
                     scanner.nextLine();
-                    System.out.print("Airline ID: ");
-                    airlineId = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.print("Airport ID: ");
-                    airportId = scanner.nextInt();
-                    scanner.nextLine();
-                    
-                    AirportAirline updatedAirportAirline = new AirportAirline(id, airlineId, airportId);
-                    airportAirlineService.updateAirportAirline(updatedAirportAirline);
+                    Optional<AirportAirline>  optionalAirportAirline= airportAirlineService.getAirportAirlineById(idToUpdate);
+                    optionalAirportAirline.ifPresentOrElse(updatedAirportAirline -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. id de la aerolinea\n2. id del aeropuerto\n0.Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el id de la aerolinea: ");
+                                    int setIdAirline = Integer.parseInt(scanner.nextLine());
+                                    updatedAirportAirline.setIdAirline(setIdAirline);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el id del aeropuerto: ");
+                                    int setIdAirport = Integer.parseInt(scanner.nextLine());
+                                    updatedAirportAirline.setIdAirport(setIdAirport);
+                                    break;
+                            }
+                        }
+                        airportAirlineService.updateAirportAirline(updatedAirportAirline);
+                    }
+                        , () -> System.out.println("No se encontro el id " + idToUpdate));
                     break;
                 case 4:
                     System.out.println("Borrar Airport-Airline:");

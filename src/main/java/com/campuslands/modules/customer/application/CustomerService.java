@@ -18,13 +18,13 @@ public class CustomerService {
     public void updateCustomer(Customer customer) {
         customerRepository.update(customer);
     }
-    public Optional<Customer> getCustomerById(int id) {
+    public Optional<Customer> findCustomerById(int id) {
         return customerRepository.findById(id);
     }
     public void deleteCustomer(int id) {
         customerRepository.delete(id);
     }
-    public List<Customer> getAllCustomers() {
+    public List<Customer> findAllCustomers() {
         return customerRepository.findAll();
     }
     

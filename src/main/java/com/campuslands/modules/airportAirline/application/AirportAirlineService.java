@@ -2,6 +2,8 @@ package com.campuslands.modules.airportAirline.application;
 
 
 import java.util.List;
+import java.util.Optional;
+
 import com.campuslands.modules.airportAirline.domain.AirportAirline;
 import com.campuslands.modules.airportAirline.infrastructure.AirportAirlineRepository;
 
@@ -24,8 +26,8 @@ public class AirportAirlineService {
         airportAirlineRepository.delete(id);
     }
 
-    public AirportAirline getAirportAirlineById(int id) {
-        return airportAirlineRepository.findById(id).orElse(null);
+    public Optional<AirportAirline> getAirportAirlineById(int id) {
+        return airportAirlineRepository.findById(id);
     }
     public List<AirportAirline> getAllAirportAirlines() {
         return airportAirlineRepository.findAll();
