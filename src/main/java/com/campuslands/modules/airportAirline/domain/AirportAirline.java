@@ -14,6 +14,10 @@ public class AirportAirline {
         this.idAirline = idAirline;
         this.idAirport = idAirport;
     }
+    public AirportAirline(int idAirline, int idAirport) {
+        this.idAirline = idAirline;
+        this.idAirport = idAirport;
+    }
 
     public int getId() {
         return id;
@@ -39,6 +43,9 @@ public class AirportAirline {
         this.idAirport = idAirport;
     }
 
-    
+    @Override
+    public String toString(){
+        return String.format("id: %d -- idAirline: %d -- idAirport: %d",id, idAirline, idAirport);
+    }
 
 }

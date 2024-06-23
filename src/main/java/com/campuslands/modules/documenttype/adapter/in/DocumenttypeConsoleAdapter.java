@@ -64,7 +64,6 @@ public class DocumenttypeConsoleAdapter {
                     break;
 
                 case 6:
-                    scanner.close();
                     System.exit(0);
                     break;
 

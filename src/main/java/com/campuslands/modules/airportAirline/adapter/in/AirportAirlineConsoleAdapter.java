@@ -25,15 +25,10 @@ public class AirportAirlineConsoleAdapter {
                 case 1:
                     List<AirportAirline> airportAirlines = airportAirlineService.getAllAirportAirlines();
                     System.out.println("Listado de Airport-Airline:");
-                    for (AirportAirline airportAirline : airportAirlines) {
-                        System.out.println(airportAirline);
-                    }
+                    airportAirlines.forEach(System.out::println);
                     break;
                 case 2:
                     System.out.println("Agregar Airport-Airline:");
-                    System.out.print("Id: ");
-                    id = scanner.nextInt();
-                    scanner.nextLine();
                     System.out.print("Airline ID: ");
                     airlineId = scanner.nextInt();
                     scanner.nextLine();
@@ -41,7 +36,7 @@ public class AirportAirlineConsoleAdapter {
                     airportId = scanner.nextInt();
                     scanner.nextLine();
                     
-                    AirportAirline airportAirline = new AirportAirline(id, airlineId, airportId);
+                    AirportAirline airportAirline = new AirportAirline(airlineId, airportId);
                     airportAirlineService.createAirportAirline(airportAirline);
                     break;
                 case 3:
@@ -85,7 +80,8 @@ public class AirportAirlineConsoleAdapter {
                     break;
                 case 5:
                     System.out.println("Saliendo...");
-                    scanner.close();
+                    scanner.nextLine();
+                    // scanner.close();
                     return;
                 default:
                     System.out.println("Ingrese una opcion valida (1 - 5).");

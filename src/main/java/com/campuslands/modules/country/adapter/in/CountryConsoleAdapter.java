@@ -51,7 +51,6 @@ public class CountryConsoleAdapter {
                     countryService.deleteCountry(id);
                     break;
                 case 5:
-                    System.out.println("Saliendo...");
                     scanner.close();
                     return;
                 default:

@@ -49,6 +49,9 @@ public class Customer {
         this.idDocument = idDocument;
     }
 
-    
+    @Override
+    public String toString(){
+        return String.format("Cliente id: %d\n  nombre: %s -- edad: %d -- idTipo de documento: %d", id, name, age, idDocument);
+    }
 
 }

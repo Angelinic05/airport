@@ -34,5 +34,8 @@ public class Documenttype {
         this.name = name;
     }
 
-
+    @Override
+    public String toString(){
+        return String.format("id Tipo de documnto: %d -- tipo de doc: %s", id, name);
+    }
 }

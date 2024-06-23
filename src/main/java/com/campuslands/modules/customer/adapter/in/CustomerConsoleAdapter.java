@@ -27,9 +27,7 @@ public class CustomerConsoleAdapter {
                 case 1:
                     List<Customer> customers = customerService.findAllCustomers();
                     System.out.println("Listado de clientes:");
-                    for (Customer customer : customers) {
-                        System.out.println(customer);
-                    }
+                    customers.forEach(System.out::println);
                     break;
                 case 2:
                     System.out.println("Agregar cliente:");
@@ -92,7 +90,6 @@ public class CustomerConsoleAdapter {
                     break;
                 case 5:
                     System.out.println("Saliendo...");
-                    scanner.close();
                     return;
                 default:
                     System.out.println("Ingrese una opcion valida (1 - 5).");

@@ -9,7 +9,6 @@ import com.campuslands.modules.airline.application.AirlineService;
 import com.campuslands.modules.airport.adapter.in.AirportConsoleAdapter;
 import com.campuslands.modules.airport.adapter.out.AirportMySQLRepository;
 import com.campuslands.modules.airport.application.AirportService;
-import com.campuslands.modules.airport.domain.Airport;
 
 import com.campuslands.modules.airportAirline.adapter.in.AirportAirlineConsoleAdapter;
 import com.campuslands.modules.airportAirline.adapter.out.AirportAirlineMySQLRepository;
@@ -18,43 +17,35 @@ import com.campuslands.modules.airportAirline.application.AirportAirlineService;
 import com.campuslands.modules.revision.adapter.in.RevisionConsoleAdapter;
 import com.campuslands.modules.revision.adapter.out.RevisionMySQLRepository;
 import com.campuslands.modules.revision.application.RevisionService;
-import com.campuslands.modules.revision.domain.Revision;
 
 import com.campuslands.modules.revisiondetail.adapter.in.RevisiondetailConsoleAdapter;
 import com.campuslands.modules.revisiondetail.adapter.out.RevisiondetailMySQLRepository;
 import com.campuslands.modules.revisiondetail.application.RevisiondetailService;
-import com.campuslands.modules.revisiondetail.domain.Revisiondetail;
 
 
 import com.campuslands.modules.status.adapter.in.StatusConsoleAdapter;
 import com.campuslands.modules.status.adapter.out.StatusMySQLRepository;
 import com.campuslands.modules.status.application.StatusService;
-import com.campuslands.modules.status.domain.Status;
 
 import com.campuslands.modules.trip.adapter.in.TripConsoleAdapter;
 import com.campuslands.modules.trip.adapter.out.TripMySQLRepository;
 import com.campuslands.modules.trip.application.TripService;
-import com.campuslands.modules.trip.domain.Trip;
 
 import com.campuslands.modules.tripbooking.adapter.in.TripbookingConsoleAdapter;
 import com.campuslands.modules.tripbooking.adapter.out.TripbookingMySQLRepository;
 import com.campuslands.modules.tripbooking.application.TripbookingService;
-import com.campuslands.modules.tripbooking.domain.Tripbooking;
 
 import com.campuslands.modules.tripbookingdetail.adapter.in.TripbookingdetailConsoleAdapter;
 import com.campuslands.modules.tripbookingdetail.adapter.out.TripbookingdetailMySQLRepository;
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
-import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
 import com.campuslands.modules.tripcrew.adapter.in.TripcrewConsoleAdapter;
 import com.campuslands.modules.tripcrew.adapter.out.TripcrewMySQLRepository;
 import com.campuslands.modules.tripcrew.application.TripcrewService;
-import com.campuslands.modules.tripcrew.domain.Tripcrew;
 
 import com.campuslands.modules.tripulationrol.adapter.in.TripulationrolConsoleAdapter;
 import com.campuslands.modules.tripulationrol.adapter.out.TripulationrolMySQLRepository;
 import com.campuslands.modules.tripulationrol.application.TripulationrolService;
-import com.campuslands.modules.tripulationrol.domain.Tripulationrol;
 
 import com.campuslands.modules.city.adapter.in.CityConsoleAdapter;
 import com.campuslands.modules.city.adapter.out.CityMySQLRepository;
@@ -106,7 +97,6 @@ import com.campuslands.modules.revemployee.application.RevemployeeService;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         // String url = "jdbc:mysql://localhost:3306/airport";
         String url = "jdbc:mysql://javaairportdb.cfecucemoghu.us-east-2.rds.amazonaws.com:3306/airport";
         String username = "airportDB";
@@ -148,6 +138,7 @@ public class Main {
             System.out.println("23. tripulationrol");
             System.out.println("");
             System.out.print("Ingrese la opcion: ");
+            Scanner scanner = new Scanner(System.in);
             int choice = scanner.nextInt();
             scanner.nextLine(); // Consume newline
 
@@ -229,34 +220,34 @@ public class Main {
                     GateConsoleAdapter gateConsoleAdapter = new GateConsoleAdapter(gateService);
                     gateConsoleAdapter.start();
                     break;
-                // case 12:
-                //     System.out.println("manufacture");
-                //     ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
-                //     ManufactureService manufactureService = new ManufactureService(manufactureMySQLRepository);
-                //     ManufactureConsoleAdapter manufactureConsoleAdapter = new ManufactureConsoleAdapter(manufactureService);
-                //     manufactureConsoleAdapter.start();
-                //     break;
-                // case 13:
-                //     System.out.println("model");
-                //     ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
-                //     ModelService modelService = new ModelService(modelMySQLRepository);
-                //     ModelConsoleAdapter modelConsoleAdapter = new ModelConsoleAdapter(modelService);
-                //     modelConsoleAdapter.start();
-                //     break;
-                // case 14:
-                //     System.out.println("plane");
-                //     PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
-                //     PlaneService planeService = new PlaneService(planeMySQLRepository);
-                //     PlaneConsoleAdapter planeConsoleAdapter = new PlaneConsoleAdapter(planeService);
-                //     planeConsoleAdapter.start();
-                //     break;
-                // case 15:
-                //     System.out.println("revemployee");
-                //     RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
-                //     RevemployeeService revemployeeService = new RevemployeeService(revemployeeMySQLRepository);
-                //     RevemployeeConsoleAdapter revemployeeConsoleAdapter = new RevemployeeConsoleAdapter(revemployeeService);
-                //     revemployeeConsoleAdapter.start();
-                //     break;
+                case 12:
+                    System.out.println("manufacture");
+                    ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
+                    ManufactureService manufactureService = new ManufactureService(manufactureMySQLRepository);
+                    ManufactureConsoleAdapter manufactureConsoleAdapter = new ManufactureConsoleAdapter(manufactureService);
+                    manufactureConsoleAdapter.start();
+                    break;
+                case 13:
+                    System.out.println("model");
+                    ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
+                    ModelService modelService = new ModelService(modelMySQLRepository);
+                    ModelConsoleAdapter modelConsoleAdapter = new ModelConsoleAdapter(modelService);
+                    modelConsoleAdapter.start();
+                    break;
+                case 14:
+                    System.out.println("plane");
+                    PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
+                    PlaneService planeService = new PlaneService(planeMySQLRepository);
+                    PlaneConsoleAdapter planeConsoleAdapter = new PlaneConsoleAdapter(planeService);
+                    planeConsoleAdapter.start();
+                    break;
+                case 15:
+                    System.out.println("revemployee");
+                    RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
+                    RevemployeeService revemployeeService = new RevemployeeService(revemployeeMySQLRepository);
+                    RevemployeeConsoleAdapter revemployeeConsoleAdapter = new RevemployeeConsoleAdapter(revemployeeService);
+                    revemployeeConsoleAdapter.start();
+                    break;
                 case 16:
                     System.out.println("revision");
                     RevisionService revisionService = new RevisionService(revisionRepository);

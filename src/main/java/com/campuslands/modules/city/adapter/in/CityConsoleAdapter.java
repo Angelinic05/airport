@@ -74,7 +74,6 @@ public class CityConsoleAdapter {
                     break;
                 case 5:
                     System.out.println("Saliendo...");
-                    scanner.close();
                     return;
                 default:
                     System.out.println("Ingrese una opcion valida (1 - 5).");
