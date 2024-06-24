@@ -30,11 +30,10 @@ public class RevemployeeMySQLRepository implements RevemployeeRepository {
                 statement.setInt(1, revemployee.getIdEmployee());
                 statement.setInt(2, revemployee.getIdRevision());
                 statement.executeUpdate();
-            } catch (Exception e) {
-                e.getStackTrace();
             }
-        } catch (SQLException e) {
-            e.getStackTrace();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -92,7 +91,7 @@ public class RevemployeeMySQLRepository implements RevemployeeRepository {
     @Override
     public List<Revemployee> findAll(){
         List<Revemployee> revemployee = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url)) {
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT id, idEmployee, idRevision FROM revemployee";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {

@@ -12,7 +12,6 @@ public class Revemployee {
         this.idRevision = idRevision;
     }
 
-    
 
     public Revemployee(int id, int idEmployee, int idRevision) {
         this.id = id;

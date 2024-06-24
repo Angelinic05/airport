@@ -51,7 +51,7 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
                 statement.setInt(3, flightconnection.getIdPlane());
                 statement.setInt(4, flightconnection.getIdAirport());
                 statement.setInt(5, flightconnection.getId());
-                statement.executeUpdate(query);
+                statement.executeUpdate();
             }
         } catch (SQLException e) {
             e.printStackTrace();

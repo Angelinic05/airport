@@ -45,7 +45,7 @@ public class FlightconnectionConsoleAdapter {
                     System.out.print("Ingrese el ID de la conexión de vuelo a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
+                    
                     System.out.print("Ingrese el numero numero de connexión: ");
                     String updateConnectionNumber = scanner.nextLine();
 
