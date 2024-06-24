@@ -40,11 +40,11 @@ public class RevisionMySQLRepository implements RevisionRepository{
     @Override
     public void update(Revision revision) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE revision SET revisionDate, idPlane = ?,? WHERE id = ?";
+            String query = "UPDATE revision SET revisionDate = ?, idPlane = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setInt(1, revision.getId());
-                statement.setDate(2, revision.getRevisionDate());
-                statement.setInt(3, revision.getIdPlane());
+                statement.setDate(1, revision.getRevisionDate());
+                statement.setInt(2, revision.getIdPlane());
+                statement.setInt(3, revision.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
