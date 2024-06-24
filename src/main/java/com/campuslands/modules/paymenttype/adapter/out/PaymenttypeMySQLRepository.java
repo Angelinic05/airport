@@ -1,37 +1,34 @@
-package com.campuslands.modules.trip.adapter.out;
+package com.campuslands.modules.paymenttype.adapter.out;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.sql.SQLException;
 
-import com.campuslands.modules.trip.domain.Trip;
-import com.campuslands.modules.trip.infraestructure.TripRepository;
+import com.campuslands.modules.paymenttype.domain.Paymenttype;
+import com.campuslands.modules.paymenttype.infrastructure.PaymenttypeRepository;
 
-public class TripMySQLRepository implements TripRepository {
+public class PaymenttypeMySQLRepository implements PaymenttypeRepository  {
     private final String url;
     private final String user;
     private final String password;
 
-    public TripMySQLRepository(String url, String user, String password) {
+    private PaymenttypeMySQLRepository(String url, String user, String password) {
         this.url = url;
         this.user = user;
         this.password = password;
     }
 
     @Override
-    public void save(Trip trip) {
+    public void save(Paymenttype paymenttype) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO trip (tripDate, priceTripe, idAirportOrigen, idAirportDestint) VALUES (?,?,?,?)";
+            String query = "INSERT INTO paymenttype (name) VALUES (?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setDate(1, trip.getTripDate());
-                statement.setDouble(2, trip.getPriceTrip());
-                statement.setInt(3, trip.getIdAirportOrigen());
-                statement.setInt(4, trip.getIdAirportDestint());
+                statement.setString(1, paymenttype.getName());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -40,15 +37,12 @@ public class TripMySQLRepository implements TripRepository {
     }
 
     @Override
-    public void update(Trip trip) {
+    public void update(Paymenttype paymenttype) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE trip SET tripDate = ? , priceTripe = ?, idAirportOrigen = ?, idAirportDestint = ? WHERE id = ?";
+            String query = "UPDATE paymenttype SET name = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setDate(1, trip.getTripDate());
-                statement.setInt(2, trip.getId());
-                statement.setDouble(3, trip.getPriceTrip());
-                statement.setInt(4, trip.getIdAirportOrigen());
-                statement.setInt(5, trip.getIdAirportDestint());
+                statement.setString(1, paymenttype.getName());
+                statement.setInt(2, paymenttype.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -57,21 +51,18 @@ public class TripMySQLRepository implements TripRepository {
     }
 
     @Override
-    public Optional<Trip> findById(int id) {
+    public Optional<Paymenttype> findById(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT * FROM trip WHERE id = ?";
+            String query = "SELECT * FROM paymenttype WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if (resultSet.next()) {
-                        Trip trip = new Trip(
+                        Paymenttype paymenttype = new Paymenttype(
                             resultSet.getInt("id"),
-                            resultSet.getDate("tripDate"),
-                            resultSet.getInt("priceTripe"),
-                            resultSet.getInt("idAirportOrigen"),
-                            resultSet.getInt("idAirportDestint")
+                            resultSet.getString("name")
                         );
-                        return Optional.of(trip);
+                        return Optional.of(paymenttype);
                     }
                 }
             }
@@ -84,7 +75,7 @@ public class TripMySQLRepository implements TripRepository {
     @Override
     public void delete(int id) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "DELETE FROM trip WHERE id = ?";
+            String query = "DELETE FROM paymenttype WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
@@ -95,27 +86,23 @@ public class TripMySQLRepository implements TripRepository {
     }
 
     @Override
-    public List<Trip> findAll() {
-        List<Trip> trips = new ArrayList<>();
+    public List<Paymenttype> findAll() {
+        List<Paymenttype> paymenttypees = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT * FROM trip";
+            String query = "SELECT * FROM paymenttype";
             try (PreparedStatement statement = connection.prepareStatement(query);
                  ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
-                    Trip trip = new Trip(
+                    Paymenttype paymenttype = new Paymenttype(
                         resultSet.getInt("id"),
-                        resultSet.getDate("tripDate"),
-                        resultSet.getInt("priceTripe"),
-                        resultSet.getInt("idAirportOrigen"),
-                        resultSet.getInt("idAirportDestint")
+                        resultSet.getString("name")
                     );
-                    trips.add(trip);
+                    paymenttypees.add(paymenttype);
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return trips;
+        return paymenttypees;
     }
 }
-

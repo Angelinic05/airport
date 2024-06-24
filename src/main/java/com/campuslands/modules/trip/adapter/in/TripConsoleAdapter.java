@@ -70,7 +70,7 @@ public class TripConsoleAdapter {
 
                     Optional<Trip> trip = tripService.getTripById(findId);
                     trip.ifPresentOrElse(
-                        p -> System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPriceTripe() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint()),
+                        p -> System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPriceTrip() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint()),
                         () -> System.out.println("Viaje no encontrado")
                     );
                     break;
@@ -84,7 +84,7 @@ public class TripConsoleAdapter {
 
                 case 5:
                     tripService.getAllTrips().forEach(p -> {
-                        System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPriceTripe() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint());
+                        System.out.println("ID: " + p.getId() + ", viaje Date: " + p.getTripDate() + ", Precio del viaje: " + p.getPriceTrip() + ", Id Ciudad Origen: "+ p.getIdAirportOrigen() + ", IdCiudad Destino: "+ p.getIdAirportDestint());
                     });
                     break;
 
