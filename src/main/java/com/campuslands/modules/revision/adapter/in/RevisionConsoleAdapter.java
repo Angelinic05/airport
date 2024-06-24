@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.airport.domain.Airport;
+
 import com.campuslands.modules.revision.application.RevisionService;
 import com.campuslands.modules.revision.domain.Revision;
 
@@ -34,8 +34,6 @@ public class RevisionConsoleAdapter {
                     break;
 
                 case 2:
-                    
-
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
@@ -50,12 +48,12 @@ public class RevisionConsoleAdapter {
                 
                             switch (optSubMenu) {
                                 case 1:
-                                    System.out.print("Ingrese el nuevo nombre: ");
+                                    System.out.print("Ingrese la fecha de la revision: ");
                                     Date revisionDateupdate = Date.valueOf(scanner.nextLine());
                                     updatedRevision.setRevisionDate(revisionDateupdate);
                                     break;
                                 case 2:
-                                    System.out.print("Ingrese el nuevo id de la ciudad: ");
+                                    System.out.print("Ingrese el nuevo id del avion: ");
                                     int idPlaneUpdated = Integer.parseInt(scanner.nextLine());
                                     updatedRevision.setIdPlane(idPlaneUpdated);
                                     break;

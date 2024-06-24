@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.campuslands.modules.revision.domain.Revision;
 import com.campuslands.modules.tripbooking.application.TripbookingService;
 import com.campuslands.modules.tripbooking.domain.Tripbooking;
 
@@ -16,21 +17,22 @@ public class TripbookingConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        
+        while (flag) {
             int choice = menu(scanner);
-
+            Date date;
+            int idTrip;
             switch (choice) {
                 case 1:
 
                     System.out.print("Ingrese la fecha de la reserva del viaje: ");
-                    Date createDate = Date.valueOf(scanner.nextLine());
+                    date = Date.valueOf(scanner.nextLine());
 
-                    System.out.println(createDate);
                     System.out.print("Ingrese el id de la reserva de viaje: ");
-                    int createIdTrip = scanner.nextInt();
+                    idTrip = scanner.nextInt();
 
-                    Tripbooking newTripbooking = new Tripbooking(createDate, createIdTrip);
+                    Tripbooking newTripbooking = new Tripbooking(date, idTrip);
                     tripbookingService.createTripbooking(newTripbooking);
 
                     break;
@@ -38,16 +40,32 @@ public class TripbookingConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese la fecha de la reserva de viaje: ");
-                    Date updateDate = Date.valueOf(scanner.nextLine());
-
-                    System.out.print("Ingrese el id de la reserva de viaje: ");
-                    int ipdateIdTrip = scanner.nextInt();
-
-                    Tripbooking updatedTripbooking = new Tripbooking(updateId, updateDate, ipdateIdTrip);
-                    tripbookingService.updateTripbooking(updatedTripbooking);
+                    Optional<Tripbooking> optionalUpdatedTripbooking = tripbookingService.getTripbookingById(updateId);
+                    optionalUpdatedTripbooking.ifPresentOrElse(updatedTripbooking -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. date\n2. idPlane\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la fecha de la reserva: ");
+                                    Date dateupdate = Date.valueOf(scanner.nextLine());
+                                    updatedTripbooking.setDate(dateupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo id del viaje: ");
+                                    int idTripUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTripbooking.setIdTrip(idTripUpdated);
+                                    break;
+                            }
+                        }
+                        tripbookingService.updateTripbooking(updatedTripbooking);
+                    }, () -> System.out.println("No se encontró la revision con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id de la reserva de viaje a buscar: ");

@@ -64,9 +64,9 @@ public class TripConsoleAdapter {
                                     updatedTrip.setTripDate(tripDateupdate);
                                     break;
                                 case 2:
-                                    System.out.print("Ingrese el nuevo id de la ciudad: ");
-                                    Double idPriceTripeUpdated = scanner.nextDouble();
-                                    updatedTrip.setPriceTrip(idPriceTripeUpdated);
+                                    System.out.print("Ingrese el nuevo precio del viaje: ");
+                                    Double idPriceTripUpdated = scanner.nextDouble();
+                                    updatedTrip.setPriceTrip(idPriceTripUpdated);
                                     break;
                                 case 3:
                                     System.out.print("Ingrese la nueva coordenada x: ");
