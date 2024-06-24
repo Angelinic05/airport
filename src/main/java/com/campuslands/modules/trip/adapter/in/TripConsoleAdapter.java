@@ -65,7 +65,7 @@ public class TripConsoleAdapter {
                                     break;
                                 case 2:
                                     System.out.print("Ingrese el nuevo precio del viaje: ");
-                                    Double idPriceTripUpdated = scanner.nextDouble();
+                                    Double idPriceTripUpdated = Double.parseDouble(scanner.nextLine());
                                     updatedTrip.setPriceTrip(idPriceTripUpdated);
                                     break;
                                 case 3:
