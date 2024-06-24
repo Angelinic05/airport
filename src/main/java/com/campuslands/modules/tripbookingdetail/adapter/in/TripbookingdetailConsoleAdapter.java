@@ -1,6 +1,5 @@
 package com.campuslands.modules.tripbookingdetail.adapter.in;
 
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 

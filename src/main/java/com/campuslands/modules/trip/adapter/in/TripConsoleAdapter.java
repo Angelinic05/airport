@@ -7,7 +7,6 @@ import java.util.Scanner;
 import com.campuslands.modules.trip.application.TripService;
 import com.campuslands.modules.trip.domain.Trip;
 
-import java.util.Optional;
 
 public class TripConsoleAdapter {
     private final TripService tripService;

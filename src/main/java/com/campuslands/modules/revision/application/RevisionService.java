@@ -13,7 +13,7 @@ public class RevisionService {
         this.revisionRepository = revisionRepository;
     }
 
-    public void createRevision(Revision revision) {
+    public void saveRevision(Revision revision) {
         revisionRepository.save(revision);
     }
 
@@ -21,7 +21,7 @@ public class RevisionService {
         revisionRepository.update(revision);
     }
 
-    public Optional<Revision> getRevisionById(int id) {
+    public Optional<Revision> findRevisionById(int id) {
         return revisionRepository.findById(id);
     }
 

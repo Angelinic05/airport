@@ -1,6 +1,5 @@
 package com.campuslands.modules.tripbookingdetail.domain;
 
-import java.sql.Date;
 
 public class Tripbookingdetail {
     private int id;

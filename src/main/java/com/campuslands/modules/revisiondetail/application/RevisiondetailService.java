@@ -21,7 +21,7 @@ public class RevisiondetailService {
         revisiondetailRepository.update(revisiondetail);
     }
 
-    public Optional<Revisiondetail> getRevisiondetailById(int id) {
+    public Optional<Revisiondetail> findRevisiondetailById(int id) {
         return revisiondetailRepository.findById(id);
     }
 

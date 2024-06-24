@@ -1,6 +1,6 @@
 package com.campuslands.modules.revisiondetail.adapter.in;
 
-import java.sql.Date;
+
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -18,37 +18,51 @@ public class RevisiondetailConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
-
+            String description;
+            int idEmployee;
             switch (choice) {
                 case 1:
                     System.out.print("Ingrese la descripcion: ");
-                    String createDescription = scanner.nextLine();
+                    description = scanner.nextLine();
 
                     System.out.print("Ingrese la id del empleado: ");
-                    int idEmployee = scanner.nextInt();
+                    idEmployee = scanner.nextInt();
 
-                    Revisiondetail newStatus = new Revisiondetail(createDescription, idEmployee);
+                    Revisiondetail newStatus = new Revisiondetail(description, idEmployee);
                     revisiondetailService.createRevisiondetail(newStatus);
 
                     break;
                 case 2:
+
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese la descripcion: ");
-                    String updateDescription = scanner.nextLine();
-
-                    System.out.print("Ingrese la id del empleado: ");
-                    int updateidEmployee = scanner.nextInt();
-
-
-
-                    Revisiondetail updatedRevisiondetail = new Revisiondetail(updateId, updateDescription, updateidEmployee);
-                    revisiondetailService.updateRevisiondetail(updatedRevisiondetail);
+                    Optional<Revisiondetail> optionalUpdatedRevisiondetail = revisiondetailService.findRevisiondetailById(updateId);
+                    optionalUpdatedRevisiondetail.ifPresentOrElse(updatedRevisiondetail -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. description\n2. idEmployee\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la nueva descripcion: ");
+                                    updatedRevisiondetail.setDescription(scanner.nextLine());
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo id de la ciudad: ");
+                                    int idEmployeeUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedRevisiondetail.setIdEmployee(idEmployeeUpdated);
+                                    break;
+                            }
+                        }
+                        revisiondetailService.updateRevisiondetail(updatedRevisiondetail);
+                    }, () -> System.out.println("No se encontró el detalle de la revision con ID: " + updateId));
                     break;
 
                 case 3:
@@ -56,7 +70,7 @@ public class RevisiondetailConsoleAdapter {
                     int findId = scanner.nextInt();
                     scanner.nextLine();
 
-                    Optional<Revisiondetail> status = revisiondetailService.getRevisiondetailById(findId);
+                    Optional<Revisiondetail> status = revisiondetailService.findRevisiondetailById(findId);
                         status.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", Descripcion: " + p.getDescription() + " , Id empleado: " + p.getIdEmployee()),
                         () -> System.out.println("detalle de la revision no encontrado")
@@ -96,7 +110,7 @@ public class RevisiondetailConsoleAdapter {
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 0 || choice > 5) {
+        while (choice < 0 || choice > 6) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    
