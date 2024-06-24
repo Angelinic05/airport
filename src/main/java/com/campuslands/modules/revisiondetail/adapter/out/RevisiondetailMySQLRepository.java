@@ -40,11 +40,11 @@ public class RevisiondetailMySQLRepository implements RevisiondetailRepository{
     @Override
     public void update(Revisiondetail revisiondetail) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE revisiondetail SET description, idEmployee = ?,? WHERE id = ?";
+            String query = "UPDATE revisiondetail SET description = ?, idEmployee = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setInt(1, revisiondetail.getId());
-                statement.setString(2, revisiondetail.getDescription());
-                statement.setInt(3, revisiondetail.getIdEmployee());
+                statement.setString(1, revisiondetail.getDescription());
+                statement.setInt(2, revisiondetail.getIdEmployee());
+                statement.setInt(3, revisiondetail.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {

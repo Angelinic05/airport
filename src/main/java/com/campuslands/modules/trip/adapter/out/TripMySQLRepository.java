@@ -26,7 +26,7 @@ public class TripMySQLRepository implements TripRepository {
     @Override
     public void save(Trip trip) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO trip (tripDate, priceTripe, idAirportOrigen, idAirportDestint) VALUES (?,?,?,?)";
+            String query = "INSERT INTO trip (tripDate, priceTrip, idAirportOrigen, idAirportDest) VALUES (?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setDate(1, trip.getTripDate());
                 statement.setDouble(2, trip.getPriceTrip());
@@ -42,13 +42,13 @@ public class TripMySQLRepository implements TripRepository {
     @Override
     public void update(Trip trip) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "UPDATE trip SET tripDate = ? , priceTripe = ?, idAirportOrigen = ?, idAirportDestint = ? WHERE id = ?";
+            String query = "UPDATE trip SET tripDate = ? , priceTrip = ?, idAirportOrigen = ?, idAirportDest = ? WHERE id = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setDate(1, trip.getTripDate());
-                statement.setInt(2, trip.getId());
-                statement.setDouble(3, trip.getPriceTrip());
-                statement.setInt(4, trip.getIdAirportOrigen());
-                statement.setInt(5, trip.getIdAirportDestint());
+                statement.setDouble(2, trip.getPriceTrip());
+                statement.setInt(3, trip.getIdAirportOrigen());
+                statement.setInt(4, trip.getIdAirportDestint());
+                statement.setInt(5, trip.getId());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -67,9 +67,9 @@ public class TripMySQLRepository implements TripRepository {
                         Trip trip = new Trip(
                             resultSet.getInt("id"),
                             resultSet.getDate("tripDate"),
-                            resultSet.getInt("priceTripe"),
+                            resultSet.getDouble("priceTrip"),
                             resultSet.getInt("idAirportOrigen"),
-                            resultSet.getInt("idAirportDestint")
+                            resultSet.getInt("idAirportDest")
                         );
                         return Optional.of(trip);
                     }
@@ -105,9 +105,9 @@ public class TripMySQLRepository implements TripRepository {
                     Trip trip = new Trip(
                         resultSet.getInt("id"),
                         resultSet.getDate("tripDate"),
-                        resultSet.getInt("priceTripe"),
+                        resultSet.getDouble("priceTrip"),
                         resultSet.getInt("idAirportOrigen"),
-                        resultSet.getInt("idAirportDestint")
+                        resultSet.getInt("idAirportDest")
                     );
                     trips.add(trip);
                 }

@@ -34,18 +34,7 @@ public class RevisionConsoleAdapter {
                     break;
 
                 case 2:
-                    // System.out.print("Ingrese  ID a actualizar: ");
-                    // int updateId = scanner.nextInt();
-                    // scanner.nextLine();
-                    // System.out.print("Ingrese la nueva fecha de la revision: ");
-                    // Date updateFecha = Date.valueOf(scanner.nextLine());
-                    // System.out.print("Ingrese la nueva id del avion: ");
-                    // int updateIdPlane = scanner.nextInt();
-                    // scanner.nextLine();
-
-                    // Revision updatedRevision = new Revision(updateId, updateFecha, updateIdPlane);
-                    // revisionService.updateRevision(updatedRevision);
-                    // break;
+                    
 
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
@@ -62,7 +51,7 @@ public class RevisionConsoleAdapter {
                             switch (optSubMenu) {
                                 case 1:
                                     System.out.print("Ingrese el nuevo nombre: ");
-                                     Date revisionDateupdate = Date.valueOf(scanner.nextLine());
+                                    Date revisionDateupdate = Date.valueOf(scanner.nextLine());
                                     updatedRevision.setRevisionDate(revisionDateupdate);
                                     break;
                                 case 2:

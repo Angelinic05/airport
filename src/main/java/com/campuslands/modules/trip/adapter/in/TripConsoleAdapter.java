@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.campuslands.modules.airport.domain.Airport;
 import com.campuslands.modules.trip.application.TripService;
 import com.campuslands.modules.trip.domain.Trip;
 
@@ -17,25 +18,28 @@ public class TripConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true){
+        Boolean flag = true;
+        while (flag){
             int choice = menu(scanner);
-
+            Date tripDate;
+            Double priceTrip;
+            int idAirportOrigen;
+            int idAirportDest;
             switch (choice) {
                 case 1:
                     System.out.print("Ingrese la fecha del viaje: ");
-                    Date createTrip_date = Date.valueOf(scanner.nextLine());
+                    tripDate = Date.valueOf(scanner.nextLine());
 
                     System.out.print("Ingrese el precio del viaje: ");
-                    double idPrice_tripe = scanner.nextDouble();
+                    priceTrip = scanner.nextDouble();
 
                     System.out.print("Ingrese la id ciudad origen: ");
-                    int idId_airport_origen = scanner.nextInt();
+                    idAirportOrigen = scanner.nextInt();
 
                     System.out.print("Ingrese la id ciudad destino: ");
-                    int idId_airport_destint = scanner.nextInt();
+                    idAirportDest = scanner.nextInt();
 
-                    Trip newTrip = new Trip(createTrip_date, idPrice_tripe, idId_airport_origen, idId_airport_destint);
+                    Trip newTrip = new Trip(tripDate, priceTrip, idAirportOrigen, idAirportDest);
                     
                     tripService.createTrip(newTrip);
                     break;
@@ -44,24 +48,42 @@ public class TripConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese la fecha del viaje: ");
-                    Date updateTrip_date = Date.valueOf(scanner.nextLine());
-
-                    System.out.print("Ingrese el precio del viaje: ");
-                    double updatePrice_tripe = scanner.nextDouble();
-
-                    System.out.print("Ingrese la id ciudad origen: ");
-                    int updateId_airport_origen = scanner.nextInt();
-
-                    System.out.print("Ingrese la id ciudad destino: ");
-                    int updateId_airport_destint = scanner.nextInt();
-
-                    scanner.nextLine();
-
-                    Trip updatedTrip = new Trip(updateId, updateTrip_date, updatePrice_tripe, updateId_airport_origen, updateId_airport_destint);
-                    tripService.updateTrip(updatedTrip);
+                    Optional<Trip> optionalUpdatedTrip = tripService.getTripById(updateId);
+                    optionalUpdatedTrip.ifPresentOrElse(updatedTrip -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. tripDate\n2. priceTripe\n3. idAirportOrigen\n4. idAirportDest\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la nueva fecha del viaje: ");
+                                    Date tripDateupdate = Date.valueOf(scanner.nextLine());
+                                    updatedTrip.setTripDate(tripDateupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo id de la ciudad: ");
+                                    Double idPriceTripeUpdated = scanner.nextDouble();
+                                    updatedTrip.setPriceTrip(idPriceTripeUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese la nueva coordenada x: ");
+                                    int idAirportOrigenUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTrip.setIdAirportOrigen(idAirportOrigenUpdated);
+                                    break;
+                                case 4:
+                                    System.out.print("Ingrese la nueva coordenada y: ");
+                                    int idAirportDestintUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTrip.setIdAirportDestint(idAirportDestintUpdated);
+                                    break;
+                            }
+                        }
+                        tripService.updateTrip(updatedTrip);
+                    }, () -> System.out.println("No se encontró el aeropuerto con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id del viaje a buscar: ");
