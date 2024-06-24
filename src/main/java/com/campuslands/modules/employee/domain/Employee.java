@@ -66,6 +66,10 @@ public class Employee {
         this.idAirport = idAirpot;
     }    
 
+    @Override
+    public String toString(){
+        return String.format("Id: %d -- Nombre; %s", id, name);
+    }
     
 }
 

@@ -66,7 +66,7 @@ import com.campuslands.modules.documenttype.application.DocumenttypeService;
 import com.campuslands.modules.employee.adapter.in.EmployeeConsoleAdapter;
 import com.campuslands.modules.employee.adapter.out.EmployeeMySQLRepository;
 import com.campuslands.modules.employee.application.EmployeeService;
-
+import com.campuslands.modules.employee.infrastructure.EmployeeRepository;
 import com.campuslands.modules.flightconnection.adapter.in.FlightconnectionConsoleAdapter;
 import com.campuslands.modules.flightconnection.application.FlightconnectionService;
 import com.campuslands.modules.flightconnection.adapter.out.FlightconnectionMySQLRepository;
@@ -110,6 +110,21 @@ public class Main {
         TripbookingdetailMySQLRepository tripbookingdetailRepository = new TripbookingdetailMySQLRepository(url, username, password);
         TripcrewMySQLRepository tripcrewRepository = new TripcrewMySQLRepository(url, username, password);
         TripulationrolMySQLRepository tripulationrolRepository = new TripulationrolMySQLRepository(url, username, password);
+        AirlineMySQLRepository airlineMySQLRepository = new AirlineMySQLRepository(url, username, password);
+        AirportMySQLRepository airportMySQLRepository = new AirportMySQLRepository(url, username, password);
+        AirportAirlineMySQLRepository airportAirlineMySQLRepository = new AirportAirlineMySQLRepository(url, username, password);
+        CityMySQLRepository cityMySQLRepository = new CityMySQLRepository(url, username, password);
+        CountryMySQLRepository countryMySQLRepository = new CountryMySQLRepository(url, username, password);
+        CustomerMySQLRepository customerMySQLRepository = new CustomerMySQLRepository(url, username, password);
+        DocumenttypeMySQLRepository documenttypeMySQLRepository = new DocumenttypeMySQLRepository(url, username, password);
+        EmployeeMySQLRepository employeeMySQLRepository = new EmployeeMySQLRepository(url, username, password);
+        FlightconnectionMySQLRepository flightconnectionMySQLRepository = new FlightconnectionMySQLRepository(url, username, password);
+        FlightfareMySQLRepository flightfareMySQLRepository = new FlightfareMySQLRepository(url, username, password);
+        GateMySQLRepository gateMySQLRepository = new GateMySQLRepository(url, username, password);
+        ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
+        ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
+        PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
+        RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
 
         System.out.println("--------------- MENU PRINCIPAL ---------------");
         while (true) {
@@ -145,105 +160,90 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("airline");
-                    AirlineMySQLRepository airlineMySQLRepository = new AirlineMySQLRepository(url, username, password);
                     AirlineService airlineService = new AirlineService(airlineMySQLRepository);
                     AirlineConsoleAdapter airlineConsoleAdapter = new AirlineConsoleAdapter(airlineService);
                     airlineConsoleAdapter.start();
                     break;
                 case 2:
                     System.out.println("airport");
-                    AirportMySQLRepository airportMySQLRepository = new AirportMySQLRepository(url, username, password);
                     AirportService airportService = new AirportService(airportMySQLRepository);
                     AirportConsoleAdapter airportConsoleAdapter = new AirportConsoleAdapter(airportService);
                     airportConsoleAdapter.start();
                     break;
                 case 3:
                     System.out.println("airportairline");
-                    AirportAirlineMySQLRepository airportAirlineMySQLRepository = new AirportAirlineMySQLRepository(url, username, password);
                     AirportAirlineService airportAirlineService = new AirportAirlineService(airportAirlineMySQLRepository);
                     AirportAirlineConsoleAdapter airportAirlineConsoleAdapter = new AirportAirlineConsoleAdapter(airportAirlineService);
                     airportAirlineConsoleAdapter.start();
                     break;
                 case 4:
                     System.out.println("city");
-                    CityMySQLRepository cityMySQLRepository = new CityMySQLRepository(url, username, password);
                     CityService cityService = new CityService(cityMySQLRepository);
                     CityConsoleAdapter cityConsoleAdapter = new CityConsoleAdapter(cityService);
                     cityConsoleAdapter.start();
                     break;
                 case 5:
                     System.out.println("country");
-                    CountryMySQLRepository countryMySQLRepository = new CountryMySQLRepository(url, username, password);
                     CountryService countryService = new CountryService(countryMySQLRepository);
                     CountryConsoleAdapter countryConsoleAdapter = new CountryConsoleAdapter(countryService);
                     countryConsoleAdapter.start();
                     break;
                 case 6:
                     System.out.println("customer");
-                    CustomerMySQLRepository customerMySQLRepository = new CustomerMySQLRepository(url, username, password);
                     CustomerService customerService = new CustomerService(customerMySQLRepository);
                     CustomerConsoleAdapter customerConsoleAdapter = new CustomerConsoleAdapter(customerService);
                     customerConsoleAdapter.start();
                     break;
                 case 7:
                     System.out.println("documenttype");
-                    DocumenttypeMySQLRepository documenttypeMySQLRepository = new DocumenttypeMySQLRepository(url, username, password);
                     DocumenttypeService documenttypeService = new DocumenttypeService(documenttypeMySQLRepository);
                     DocumenttypeConsoleAdapter documenttypeConsoleAdapter = new DocumenttypeConsoleAdapter(documenttypeService);
                     documenttypeConsoleAdapter.start();
                     break;
                 case 8:
                     System.out.println("employee");
-                    EmployeeMySQLRepository employeeMySQLRepository = new EmployeeMySQLRepository(url, username, password);
                     EmployeeService employeeService = new EmployeeService(employeeMySQLRepository);
                     EmployeeConsoleAdapter employeeConsoleAdapter = new EmployeeConsoleAdapter(employeeService);
                     employeeConsoleAdapter.start();
                     break;
                 case 9:
                     System.out.println("flightconnection");
-                    FlightconnectionMySQLRepository flightconnectionMySQLRepository = new FlightconnectionMySQLRepository(url, username, password);
                     FlightconnectionService flightconnectionService = new FlightconnectionService(flightconnectionMySQLRepository);
                     FlightconnectionConsoleAdapter flightconnectionConsoleAdapter = new FlightconnectionConsoleAdapter(flightconnectionService);
                     flightconnectionConsoleAdapter.start();
                     break;
                 case 10:
                     System.out.println("flightfare");
-                    FlightfareMySQLRepository flightfareMySQLRepository = new FlightfareMySQLRepository(url, username, password);
                     FlightfareService flightfareService = new FlightfareService(flightfareMySQLRepository);
                     FlightfareConsoleAdapter flightfareConsoleAdapter = new FlightfareConsoleAdapter(flightfareService);
                     flightfareConsoleAdapter.start();
                     break;
                 case 11:
                     System.out.println("gate");
-                    GateMySQLRepository gateMySQLRepository = new GateMySQLRepository(url, username, password);
                     GateService gateService = new GateService(gateMySQLRepository);
                     GateConsoleAdapter gateConsoleAdapter = new GateConsoleAdapter(gateService);
                     gateConsoleAdapter.start();
                     break;
                 case 12:
                     System.out.println("manufacture");
-                    ManufactureMySQLRepository manufactureMySQLRepository = new ManufactureMySQLRepository(url, username, password);
                     ManufactureService manufactureService = new ManufactureService(manufactureMySQLRepository);
                     ManufactureConsoleAdapter manufactureConsoleAdapter = new ManufactureConsoleAdapter(manufactureService);
                     manufactureConsoleAdapter.start();
                     break;
                 case 13:
                     System.out.println("model");
-                    ModelMySQLRepository modelMySQLRepository = new ModelMySQLRepository(url, username, password);
                     ModelService modelService = new ModelService(modelMySQLRepository);
                     ModelConsoleAdapter modelConsoleAdapter = new ModelConsoleAdapter(modelService);
                     modelConsoleAdapter.start();
                     break;
                 case 14:
                     System.out.println("plane");
-                    PlaneMySQLRepository planeMySQLRepository = new PlaneMySQLRepository(url, username, password);
                     PlaneService planeService = new PlaneService(planeMySQLRepository);
                     PlaneConsoleAdapter planeConsoleAdapter = new PlaneConsoleAdapter(planeService);
                     planeConsoleAdapter.start();
                     break;
                 case 15:
                     System.out.println("revemployee");
-                    RevemployeeMySQLRepository revemployeeMySQLRepository = new RevemployeeMySQLRepository(url, username, password);
                     RevemployeeService revemployeeService = new RevemployeeService(revemployeeMySQLRepository);
                     RevemployeeConsoleAdapter revemployeeConsoleAdapter = new RevemployeeConsoleAdapter(revemployeeService);
                     revemployeeConsoleAdapter.start();
@@ -286,7 +286,7 @@ public class Main {
                     break;
                 case 22:
                     System.out.println("tripcrew");
-                    TripcrewService tripcrewService = new TripcrewService(tripcrewRepository);
+                    TripcrewService tripcrewService = new TripcrewService(tripcrewRepository, employeeMySQLRepository);
                     TripcrewConsoleAdapter tripcrewConsoleAdapter = new TripcrewConsoleAdapter(tripcrewService);
                     tripcrewConsoleAdapter.start();
                     break;

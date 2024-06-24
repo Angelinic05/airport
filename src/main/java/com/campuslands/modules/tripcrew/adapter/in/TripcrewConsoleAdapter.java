@@ -22,9 +22,9 @@ public class TripcrewConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese el id del empleado: ");
-                    int createIdEmployee = scanner.nextInt();
 
+                    int createIdEmployee = tripcrewService.selectEmployee();
+                    
                     System.out.print("Ingrese el id de la coneccion: ");
                     int createIdConnection = scanner.nextInt();
 

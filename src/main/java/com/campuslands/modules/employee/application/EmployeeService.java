@@ -31,4 +31,8 @@ public class EmployeeService {
     public List<Employee> findAllEmployee(){
         return employeeRepository.findAll();
     }
+
+    public List<Employee> selectEmployee(){
+        return employeeRepository.selectAvaliableEmployee();
+    }
 }

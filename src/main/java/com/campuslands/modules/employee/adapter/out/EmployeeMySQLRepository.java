@@ -130,4 +130,31 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
         }
         return employee;
     }
+
+    @Override
+    public List<Employee> selectAvaliableEmployee() {
+        List<Employee> employee = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT e.* FROM employee e WHERE e.id NOT IN (SELECT tc.idEmployee FROM tripcrew tc)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Employee employee2 = new Employee(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getInt("idRol"),
+                            resultSet.getDate("entryDate"),
+                            resultSet.getInt("idAirline"),
+                            resultSet.getInt("idAirport")
+                        );
+                        employee.add(employee2);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return employee;
+    }
+
 }
