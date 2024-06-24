@@ -9,11 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import java.sql.Date; 
 
 import com.campuslands.modules.employee.domain.Employee;
 import com.campuslands.modules.employee.infrastructure.EmployeeRepository;
-import com.campuslands.modules.status.domain.Status;
 
 public class EmployeeMySQLRepository implements EmployeeRepository{
 

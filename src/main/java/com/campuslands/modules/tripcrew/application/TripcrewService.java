@@ -3,11 +3,14 @@ package com.campuslands.modules.tripcrew.application;
 import java.util.List;
 import java.util.Optional;
 
+import com.campuslands.modules.employee.application.EmployeeService;
 import com.campuslands.modules.tripcrew.domain.Tripcrew;
 import com.campuslands.modules.tripcrew.infraestructure.TripcrewRepository;
 
-public class TripcrewService {
+public class TripcrewService{
     private final TripcrewRepository tripcrewRepository;
+    private EmployeeService employeeService;
+    private FlightConnectionService flightConnectionService;
 
     public TripcrewService(TripcrewRepository tripcrewRepository) {
         this.tripcrewRepository = tripcrewRepository;
