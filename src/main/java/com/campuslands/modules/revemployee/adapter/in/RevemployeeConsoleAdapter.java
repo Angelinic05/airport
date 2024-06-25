@@ -30,10 +30,11 @@ public class RevemployeeConsoleAdapter {
 
                     Revemployee revemployee = new Revemployee(createIdEmployee, createIdRevision);
                     revemployeeService.saveRevemployee(revemployee);
+                    System.out.println("Revisión guardada con exito");
                     break;
                 
                 case 2:
-                    System.out.print("Ingrese  ID a actualizar: ");
+                    System.out.print("Ingrese el ID de la revision del empleado a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
                     Optional<Revemployee> optionalUpdatedRevemployee = revemployeeService.findByIdRevemployee(updateId);
@@ -64,17 +65,17 @@ public class RevemployeeConsoleAdapter {
 
 
                 case 3:
-                    System.out.print("Ingrese el Id del Reempleado a buscar: ");
+                    System.out.print("Ingrese el Id de la revision del empleado a buscar: ");
                     int findId = scanner.nextInt();
                     Optional<Revemployee> revemployee1 = revemployeeService.findByIdRevemployee(findId);
                         revemployee1.ifPresentOrElse(
                         p -> System.out.println("ID: " + p.getId() + ", idEmpleado: " + p.getIdEmployee() + ", idRevision: " + p.getIdRevision()),
-                        () -> System.out.println("Reempleado no encontrado")
+                        () -> System.out.println("Revision del empleado no encontrado")
                     );
                     break;
 
                 case 4:
-                    System.out.print("Ingrese el Id del Reempleado a borrar: ");
+                    System.out.print("Ingrese el Id de la revision del empleado a borrar: ");
                     int deleteId = scanner.nextInt();
                     revemployeeService.deleteRevemployee(deleteId);
                     break;

@@ -89,6 +89,7 @@ import com.campuslands.modules.model.adapter.out.ModelMySQLRepository;
 import com.campuslands.modules.model.adapter.in.ModelConsoleAdapter;
 
 import com.campuslands.modules.plane.application.PlaneService;
+import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 import com.campuslands.modules.plane.adapter.out.PlaneMySQLRepository;
 import com.campuslands.modules.plane.adapter.in.PlaneConsoleAdapter;
 
@@ -209,7 +210,7 @@ public class Main {
                     break;
                 case 9:
                     System.out.println("flightconnection");
-                    FlightconnectionService flightconnectionService = new FlightconnectionService(flightconnectionMySQLRepository);
+                    FlightconnectionService flightconnectionService = new FlightconnectionService(flightconnectionMySQLRepository,planeMySQLRepository);
                     FlightconnectionConsoleAdapter flightconnectionConsoleAdapter = new FlightconnectionConsoleAdapter(flightconnectionService);
                     flightconnectionConsoleAdapter.start();
                     break;

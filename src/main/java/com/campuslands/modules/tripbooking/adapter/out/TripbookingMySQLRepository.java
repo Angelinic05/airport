@@ -82,6 +82,7 @@ public class TripbookingMySQLRepository implements TripbookingRepository{
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
+                System.out.println("Reserva eliminada con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();

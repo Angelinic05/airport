@@ -32,5 +32,9 @@ public class RevisionService {
     public List<Revision> getAllRevisions() {
         return revisionRepository.findAll();
     }
+
+    public List<Revision> findByPlaneRevision(int id){
+        return revisionRepository.findByPlane(id);
+    }
 }
 

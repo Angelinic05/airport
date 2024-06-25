@@ -45,6 +45,7 @@ public class CustomerConsoleAdapter {
                     
                     Customer customer = new Customer(id, name, age, idDocumenttype);
                     customerService.createCustomer(customer);
+                    System.out.println("Cliente registrado con exito");
                     break;
                 case 3:
                     System.out.println("Actualizar cliente:");

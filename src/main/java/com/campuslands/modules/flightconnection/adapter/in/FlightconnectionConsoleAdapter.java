@@ -25,11 +25,11 @@ public class FlightconnectionConsoleAdapter {
 
             switch (choice) {
                 case 1:
-
                     System.out.print("Ingrese el numero de connexión: ");
                     String createConnectionNumber = scanner.nextLine();
-
+                    System.out.println("Lista de trayectos disponibles: ");
                     int createIdTrip = flightconnectionService.avaliableFlightsForTrip();
+                    System.out.println("Lista de aviones disponibles: ");
                     int createIdPlane = flightconnectionService.avaliablePlanesForTrip();
 
                     System.out.print("Ingrese el ID del aeropuerto: ");
@@ -37,7 +37,6 @@ public class FlightconnectionConsoleAdapter {
 
                     Flightconnection flightconnection = new Flightconnection(createConnectionNumber, createIdTrip, createIdPlane, createIdAirport);
                     flightconnectionService.saveFlightconnection(flightconnection);
-                    System.out.println("Avion agregado con éxito");
                     break;
 
                 case 2:
@@ -87,7 +86,7 @@ public class FlightconnectionConsoleAdapter {
                     Optional<Flightconnection> flightconnection1 = flightconnectionService.findByIdFlightconnection(findId);
                     flightconnection1.ifPresentOrElse( 
                         p -> System.out.println("ID:" + p.getId() + ", numero de connexión : " + p.getConnectionNumber() + ", idTrip: " + p.getIdTrip() + ", idPlane: " + p.getIdPlane() + ", idAirport: " + p.getIdAirport()), 
-                        () -> System.out.println("Conexión de vuelono encontrado")); 
+                        () -> System.out.println("Conexión de vuelo no encontrado")); 
                     break;
 
                 case 4:

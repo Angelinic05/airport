@@ -109,4 +109,28 @@ public class RevisionMySQLRepository implements RevisionRepository{
         }
         return revisions;
     }
+
+    @Override
+    public List<Revision> findByPlane(int id){
+        ArrayList<Revision> revisiones = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT * FROM revision WHERE idPlane = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Revision revision = new Revision(
+                            resultSet.getInt("id"),
+                            resultSet.getDate("revisionDate"),
+                            resultSet.getInt("idPlane")
+                        );
+                        revisiones.add(revision);                        
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return revisiones;
+    };
 }

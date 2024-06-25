@@ -13,7 +13,6 @@ public class Revision {
         this.idPlane = idPlane;
     }
 
-
     public Revision(Date revisionDate, int idPlane){
         this.revisionDate = revisionDate;
         this.idPlane = idPlane;
@@ -44,5 +43,10 @@ public class Revision {
 
     public void setIdPlane(int idPlane) {
         this.idPlane = idPlane;
+    }
+
+    @Override
+    public String toString(){
+        return String.format("ID: %d  --- Fecha de revision: %s --- idPlane: %d", id,revisionDate.toString(), idPlane);
     }
 }

@@ -128,7 +128,7 @@ public class PlaneMySQLRepository implements PlaneRepository{
     public List<Plane> avaliabPlanesForFlight() {
         List<Plane> plane = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT p.id, p.capacity, p.fabricationDate, p.idStatus, p.idModel FROM plane p INNER JOIN flightconnection fc ON p.id = fc.idPlane WHERE fc.id IS NULL";
+            String query = "SELECT p.id, p.capacity, p.fabricationDate, p.idStatus, p.idModel FROM plane p LEFT JOIN flightconnection fc ON p.id = fc.idPlane WHERE fc.id IS NULL;";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {

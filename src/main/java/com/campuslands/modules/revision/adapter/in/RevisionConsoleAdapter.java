@@ -24,7 +24,7 @@ public class RevisionConsoleAdapter {
             int idPlane;
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese la fecha de la revision: ");
+                    System.out.print("Ingrese la fecha de la revision (formato yyyy-mm-dd): ");
                     revisionDate = Date.valueOf(scanner.nextLine());
                     System.out.print("Ingrese la id del avion: ");
                     idPlane = scanner.nextInt();
@@ -89,6 +89,11 @@ public class RevisionConsoleAdapter {
                     });
                     break;
 
+                case 6: 
+                    System.out.println("Ingrese la matricula del avion: ");
+                    int matriculaId = scanner.nextInt();
+                    revisionService.findByPlaneRevision(matriculaId).forEach(System.out::println);
+                    break;
                 case 0:
                     System.out.println("Saliendo...");
                     scanner.nextLine();
@@ -105,11 +110,12 @@ public class RevisionConsoleAdapter {
         System.out.println("3. Buscar Revision por ID");
         System.out.println("4. Eliminar Revision");
         System.out.println("5. Listar todas las revisiones");
+        System.out.println("6. Buscar por matricula de avion");
         System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 0 || choice > 5) {
+        while (choice < 0 || choice > 6) {
             try {
                 choice = Integer.parseInt(scanner.nextLine());
                 if (choice > 6) {                    
