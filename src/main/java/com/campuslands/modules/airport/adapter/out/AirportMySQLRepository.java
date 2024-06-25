@@ -51,6 +51,7 @@ public class AirportMySQLRepository implements AirportRepository {
                 statement.setDouble(4, airport.getyPosition());
                 statement.setInt(5, airport.getId());
                 statement.executeUpdate();
+                System.out.println("Aeropuerto actualizado con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -88,6 +89,7 @@ public class AirportMySQLRepository implements AirportRepository {
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
+                System.out.println("Aeropuerto eliminado con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();

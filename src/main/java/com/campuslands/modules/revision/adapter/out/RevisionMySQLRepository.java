@@ -46,6 +46,7 @@ public class RevisionMySQLRepository implements RevisionRepository{
                 statement.setInt(2, revision.getIdPlane());
                 statement.setInt(3, revision.getId());
                 statement.executeUpdate();
+                System.out.println("Revision actualizado con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -82,6 +83,7 @@ public class RevisionMySQLRepository implements RevisionRepository{
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
+                System.out.println("Revision eliminada con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();

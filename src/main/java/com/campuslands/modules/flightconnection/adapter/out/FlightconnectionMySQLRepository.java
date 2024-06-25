@@ -90,6 +90,7 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, id);
                 statement.executeUpdate();
+                System.out.println("Trayecto eliminada con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();
