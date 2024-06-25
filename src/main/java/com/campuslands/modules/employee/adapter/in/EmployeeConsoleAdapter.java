@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.sql.Date;
 import com.campuslands.modules.employee.application.EmployeeService;
 import com.campuslands.modules.employee.domain.Employee;
+import com.campuslands.modules.trip.domain.Trip;
 
 public class EmployeeConsoleAdapter {
 
@@ -17,10 +18,9 @@ public class EmployeeConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
-
             switch (choice) {
                 case 1:
                     System.out.print("Ingrese el id del empleado: ");
@@ -49,29 +49,51 @@ public class EmployeeConsoleAdapter {
                     break;
 
                 case 2:
-                    System.out.print("Ingrese el ID del empleado a actualizar: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo nombre: ");
-                    String updateName = scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo ID del rol del empleado: ");
-                    int updateIdRol = scanner.nextInt();
-
-                    System.out.print("Ingrese la nueva fecha de entrada del empleado (formato: yyyy-mm-dd): ");
-                    String updateEntryDate = scanner.nextLine();
-                    Date updatesqlDate = Date.valueOf(updateEntryDate);
-
-                    System.out.print("Ingrese el nuevo ID de la aerolinea del empleado: ");
-                    int updateIdAirline = scanner.nextInt();
-
-                    System.out.print("Ingrese el nuevo ID del aeropuerto del empleado: ");
-                    int updateIdAirport = scanner.nextInt();
-
-                    Employee updateEmployee = new Employee(updateId, updateName, updateIdRol, updatesqlDate, updateIdAirline, updateIdAirport);
-                    employeeService.updateEmployee(updateEmployee);
+                    Optional<Employee> optionalUpdatedEmployee = employeeService.findByIdEmployee(updateId);
+                    optionalUpdatedEmployee.ifPresentOrElse(updatedEmployee -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. name\n2. idRol\n3. entryDate\n4. idAirline\n5. idAirport\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el nuevo nombre: ");
+                                    String nameupdate = scanner.nextLine();
+                                    updatedEmployee.setName(nameupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo ID del rol del empleado: ");
+                                    int idRolUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedEmployee.setIdRol(idRolUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese la nueva fecha de entrada del empleado (formato: yyyy-mm-dd): ");
+                                    Date entryDateUpdated = Date.valueOf(scanner.nextLine());
+                                    updatedEmployee.setEntryDate(entryDateUpdated);
+                                    break;
+                                case 4:
+                                    System.out.print("Ingrese el nuevo ID de la aerolinea del empleado: ");
+                                    int idAirlineUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedEmployee.setIdAirline(idAirlineUpdated);
+                                    break;
+                                case 5:
+                                    System.out.print("Ingrese el nuevo ID del aeropuerto del empleado: ");
+                                    int idAirportUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedEmployee.setIdAirpot(idAirportUpdated);
+                                    break;
+                            }
+                        }
+                        employeeService.updateEmployee(updatedEmployee);
+                    }, () -> System.out.println("No se encontró el empleado con ID: " + updateId));
                     break;
+
+
 
                 case 3:
                     System.out.print("Ingrese el Id del empleado a buscar: ");

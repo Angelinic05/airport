@@ -1,12 +1,14 @@
 package com.campuslands.modules.flightconnection.adapter.in;
 
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
 
 import com.campuslands.modules.flightconnection.application.FlightconnectionService;
 import com.campuslands.modules.flightconnection.domain.Flightconnection;
+import com.campuslands.modules.trip.domain.Trip;
 
 public class FlightconnectionConsoleAdapter {
     private FlightconnectionService flightconnectionService;
@@ -17,8 +19,8 @@ public class FlightconnectionConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -41,26 +43,45 @@ public class FlightconnectionConsoleAdapter {
                     break;
 
                 case 2:
-
-                    System.out.print("Ingrese el ID de la conexión de vuelo a actualizar: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-                    
-                    System.out.print("Ingrese el numero numero de connexión: ");
-                    String updateConnectionNumber = scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo ID del viaje: ");
-                    int updateIdTrip = scanner.nextInt();
-
-                    System.out.print("Ingrese el nuevo ID del avion: ");
-                    int updateIdPlane = scanner.nextInt();
-
-                    System.out.print("Ingrese el nuevo ID del aeropuerto: ");
-                    int updateIdAirport = scanner.nextInt();
-
-                    Flightconnection updateflightconnection = new Flightconnection(updateId, updateConnectionNumber, updateIdTrip, updateIdPlane, updateIdAirport);
-                    flightconnectionService.updateFlightconnection(updateflightconnection);
+                    Optional<Flightconnection> optionalUpdatedFlightconnection = flightconnectionService.findByIdFlightconnection(updateId);
+                    optionalUpdatedFlightconnection.ifPresentOrElse(updatedFlightconnection -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. connectionNumber\n2. idTrip\n3. idPlane\n4. idAirport\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el numero numero de connexión: ");
+                                    String connectionNumberupdate = scanner.nextLine();
+                                    updatedFlightconnection.setConnectionNumber(connectionNumberupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo ID del viaje: ");
+                                    int idTripUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedFlightconnection.setIdTrip(idTripUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese el nuevo ID del avion: ");
+                                    int idPlaneUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedFlightconnection.setIdPlane(idPlaneUpdated);
+                                    break;
+                                case 4:
+                                    System.out.print("Ingrese el nuevo ID del aeropuerto: ");
+                                    int idAirportUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedFlightconnection.setIdAirport(idAirportUpdated);
+                                    break;
+                            }
+                        }
+                        flightconnectionService.updateFlightconnection(updatedFlightconnection);
+                    }, () -> System.out.println("No se encontró la conexion del vuelo con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id de la conexión de vuelo a buscar: ");

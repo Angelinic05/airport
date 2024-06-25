@@ -1,9 +1,11 @@
 package com.campuslands.modules.model.adapter.in;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 import com.campuslands.modules.model.application.ModelService;
 import com.campuslands.modules.model.domain.Model;
+import com.campuslands.modules.trip.domain.Trip;
 
 
 
@@ -16,8 +18,8 @@ public class ModelConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -33,19 +35,35 @@ public class ModelConsoleAdapter {
                     break;
                 
                 case 2:
-                    System.out.print("Ingrese ID del modelo a actualizar: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo nombre: ");
-                    String updateName = scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo ID de manufacturas del modelo: ");
-                    int updateIdManufacturas = scanner.nextInt();
-
-                    Model updatedModel = new Model(updateId, updateName, updateIdManufacturas);
-                    modelService.updateModel(updatedModel);
+                    Optional<Model> optionalUpdatedModel = modelService.findByIdModel(updateId);
+                    optionalUpdatedModel.ifPresentOrElse(updatedModel -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. name\n2. idManufactures\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el nuevo nombre: ");
+                                    String nameupdate = scanner.nextLine();
+                                    updatedModel.setName(nameupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo ID de manufacturas del modelo: ");
+                                    int idPriceTripUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedModel.setIdManufactures(idPriceTripUpdated);
+                                    break;
+                            }
+                        }
+                        modelService.updateModel(updatedModel);
+                    }, () -> System.out.println("No se encontró el aeropuerto con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id del modelo a buscar: ");

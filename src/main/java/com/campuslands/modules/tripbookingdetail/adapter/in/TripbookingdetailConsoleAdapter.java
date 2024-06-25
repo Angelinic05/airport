@@ -3,6 +3,7 @@ package com.campuslands.modules.tripbookingdetail.adapter.in;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.campuslands.modules.revisiondetail.domain.Revisiondetail;
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
 import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
@@ -15,22 +16,26 @@ public class TripbookingdetailConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
+        Boolean flag = true;
 
-        while (true) {
+        while (flag) {
             int choice = menu(scanner);
+            int idTripbooking;
+            int idCustomers;
+            int idFares;
 
             switch (choice) {
                 case 1:
                     System.out.print("Ingrese la Id del detalle de la reserva de viaje: ");
-                    int createIdTripbooking = scanner.nextInt();
+                    idTripbooking = scanner.nextInt();
 
                     System.out.print("Ingrese la Id customers: ");
-                    int createIdCustomers = scanner.nextInt();
+                    idCustomers = scanner.nextInt();
 
                     System.out.print("Ingrese la Id Fares: ");
-                    int createIdFares = scanner.nextInt();
+                    idFares = scanner.nextInt();
 
-                    Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(createIdTripbooking, createIdCustomers, createIdFares);
+                    Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(idTripbooking, idCustomers, idFares);
                     tripbookingdetailService.createTripbookingdetail(newTripbookingdetail);
 
                     break;
@@ -38,18 +43,36 @@ public class TripbookingdetailConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese la Id del detalle de la reserva de viaje: ");
-                    int updateIdTripbooking = scanner.nextInt();
-
-                    System.out.print("Ingrese la Id customers: ");
-                    int updateIdCustomers = scanner.nextInt();
-
-                    System.out.print("Ingrese la Id Fares: ");
-                    int updateIdFares = scanner.nextInt();
-
-                    Tripbookingdetail updatedTripbookingdetail = new Tripbookingdetail(updateId, updateIdTripbooking, updateIdCustomers, updateIdFares);
-                    tripbookingdetailService.updateTripbookingdetail(updatedTripbookingdetail);
+                    Optional<Tripbookingdetail> optionalUpdatedTripbookingdetail = tripbookingdetailService.getTripbookingdetailById(updateId);
+                    optionalUpdatedTripbookingdetail.ifPresentOrElse(updatedTripbookingdetail -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. idTripbooking\n2. idCustomers\n3. idFares\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la nueva descripcion: ");
+                                    int idTripbookingUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTripbookingdetail.setIdTripbooking(idTripbookingUpdated);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese la nueva descripcion: ");
+                                    int idCustomersUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTripbookingdetail.setIdCustomers(idCustomersUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese el nuevo id de la ciudad: ");
+                                    int idFaresUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTripbookingdetail.setIdFares(idFaresUpdated);
+                                    break;
+                            }
+                        }
+                        tripbookingdetailService.updateTripbookingdetail(updatedTripbookingdetail);
+                        System.out.println("guardando cambios...");
+                    }, () -> System.out.println("No se encontró el detalle de la revision con ID: " + updateId));
                     break;
 
                 case 3:

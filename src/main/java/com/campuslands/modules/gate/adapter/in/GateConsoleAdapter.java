@@ -1,10 +1,12 @@
 package com.campuslands.modules.gate.adapter.in;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.gate.application.GateService;
 import com.campuslands.modules.gate.domain.Gate;
+import com.campuslands.modules.trip.domain.Trip;
 
 
 
@@ -17,8 +19,8 @@ public class GateConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -35,19 +37,35 @@ public class GateConsoleAdapter {
 
                 case 2:
 
-                    System.out.print("Ingrese el ID de la puerta: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo numero de puerta: ");
-                    String updateGateNumber = scanner.nextLine();
-                    
-                    System.out.print("Ingrese el nuevo ID de aeropuerto: ");
-                    int updateIdAirport = scanner.nextInt();
-
-                    Gate gate2 = new Gate(updateId, updateGateNumber, updateIdAirport);
-                    gateService.updateGate(gate2);
+                    Optional<Gate> optionalUpdatedGate = gateService.findByIdGate(updateId);
+                    optionalUpdatedGate.ifPresentOrElse(updatedGate -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. gateNumber\n2. idAirport\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el nuevo numero de puerta: ");
+                                    String gateNumberupdate = scanner.nextLine();
+                                    updatedGate.setGateNumber(gateNumberupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo ID de aeropuerto: ");
+                                    int idAirportUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedGate.setIdAirport(idAirportUpdated);
+                                    break;
+                            }
+                        }
+                        gateService.updateGate(updatedGate);
+                    }, () -> System.out.println("No se encontró el aeropuerto con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id de la puerta a buscar: ");

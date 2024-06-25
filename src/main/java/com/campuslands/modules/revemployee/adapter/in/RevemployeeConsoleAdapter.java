@@ -1,9 +1,11 @@
 package com.campuslands.modules.revemployee.adapter.in;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 import com.campuslands.modules.revemployee.application.RevemployeeService;
 import com.campuslands.modules.revemployee.domain.Revemployee;
+import com.campuslands.modules.trip.domain.Trip;
 
 public class RevemployeeConsoleAdapter {
     private final RevemployeeService revemployeeService;
@@ -14,8 +16,8 @@ public class RevemployeeConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -31,18 +33,35 @@ public class RevemployeeConsoleAdapter {
                     break;
                 
                 case 2:
-                    System.out.print("Ingrese ID del Reempleado a actualizar: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
-
-                    System.out.print("Ingrese el nuevo ID del empleado: ");
-                    int updateIdEmployee = scanner.nextInt();
-
-                    System.out.print("Ingrese el nuevo ID de la revision: ");
-                    int updateIdRevision = scanner.nextInt();
-
-                    Revemployee updatedRevemployee = new Revemployee(updateId, updateIdEmployee, updateIdRevision);
-                    revemployeeService.updateRevemployee(updatedRevemployee);
+                    scanner.nextLine();
+                    Optional<Revemployee> optionalUpdatedRevemployee = revemployeeService.findByIdRevemployee(updateId);
+                    optionalUpdatedRevemployee.ifPresentOrElse(updatedRevemployee -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. idEmployee\n2. idRevision\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese el nuevo ID del empleado: ");
+                                    int idEmployeeupdate = Integer.parseInt(scanner.nextLine());
+                                    updatedRevemployee.setIdEmployee(idEmployeeupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo ID de la revision: ");
+                                    int idRevisionUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedRevemployee.setIdRevision(idRevisionUpdated);
+                                    break;
+                            }
+                        }
+                        revemployeeService.updateRevemployee(updatedRevemployee);
+                    }, () -> System.out.println("No se encontró el reempleado con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id del Reempleado a buscar: ");

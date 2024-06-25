@@ -1,9 +1,11 @@
 package com.campuslands.modules.flightfare.adapter.in;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.flightfare.domain.Flightfare;
+import com.campuslands.modules.trip.domain.Trip;
 import com.campuslands.modules.flightfare.application.FlightfareService;
 
 public class FlightfareConsoleAdapter {
@@ -15,8 +17,8 @@ public class FlightfareConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -36,23 +38,40 @@ public class FlightfareConsoleAdapter {
                     break;
 
                 case 2:
-
-                    System.out.print("Ingrese el ID de la tarifa de vuelo a actualizar: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese la nueva descripcion de la tarifa de vuelo: ");
-                    String updateDescription = scanner.nextLine();
-
-                    System.out.print("Ingrese los detalles nuevos de la tarifa de vuelo: ");
-                    String updateDetails = scanner.nextLine();
-
-                    System.out.print("Ingrese el valor nuevo de la tarifa de vuelo: ");
-                    double updateValue = scanner.nextDouble();
-
-                    Flightfare flightfare2 = new Flightfare(updateId, updateDescription, updateDetails, updateValue);
-                    flightfareService.updateFlightfare(flightfare2);
+                    Optional<Flightfare> optionalUpdatedFlightfare = flightfareService.findByIdFlightfare(updateId);
+                    optionalUpdatedFlightfare.ifPresentOrElse(updatedFlightfare -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. description\n2. details\n3. value\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la nueva descripcion de la tarifa de vuelo: ");
+                                    String descriptionUupdate = scanner.nextLine();
+                                    updatedFlightfare.setDescription(descriptionUupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese los detalles nuevos de la tarifa de vuelo: ");
+                                    String detailsUpdated = scanner.nextLine();
+                                    updatedFlightfare.setDetails(detailsUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese el valor nuevo de la tarifa de vuelo: ");
+                                    Double valueUpdated = Double.parseDouble(scanner.nextLine());
+                                    updatedFlightfare.setValue(valueUpdated);
+                                    break;
+                            }
+                        }
+                        flightfareService.updateFlightfare(updatedFlightfare);
+                    }, () -> System.out.println("No se encontró el aeropuerto con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id de la tarifa de vuelo a buscar: ");

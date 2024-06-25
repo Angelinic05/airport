@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.plane.domain.Plane;
+import com.campuslands.modules.trip.domain.Trip;
 import com.campuslands.modules.plane.application.PlaneService;
 
 public class PlaneConsoleAdapter {
@@ -16,8 +17,8 @@ public class PlaneConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
 
             switch (choice) {
@@ -43,29 +44,45 @@ public class PlaneConsoleAdapter {
                     break;
                 
                 case 2:
-                    System.out.print("Ingrese ID del avion a actualizar: ");
+                    System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese la nueva capacidad del avion: ");
-                    int updateCapacity = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.print("Ingrese la nueva fecha de fabricacion (formato: yyyy-mm-dd): ");
-                    String updatefabricationDate = scanner.nextLine();
-                    Date updatefabricanteDate = Date.valueOf(updatefabricationDate);
-
-                    System.out.print("Ingrese el nuevo ID del estado del avion: ");
-                    int updateIdStatus = scanner.nextInt();
-                    scanner.nextLine();
-
-                    System.out.print("Ingrese el nuevo planeo del avion: ");
-                    int updateIdPlane = scanner.nextInt();
-                    scanner.nextLine();
-
-                    Plane updatedPlane = new Plane(updateId, updateCapacity, updatefabricanteDate, updateIdStatus,updateIdPlane);
-                    planeService.updatePlane(updatedPlane);
+                    Optional<Plane> optionalUpdatedPlane = planeService.findByIdPlane(updateId);
+                    optionalUpdatedPlane.ifPresentOrElse(updatedPlane -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. capacity\n2. fabricationDate\n3. idStatus\n4. idModel\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la nueva capacidad del avion: ");
+                                    int capacityupdate = Integer.parseInt(scanner.nextLine());
+                                    updatedPlane.setCapacity(capacityupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese la nueva fecha de fabricacion (formato: yyyy-mm-dd): ");
+                                    Date CapacityUpdated = Date.valueOf(scanner.nextLine());
+                                    updatedPlane.setFabricationDate(CapacityUpdated);
+                                    break;
+                                case 3:
+                                    System.out.print("Ingrese el nuevo ID del estado del avion: ");
+                                    int idStatusUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedPlane.setIdStatus(idStatusUpdated);
+                                    break;
+                                case 4:
+                                    System.out.print("Ingrese el nuevo id del modelo del avion: ");
+                                    int idModelUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedPlane.setIdModel(idModelUpdated);
+                                    break;
+                            }
+                        }
+                        planeService.updatePlane(updatedPlane);
+                    }, () -> System.out.println("No se encontró el avion con ID: " + updateId));
                     break;
+
 
                 case 3:
                     System.out.print("Ingrese el Id del avion a buscar: ");

@@ -68,7 +68,7 @@ public class GateMySQLRepository implements GateRepository{
                         Gate gate = new Gate(
                             resultSet.getInt("id"),
                             resultSet.getString("gateNumber"),
-                            resultSet.getInt("idAirpot")
+                            resultSet.getInt("idAirport")
                         );
                         return Optional.of(gate);
                     }

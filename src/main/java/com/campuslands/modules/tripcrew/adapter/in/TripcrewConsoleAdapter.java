@@ -1,9 +1,10 @@
 package com.campuslands.modules.tripcrew.adapter.in;
 
+import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-
+import com.campuslands.modules.trip.domain.Trip;
 import com.campuslands.modules.tripcrew.application.TripcrewService;
 import com.campuslands.modules.tripcrew.domain.Tripcrew;
 
@@ -16,13 +17,13 @@ public class TripcrewConsoleAdapter {
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
-
-        while (true) {
+        Boolean flag = true;
+        while (flag) {
             int choice = menu(scanner);
-
+            int idEmployee;
+            int idConnection;
             switch (choice) {
                 case 1:
-
                     int createIdEmployee = tripcrewService.selectEmployee();
                     if(createIdEmployee == -1){return;}
                     int createIdConnection = tripcrewService.selectFlightconnection();
@@ -36,15 +37,30 @@ public class TripcrewConsoleAdapter {
                     System.out.print("Ingrese  ID a actualizar: ");
                     int updateId = scanner.nextInt();
                     scanner.nextLine();
-
-                    System.out.print("Ingrese el id del empleado a actualizar: ");
-                    int updateIdEmployee = scanner.nextInt();
-
-                    System.out.print("Ingrese el id de la coneccion a actualizar: ");
-                    int updateIdConnection = scanner.nextInt();
-
-                    Tripcrew updatedTripcrew = new Tripcrew(updateId, updateIdEmployee, updateIdConnection);
-                    tripcrewService.updateTripcrew(updatedTripcrew);
+                    Optional<Tripcrew> optionalUpdatedTripcrew = tripcrewService.getTripcrewById(updateId);
+                    optionalUpdatedTripcrew.ifPresentOrElse(updatedTripcrew -> {
+                        int optSubMenu = -1;
+                        String submenu = "¿Qué desea actualizar?\n1. idEmployee\n2. idConnection\n0. Salir\n";
+                
+                        while (optSubMenu != 0) {
+                            System.out.println(submenu);
+                            optSubMenu = Integer.parseInt(scanner.nextLine());
+                
+                            switch (optSubMenu) {
+                                case 1:
+                                    System.out.print("Ingrese la nueva fecha del viaje: ");
+                                    int idEmployeeupdate = Integer.parseInt(scanner.nextLine());
+                                    updatedTripcrew.setIdEmployee(idEmployeeupdate);
+                                    break;
+                                case 2:
+                                    System.out.print("Ingrese el nuevo precio del viaje: ");
+                                    int idConnectionUpdated = Integer.parseInt(scanner.nextLine());
+                                    updatedTripcrew.setIdConnection(idConnectionUpdated);
+                                    break;
+                            }
+                        }
+                        tripcrewService.updateTripcrew(updatedTripcrew);
+                    }, () -> System.out.println("No se encontró la tripulacion con ID: " + updateId));
                     break;
 
                 case 3:

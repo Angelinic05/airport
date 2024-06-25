@@ -18,23 +18,18 @@ public class TripbookingConsoleAdapter {
     public void start() {
         Scanner scanner = new Scanner(System.in);
         Boolean flag = true;
-        
         while (flag) {
             int choice = menu(scanner);
             Date date;
             int idTrip;
             switch (choice) {
                 case 1:
-
                     System.out.print("Ingrese la fecha de la reserva del viaje: ");
                     date = Date.valueOf(scanner.nextLine());
-
                     System.out.print("Ingrese el id de la reserva de viaje: ");
                     idTrip = scanner.nextInt();
-
                     Tripbooking newTripbooking = new Tripbooking(date, idTrip);
                     tripbookingService.createTripbooking(newTripbooking);
-
                     break;
                 case 2:
                     System.out.print("Ingrese  ID a actualizar: ");
