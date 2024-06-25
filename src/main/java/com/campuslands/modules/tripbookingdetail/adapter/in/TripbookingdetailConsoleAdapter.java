@@ -3,7 +3,6 @@ package com.campuslands.modules.tripbookingdetail.adapter.in;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.revisiondetail.domain.Revisiondetail;
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
 import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
@@ -26,13 +25,13 @@ public class TripbookingdetailConsoleAdapter {
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese la Id del detalle de la reserva de viaje: ");
+                    System.out.print("Ingrese el Id de la reserva de viaje: ");
                     idTripbooking = scanner.nextInt();
 
-                    System.out.print("Ingrese la Id customers: ");
+                    System.out.print("Ingrese el Id del cliente: ");
                     idCustomers = scanner.nextInt();
 
-                    System.out.print("Ingrese la Id Fares: ");
+                    System.out.print("Ingrese el Id de la tarifa: ");
                     idFares = scanner.nextInt();
 
                     Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(idTripbooking, idCustomers, idFares);

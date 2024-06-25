@@ -37,6 +37,7 @@ public class FlightconnectionConsoleAdapter {
 
                     Flightconnection flightconnection = new Flightconnection(createConnectionNumber, createIdTrip, createIdPlane, createIdAirport);
                     flightconnectionService.saveFlightconnection(flightconnection);
+                    System.out.println("Avion agregado con éxito");
                     break;
 
                 case 2:

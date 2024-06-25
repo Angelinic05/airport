@@ -31,6 +31,7 @@ public class RevisionConsoleAdapter {
                     
                     Revision newRevision = new Revision(revisionDate, idPlane);
                     revisionService.saveRevision(newRevision);
+                    System.out.println("Revision registrada con exito");
                     break;
 
                 case 2:

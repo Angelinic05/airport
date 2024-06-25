@@ -23,6 +23,10 @@ public class PlaneConsoleAdapter {
 
             switch (choice) {
                 case 1:
+                    System.out.print("Ingrese la matricula del avion(solo numeros): ");
+                    int crateId = scanner.nextInt();
+                    scanner.nextLine();
+                    
                     System.out.print("Ingrese la capacidad del avion: ");
                     int crateCapacity = scanner.nextInt();
                     scanner.nextLine();
@@ -35,11 +39,11 @@ public class PlaneConsoleAdapter {
                     int crateIdStatus = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.print("Ingrese el planeo del avion: ");
-                    int crateIdPlane = scanner.nextInt();
+                    System.out.print("Ingrese el ID del modelo del avion: ");
+                    int crateIdModel = scanner.nextInt();
                     scanner.nextLine();
 
-                    Plane plane = new Plane(crateCapacity, createfabricanteDate, crateIdStatus, crateIdPlane );
+                    Plane plane = new Plane(crateId, crateCapacity, createfabricanteDate, crateIdStatus, crateIdModel );
                     planeService.savePlane(plane);
                     break;
                 
