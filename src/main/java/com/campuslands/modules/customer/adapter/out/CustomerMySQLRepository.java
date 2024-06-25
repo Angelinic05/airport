@@ -74,6 +74,7 @@ public class CustomerMySQLRepository implements CustomerRepository {
                 statement.setInt(3, customer.getIdDocument());
                 statement.setInt(4, customer.getId());
                 statement.executeUpdate();
+                System.out.println("Aeropuerto actualizado con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();
