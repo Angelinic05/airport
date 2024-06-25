@@ -32,7 +32,7 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, flightconnection.getConnectionNumber());
                 statement.setInt(2, flightconnection.getIdTrip());
-                statement.setInt(3, flightconnection.getIdPlane());
+                if(flightconnection.getIdPlane() != null){statement.setInt(3, flightconnection.getIdPlane());};
                 statement.setInt(4, flightconnection.getIdAirport());
                 statement.executeUpdate(); //PREGUNTAR BIEN QUE ES ESTO
             }

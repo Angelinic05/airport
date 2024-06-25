@@ -44,7 +44,7 @@ public class Flightconnection {
     public void setIdTrip(int idTrip) {
         this.idTrip = idTrip;
     }
-    public int getIdPlane() {
+    public Integer getIdPlane() {
         return idPlane;
     }
     public void setIdPlane(int idPlane) {
