@@ -32,7 +32,7 @@ public class FlightconnectionConsoleAdapter {
                     scanner.nextLine();
 
                     System.out.println("Lista de aviones disponibles: ");
-                    int createIdPlane = flightconnectionService.avaliablePlanesForTrip();
+                    Integer createIdPlane = flightconnectionService.avaliablePlanesForTrip();
                     createIdPlane = createIdPlane == -1 ? null : createIdPlane;
 
                     System.out.print("Ingrese el ID del aeropuerto: ");
@@ -107,7 +107,7 @@ public class FlightconnectionConsoleAdapter {
                     System.out.println("Lista de Trayectos sin aeronave: ");
                     int idFlightconnection = flightconnectionService.avaliableFlightsForTrip();
                     Flightconnection flightconnection2 = flightconnectionService.findByIdFlightconnection(idFlightconnection).get();
-                    int idPlane = flightconnectionService.avaliablePlanesForTrip();
+                    Integer idPlane = flightconnectionService.avaliablePlanesForTrip();
                     flightconnection2.setIdPlane(idPlane);
                     flightconnectionService.updateFlightconnection(flightconnection2);
                     
