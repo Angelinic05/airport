@@ -32,4 +32,5 @@ public class FlightconnectionService {
     public List<Flightconnection> findAllFlightconnection(){
         return flightconnectionRepository.findAll();
     }
+
 }

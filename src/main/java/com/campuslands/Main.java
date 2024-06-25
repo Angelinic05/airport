@@ -66,7 +66,8 @@ import com.campuslands.modules.documenttype.application.DocumenttypeService;
 import com.campuslands.modules.employee.adapter.in.EmployeeConsoleAdapter;
 import com.campuslands.modules.employee.adapter.out.EmployeeMySQLRepository;
 import com.campuslands.modules.employee.application.EmployeeService;
-import com.campuslands.modules.employee.infrastructure.EmployeeRepository;
+
+
 import com.campuslands.modules.flightconnection.adapter.in.FlightconnectionConsoleAdapter;
 import com.campuslands.modules.flightconnection.application.FlightconnectionService;
 import com.campuslands.modules.flightconnection.adapter.out.FlightconnectionMySQLRepository;
@@ -286,7 +287,7 @@ public class Main {
                     break;
                 case 22:
                     System.out.println("tripcrew");
-                    TripcrewService tripcrewService = new TripcrewService(tripcrewRepository, employeeMySQLRepository);
+                    TripcrewService tripcrewService = new TripcrewService(tripcrewRepository, employeeMySQLRepository, flightconnectionMySQLRepository);
                     TripcrewConsoleAdapter tripcrewConsoleAdapter = new TripcrewConsoleAdapter(tripcrewService);
                     tripcrewConsoleAdapter.start();
                     break;
@@ -296,7 +297,7 @@ public class Main {
                     TripulationrolConsoleAdapter tripulationrolConsoleAdapter = new TripulationrolConsoleAdapter(tripulationrolService);
                     tripulationrolConsoleAdapter.start();
                     break;
-                case 24:
+                case 0:
                     scanner.close();
                     System.exit(0);
                     break;

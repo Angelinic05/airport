@@ -11,7 +11,6 @@ public class Tripcrew {
         this.id = id;
         this.idEmployee = idEmployee;
         this.idConnection = idConnection;
-
     }
 
     public Tripcrew(int idEmployee, int idConnection) {

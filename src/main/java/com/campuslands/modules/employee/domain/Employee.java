@@ -68,7 +68,7 @@ public class Employee {
 
     @Override
     public String toString(){
-        return String.format("Id: %d -- Nombre; %s", id, name);
+        return String.format("Id: %d -- Nombre: %s", id, name);
     }
     
 }

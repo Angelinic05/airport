@@ -57,4 +57,8 @@ public class Flightconnection {
         this.idAirport = idAirport;
     }
     
+    @Override
+    public String toString(){
+        return String.format("ID: %d -- Connection Number:  %s -- IdTrip: %d -- IdPlane: %d -- IdAirport: %d",id, connectionNumber, idTrip, idPlane, idAirport);
+    }
 }

@@ -24,9 +24,9 @@ public class TripcrewConsoleAdapter {
                 case 1:
 
                     int createIdEmployee = tripcrewService.selectEmployee();
-                    
-                    System.out.print("Ingrese el id de la coneccion: ");
-                    int createIdConnection = scanner.nextInt();
+                    if(createIdEmployee == -1){return;}
+                    int createIdConnection = tripcrewService.selectFlightconnection();
+                    if(createIdConnection == -1){return;}
 
                     Tripcrew newTripcrew = new Tripcrew(createIdEmployee, createIdConnection);
                     tripcrewService.createTripcrew(newTripcrew);
