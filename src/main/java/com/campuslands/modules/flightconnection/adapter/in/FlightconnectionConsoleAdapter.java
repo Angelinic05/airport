@@ -29,11 +29,8 @@ public class FlightconnectionConsoleAdapter {
                     System.out.print("Ingrese el numero de connexión: ");
                     String createConnectionNumber = scanner.nextLine();
 
-                    System.out.print("Ingrese el ID del viaje: ");
-                    int createIdTrip = scanner.nextInt();
-
-                    System.out.print("Ingrese el ID del avion: ");
-                    int createIdPlane = scanner.nextInt();
+                    int createIdTrip = flightconnectionService.avaliableFlightsForTrip();
+                    int createIdPlane = flightconnectionService.avaliablePlanesForTrip();
 
                     System.out.print("Ingrese el ID del aeropuerto: ");
                     int createIdAirport = scanner.nextInt();

@@ -122,10 +122,35 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
     }
 
     @Override
-    public List<Flightconnection> avaliableFlights() {
+    public List<Flightconnection> avaliableFlightsForTrip() {
         List<Flightconnection> flightconnection = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
             String query = "SELECT fc.id, fc.connectionNumber, fc.idTrip, fc.idPlane, fc.idAirport FROM flightconnection fc LEFT JOIN tripcrew tc ON fc.id = tc.idConnection WHERE tc.idConnection IS NULL ";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Flightconnection flightconnection2 = new Flightconnection(
+                            resultSet.getInt("id"),
+                            resultSet.getString("connectionNumber"),
+                            resultSet.getInt("idTrip"),
+                            resultSet.getInt("idPlane"),
+                            resultSet.getInt("idAirport")
+                        );
+                        flightconnection.add(flightconnection2);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flightconnection;
+    } 
+
+    @Override
+    public List<Flightconnection> avaliableFlightsForPlane() {
+        List<Flightconnection> flightconnection = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT fc.id, fc.connectionNumber, fc.idTrip, fc.idPlane, fc.idAirport FROM flightconnection fc LEFT JOIN plane p ON p.id = fc.idPlane WHERE fc.idPlane IS NULL ";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {

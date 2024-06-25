@@ -11,5 +11,5 @@ public interface PlaneRepository {
     Optional<Plane> findById(int id);
     void delete(int id);
     List<Plane> findAll();
-    
+    List<Plane> avaliabPlanesForFlight();
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.campuslands.modules.flightconnection.domain.Flightconnection;
 import com.campuslands.modules.plane.domain.Plane;
 import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 
@@ -33,6 +34,7 @@ public class PlaneMySQLRepository implements PlaneRepository{
                 statement.setInt(3, plane.getIdStatus());
                 statement.setInt(4, plane.getIdModel());
                 statement.executeUpdate();
+                System.out.println("Avion agregado con éxito");
             } catch (Exception e) {
                 e.getStackTrace();
             }
@@ -52,6 +54,7 @@ public class PlaneMySQLRepository implements PlaneRepository{
                 statement.setInt(4, plane.getIdModel());
                 statement.setInt(5, plane.getId());
                 statement.executeUpdate();                
+                System.out.println("Avion actualizado con éxito");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -120,4 +123,28 @@ public class PlaneMySQLRepository implements PlaneRepository{
         }
         return plane;
     }
+    @Override
+    public List<Plane> avaliabPlanesForFlight() {
+        List<Plane> plane = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT p.id, p.capacity, p.fabricationDate, p.idStatus, p.idModel FROM plane p INNER JOIN flightconnection fc ON p.id = fc.idPlane WHERE fc.id IS NULL";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Plane plane2 = new Plane(
+                            resultSet.getInt("id"),
+                            resultSet.getInt("capacity"),
+                            resultSet.getDate("fabricationDate"),
+                            resultSet.getInt("idStatus"),
+                            resultSet.getInt("idModel")
+                        );
+                        plane.add(plane2);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return plane;
+    } 
 }

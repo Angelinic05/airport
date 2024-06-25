@@ -80,7 +80,7 @@ public class TripcrewService{
 
     public int selectFlightconnection(){
         Scanner sc = new Scanner(System.in);
-        List<Flightconnection> lista = flightconnectionRepository.avaliableFlights();
+        List<Flightconnection> lista = flightconnectionRepository.avaliableFlightsForTrip();
         
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + "- " + lista.get(i));
