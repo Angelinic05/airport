@@ -26,12 +26,13 @@ public class PlaneMySQLRepository implements PlaneRepository{
     @Override
     public void save(Plane plane){
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO plane (capacity, fabricationDate, idStatus, idModel) VALUES (?,?,?,?)";
+            String query = "INSERT INTO plane (id, capacity, fabricationDate, idStatus, idModel) VALUES (?,?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setInt(1, plane.getCapacity());
-                statement.setDate(2, plane.getFabricationDate());
-                statement.setInt(3, plane.getIdStatus());
-                statement.setInt(4, plane.getIdModel());
+                statement.setInt(1, plane.getId());
+                statement.setInt(2, plane.getCapacity());
+                statement.setDate(3, plane.getFabricationDate());
+                statement.setInt(4, plane.getIdStatus());
+                statement.setInt(5, plane.getIdModel());
                 statement.executeUpdate();
             } catch (Exception e) {
                 e.getStackTrace();

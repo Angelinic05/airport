@@ -31,6 +31,7 @@ public class TripbookingMySQLRepository implements TripbookingRepository{
                 statement.setDate(1, tripbooking.getDate());
                 statement.setInt(2, tripbooking.getIdTrip());
                 statement.executeUpdate();
+                System.out.println("Reserva realizada con exito");
             }
         } catch (SQLException e) {
             e.printStackTrace();

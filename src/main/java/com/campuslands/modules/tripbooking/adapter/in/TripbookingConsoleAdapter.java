@@ -26,7 +26,7 @@ public class TripbookingConsoleAdapter {
                 case 1:
                     System.out.print("Ingrese la fecha de la reserva del viaje: ");
                     date = Date.valueOf(scanner.nextLine());
-                    System.out.print("Ingrese el id de la reserva de viaje: ");
+                    System.out.print("Ingrese el id de la reserva de viaje (formato yyyy-mm-dd): ");
                     idTrip = scanner.nextInt();
                     Tripbooking newTripbooking = new Tripbooking(date, idTrip);
                     tripbookingService.createTripbooking(newTripbooking);
