@@ -4,7 +4,6 @@ import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.airport.domain.Airport;
 import com.campuslands.modules.trip.application.TripService;
 import com.campuslands.modules.trip.domain.Trip;
 

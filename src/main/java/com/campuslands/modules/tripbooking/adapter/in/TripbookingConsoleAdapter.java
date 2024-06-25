@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.revision.domain.Revision;
+
 import com.campuslands.modules.tripbooking.application.TripbookingService;
 import com.campuslands.modules.tripbooking.domain.Tripbooking;
 
@@ -63,7 +63,7 @@ public class TripbookingConsoleAdapter {
                             }
                         }
                         tripbookingService.updateTripbooking(updatedTripbooking);
-                    }, () -> System.out.println("No se encontró la revision con ID: " + updateId));
+                    }, () -> System.out.println("No se encontró la reserva con ID: " + updateId));
                     break;
 
 
