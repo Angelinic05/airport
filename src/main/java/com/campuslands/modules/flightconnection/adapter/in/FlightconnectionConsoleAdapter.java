@@ -105,9 +105,11 @@ public class FlightconnectionConsoleAdapter {
                     break;
                 case 6:
                     System.out.println("Lista de Trayectos sin aeronave: ");
-                    int idFlightconnection = flightconnectionService.avaliableFlightsForTrip();
+                    int idFlightconnection = flightconnectionService.avaliableFlightsForPlane();
+                    if(idFlightconnection == -1){break;}
                     Flightconnection flightconnection2 = flightconnectionService.findByIdFlightconnection(idFlightconnection).get();
                     Integer idPlane = flightconnectionService.avaliablePlanesForTrip();
+                    if(idPlane == -1){break;}
                     flightconnection2.setIdPlane(idPlane);
                     flightconnectionService.updateFlightconnection(flightconnection2);
                     

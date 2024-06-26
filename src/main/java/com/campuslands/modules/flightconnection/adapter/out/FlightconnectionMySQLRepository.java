@@ -32,7 +32,8 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, flightconnection.getConnectionNumber());
                 statement.setInt(2, flightconnection.getIdTrip());
-                if(flightconnection.getIdPlane() != null){statement.setInt(3, flightconnection.getIdPlane());};
+                if(flightconnection.getIdPlane() != null){statement.setInt(3, flightconnection.getIdPlane());}
+                else{statement.setNull(3, java.sql.Types.INTEGER);}
                 statement.setInt(4, flightconnection.getIdAirport());
                 statement.executeUpdate(); //PREGUNTAR BIEN QUE ES ESTO
             }
@@ -66,11 +67,15 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
                 statement.setInt(1, id);
                 try (ResultSet resultSet = statement.executeQuery()) {
                     if(resultSet.next()){
+                        Integer idPlane = (Integer) resultSet.getObject("idPlane");
+                        if (resultSet.wasNull()) {
+                            idPlane = null;
+                        }
                         Flightconnection flightconnection = new Flightconnection(
                             resultSet.getInt("id"),
                             resultSet.getString("connectionNumber"),
                             resultSet.getInt("idTrip"),
-                            resultSet.getInt("idPlane"),
+                            idPlane,
                             resultSet.getInt("idAirport")
                             );
                             return Optional.of(flightconnection);
@@ -105,11 +110,15 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
+                        Integer idPlane = (Integer) resultSet.getObject("idPlane");
+                        if (resultSet.wasNull()) {
+                            idPlane = null;
+                        }
                         Flightconnection flightconnection2 = new Flightconnection(
                             resultSet.getInt("id"),
                             resultSet.getString("connectionNumber"),
                             resultSet.getInt("idTrip"),
-                            resultSet.getInt("idPlane"),
+                            idPlane,
                             resultSet.getInt("idAirport")
                         );
                         flightconnection.add(flightconnection2);
@@ -130,11 +139,15 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
+                        Integer idPlane = (Integer) resultSet.getObject("idPlane");
+                        if (resultSet.wasNull()) {
+                            idPlane = null;
+                        }
                         Flightconnection flightconnection2 = new Flightconnection(
                             resultSet.getInt("id"),
                             resultSet.getString("connectionNumber"),
                             resultSet.getInt("idTrip"),
-                            resultSet.getInt("idPlane"),
+                            idPlane,
                             resultSet.getInt("idAirport")
                         );
                         flightconnection.add(flightconnection2);
@@ -151,15 +164,19 @@ public class FlightconnectionMySQLRepository implements FlightconnectionReposito
     public List<Flightconnection> avaliableFlightsForPlane() {
         List<Flightconnection> flightconnection = new ArrayList<>();
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT fc.id, fc.connectionNumber, fc.idTrip, fc.idPlane, fc.idAirport FROM flightconnection fc LEFT JOIN plane p ON p.id = fc.idPlane WHERE fc.idPlane IS NULL ";
+            String query = "SELECT fc.id, fc.connectionNumber, fc.idTrip, fc.idPlane, fc.idAirport FROM flightconnection fc LEFT JOIN plane p ON p.id = fc.idPlane WHERE fc.idPlane IS NULL";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
+                        Integer idPlane = (Integer) resultSet.getObject("idPlane");
+                        if (resultSet.wasNull()) {
+                            idPlane = null;
+                        }
                         Flightconnection flightconnection2 = new Flightconnection(
                             resultSet.getInt("id"),
                             resultSet.getString("connectionNumber"),
                             resultSet.getInt("idTrip"),
-                            resultSet.getInt("idPlane"),
+                            idPlane,
                             resultSet.getInt("idAirport")
                         );
                         flightconnection.add(flightconnection2);

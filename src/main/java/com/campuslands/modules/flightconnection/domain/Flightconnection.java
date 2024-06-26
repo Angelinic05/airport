@@ -1,22 +1,22 @@
 package com.campuslands.modules.flightconnection.domain;
 
 public class Flightconnection {
-    int id;
+    Integer id;
     String connectionNumber;
-    int idTrip;
-    int idPlane;
-    int idAirport;
+    Integer idTrip;
+    Integer idPlane;
+    Integer idAirport;
 
     public Flightconnection(){}
 
-    public Flightconnection(String connectionNumber, int idTrip, int idPlane, int idAirport){
+    public Flightconnection(String connectionNumber, Integer idTrip, Integer idPlane, Integer idAirport){
         this.connectionNumber = connectionNumber;
         this.idTrip = idTrip;
         this.idPlane = idPlane;
         this.idAirport = idAirport;
     }
 
-    public Flightconnection(int id, String connectionNumber, int idTrip, int idPlane, int idAirport) {
+    public Flightconnection(Integer id, String connectionNumber, Integer idTrip, Integer idPlane, Integer idAirport) {
         this.id = id;
         this.connectionNumber = connectionNumber;
         this.idTrip = idTrip;

@@ -49,7 +49,36 @@ public class FlightconnectionService {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + "- " + lista.get(i));
         }
-        System.out.println("0 para salir.");
+        System.out.println("\n0 - Salir.");
+        System.out.println("\nSeleccione el trayecto: ");
+        while (true) {
+            try {
+                int opc = sc.nextInt() - 1;
+
+                if (opc == -1) {
+                    return -1;
+                } 
+
+                if (opc < 0 || opc >= lista.size()) {
+                    System.out.println("Selección inválida. Por favor, ingrese un número entre 0 y " + (lista.size() - 1) + ".");
+                }
+                else {
+                    Flightconnection flightconnection = lista.get(opc);
+                    return flightconnection.getId();
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Entrada inválida. Por favor, ingrese un número entero.");
+                sc.next();
+            }
+        }
+    }
+    public int avaliableFlightsForPlane(){
+        Scanner sc = new Scanner(System.in);
+        List<Flightconnection> lista = flightconnectionRepository.avaliableFlightsForPlane();
+        for (int i = 0; i < lista.size(); i++) {
+            System.out.println((i + 1) + "- " + lista.get(i));
+        }
+        System.out.println("\n0 - Salir.");
         System.out.println("\nSeleccione el trayecto: ");
         while (true) {
             try {
@@ -79,7 +108,7 @@ public class FlightconnectionService {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + "- " + lista.get(i));
         }
-        System.out.println("0 para salir.");
+        System.out.println("\n0 - Salir.");
         System.out.println("\nSeleccione la aeronave: ");
         while (true) {
             try {
