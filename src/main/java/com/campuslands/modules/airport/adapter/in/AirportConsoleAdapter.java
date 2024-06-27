@@ -1,24 +1,30 @@
 package com.campuslands.modules.airport.adapter.in;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.airport.application.AirportService;
 import com.campuslands.modules.airport.domain.Airport;
+import com.campuslands.modules.flightconnection.domain.Flightconnection;
+import com.campuslands.modules.trip.domain.Trip;
 
 public class AirportConsoleAdapter {
     
     private AirportService airportService;
-    
+    private Scanner scanner;
+
     public AirportConsoleAdapter(AirportService airportService) {
         this.airportService = airportService;
+        this.scanner = new Scanner(System.in);
     }
     public void start() {
 
         Scanner scanner = new Scanner(System.in);
         Boolean flag = true;
         while (flag) {
-            int choice = menu(scanner);
+            int choice = menu();
             String name;
             Double xPosition;
             Double yPosition;
@@ -102,7 +108,71 @@ public class AirportConsoleAdapter {
                         System.out.println(p);
                     });
                     break;
+                case 6:
+                    System.out.println(airportService.getAirportsByAirline().toString());
+                    
+                    System.out.print("Ingrese el Id del aeropuerto de origen: ");
+                    int startId = scanner.nextInt();
+                    scanner.nextLine(); // Consume el salto de línea pendiente
+                    System.out.print("Ingrese el Id del aeropuerto de destino: ");
+                    int endId = scanner.nextInt();
+                    scanner.nextLine(); // Consume el salto de línea pendiente
+                
+                    List<Airport> path = airportService.findShortestPath(startId, endId);
+                    
+                    if (path.isEmpty()) {
+                        System.out.println("No se encontró una ruta.");
+                    } else {
+                        System.out.print("Ruta más corta: ");
+                        for (int i = 0; i < path.size(); i++) {
+                            Airport airport = path.get(i);
+                            System.out.print("[" + airport.getName() + "]");
+                            if (i < path.size() - 1) {
+                                System.out.print(" -> ");
+                            }
+                        }
+                        System.out.println();
+                        
+                        // Mostrar escalas (aeropuertos intermedios)
+                        if (path.size() > 2) {
+                            System.out.print("Escalas: ");
+                            for (int i = 1; i < path.size() - 1; i++) {
+                                Airport airport = path.get(i);
+                                System.out.print("[" + airport.getName() + "]");
+                                if (i < path.size() - 2) {
+                                    System.out.print(" -> ");
+                                }
+                            }
+                            System.out.println();
+                        }
+                    }
 
+                    System.out.println("Desea Crear esta Coneccion de vuelo ? Y/N ");
+                    String input = scanner.nextLine();
+                    if(input.equals("Y") ){
+
+                        System.out.println("Ingrese la fecha del viaje(YYYY-MM-DD)");
+                        Date dateTrip = Date.valueOf(scanner.nextLine());
+
+                        System.out.println("Ingrese el costo del viaje");
+                        Double priceTrip = Double.parseDouble(scanner.nextLine());
+                        Trip trip = new Trip(dateTrip, priceTrip, startId, endId);
+                        int idTrip = airportService.saveTrip(trip);
+                        
+                        //Agrergar las escalas
+                        if (!path.isEmpty()) {
+                            System.out.println("Ingrese el numero de coneccion: ");
+                            String conNumber = scanner.nextLine();
+
+                            path.forEach((airport) ->{
+                                Flightconnection fc = new Flightconnection(conNumber, idTrip, airport.getId());
+                                airportService.saveFlightConnection(fc);
+                            });
+                            System.out.println(String.format("Vuelo id: %d\nConecciones con Numero de Coneccion:%s\n CREADOS", idTrip, conNumber));
+                        }
+                    }
+                    
+                    break;
                 case 0:
                     System.out.println("Saliendo...");
                     scanner.nextLine();
@@ -114,26 +184,116 @@ public class AirportConsoleAdapter {
         }
     }
 
-    private int menu(Scanner scanner){
+    private int menu(){
         System.out.println("1. Crear Aeropuerto");
         System.out.println("2. Actualizar Aeropuerto");
         System.out.println("3. Buscar Aeropuerto por ID");
         System.out.println("4. Eliminar Aeropuerto");
         System.out.println("5. Listar todos los Aeropuertos");
+        System.out.println("6. Encontrar ruta óptima entre aeropuertos");
         System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
         int choice = -1;
-        while (choice < 0 || choice > 6) {
-            try {
-                choice = Integer.parseInt(scanner.nextLine());
-                if (choice > 6) {                    
-                    System.out.println("Ingrese una opcion valida (1 - 5).");
-                }
-            } catch (Exception e) {
-                System.out.println("Ingrese una opcion valida (1 - 5).");
-            }
+        try {
+            choice = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Ingrese una opción válida (0 - 6).");
         }
         return choice;
+    }
+
+    private void createAirport() {
+        System.out.print("Ingrese el nombre del aeropuerto: ");
+        String name = scanner.nextLine();
+        System.out.print("Ingrese el id de la ciudad: ");
+        int idCity = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese la coordenada x del aeropuerto: ");
+        double xPosition = Double.parseDouble(scanner.nextLine());
+        System.out.print("Ingrese la coordenada y del aeropuerto: ");
+        double yPosition = Double.parseDouble(scanner.nextLine());
+
+        Airport newAirport = new Airport(name, idCity, xPosition, yPosition);
+        airportService.saveAirport(newAirport);
+    }
+
+    private void updateAirport() {
+        System.out.print("Ingrese ID a actualizar: ");
+        int updateId = Integer.parseInt(scanner.nextLine());
+        airportService.findAirportById(updateId).ifPresentOrElse(updatedAirport -> {
+            int optSubMenu = -1;
+            String submenu = "¿Qué desea actualizar?\n1. name\n2. idCity\n3. xPosition\n4. yPosition\n0. Salir\n";
+
+            while (optSubMenu != 0) {
+                System.out.println(submenu);
+                optSubMenu = Integer.parseInt(scanner.nextLine());
+
+                switch (optSubMenu) {
+                    case 1:
+                        System.out.print("Ingrese el nuevo nombre: ");
+                        updatedAirport.setName(scanner.nextLine());
+                        break;
+                    case 2:
+                        System.out.print("Ingrese el nuevo id de la ciudad: ");
+                        int idCityUpdated = Integer.parseInt(scanner.nextLine());
+                        updatedAirport.setIdCity(idCityUpdated);
+                        break;
+                    case 3:
+                        System.out.print("Ingrese la nueva coordenada x: ");
+                        double xPositionUpdated = Double.parseDouble(scanner.nextLine());
+                        updatedAirport.setxPosition(xPositionUpdated);
+                        break;
+                    case 4:
+                        System.out.print("Ingrese la nueva coordenada y: ");
+                        double yPositionUpdated = Double.parseDouble(scanner.nextLine());
+                        updatedAirport.setyPosition(yPositionUpdated);
+                        break;
+                }
+            }
+            airportService.updateAirport(updatedAirport);
+        }, () -> System.out.println("No se encontró el aeropuerto con ID: " + updateId));
+    }
+
+    private void findAirportById() {
+        System.out.print("Ingrese el Id del aeropuerto a buscar: ");
+        int findId = Integer.parseInt(scanner.nextLine());
+
+        airportService.findAirportById(findId).ifPresentOrElse(
+                airport -> System.out.println(airport),
+                () -> System.out.println("Aeropuerto no encontrado")
+        );
+    }
+
+    private void deleteAirport() {
+        System.out.print("Ingrese el Id del Aeropuerto a borrar: ");
+        int deleteId = Integer.parseInt(scanner.nextLine());
+        airportService.deleteAirport(deleteId);
+    }
+
+    private void listAllAirports() {
+        airportService.findAllAirports().forEach(System.out::println);
+    }
+
+    private void findShortestPath() {
+        System.out.print("Ingrese el Id del aeropuerto de origen: ");
+        int startId = Integer.parseInt(scanner.nextLine());
+        System.out.print("Ingrese el Id del aeropuerto de destino: ");
+        int endId = Integer.parseInt(scanner.nextLine());
+
+        List<Airport> path = airportService.findShortestPath(startId, endId);
+
+        if (path.isEmpty()) {
+            System.out.println("No se encontró una ruta.");
+        } else {
+            System.out.print("Ruta más corta: ");
+            for (int i = 0; i < path.size(); i++) {
+                Airport airport = path.get(i);
+                System.out.print("[" + airport.getName() + "]");
+                if (i < path.size() - 1) {
+                    System.out.print(" -> ");
+                }
+            }
+            System.out.println();
+        }
     }
 }

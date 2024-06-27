@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,5 +120,39 @@ public class AirportMySQLRepository implements AirportRepository {
         return airports;
     }
 
+    @Override
+    public HashMap<Integer, List<Integer>> getAirportsByAirline(){
+        HashMap<Integer, List<Integer>> airportsByAirline = new HashMap<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT DISTINCT idAirline FROM airportairline";
+            String query2 = "SELECT idAirport FROM airportairline where idAirline =?";
+            try (PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+
+                    int idAirline = resultSet.getInt("idAirline");
+                    try (PreparedStatement statement2 = connection.prepareStatement(query2)) {
+
+                        statement2.setInt(1, idAirline);
+                        ResultSet resultSet2 = statement2.executeQuery();
+
+                        List<Integer> airportList = new ArrayList<>();
+                        
+                        while (resultSet2.next()) {
+                            int idAirport = resultSet2.getInt("idAirport");
+                            airportList.add(idAirport);
+                        }
+
+                        airportsByAirline.put(idAirline, airportList);
+                        }
+
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return airportsByAirline;
+    }
 
 }
+

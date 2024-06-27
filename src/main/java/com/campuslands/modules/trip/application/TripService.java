@@ -31,5 +31,7 @@ public class TripService {
     public List<Trip> getAllTrips() {
         return tripRepository.findAll();
     }
-
+    public int saveAndReturnId(Trip trip){
+        return  tripRepository.saveAndReturnId(trip);
+    }
 }

@@ -24,6 +24,12 @@ public class Flightconnection {
         this.idAirport = idAirport;
     }
 
+    public Flightconnection(String connectionNumber, int idTrip, int idAirport) {
+        this.connectionNumber = connectionNumber;
+        this.idTrip = idTrip;
+        this.idAirport = idAirport;
+    }
+
     public int getId() {
         return id;
     }

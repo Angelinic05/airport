@@ -68,5 +68,8 @@ public class Airport {
     public String toString(){
         return String.format("Airport %s[ID: %d -- IDCity: %d -- XPosition: %f -- YPosition %f],",name, id, idCity, xPosition, yPosition);
     }
-    
+
+    public double distanceTo(Airport other) {
+        return Math.sqrt(Math.pow(this.xPosition - other.xPosition, 2) + Math.pow(this.yPosition - other.yPosition, 2));
+    }
 }
