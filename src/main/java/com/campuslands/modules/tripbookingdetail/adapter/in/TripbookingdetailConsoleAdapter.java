@@ -25,7 +25,7 @@ public class TripbookingdetailConsoleAdapter {
             int idTripbooking;
             int idCustomers;
             int idFares;
-            int setNumber;
+            int seatNumber;
 
             switch (choice) {
                 case 1:
@@ -44,8 +44,8 @@ public class TripbookingdetailConsoleAdapter {
                     List<Integer> seatsOccupered = tripbookingdetailService.SeatsOccupied(); //Lista de asientos ocupados
                     for (int i = 1; i <= capacity; i++) { if (!seatsOccupered.contains(i)) { System.out.println("Asiento disponible: " + i); } }
                     System.out.println("Ingrese el numero de asiento: ");
-                    setNumber = scanner.nextInt();
-                    Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(idTripbooking, idCustomers, idFares, setNumber);
+                    seatNumber = scanner.nextInt();
+                    Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(idTripbooking, idCustomers, idFares, seatNumber);
                     tripbookingdetailService.createTripbookingdetail(newTripbookingdetail);
 
                     break;

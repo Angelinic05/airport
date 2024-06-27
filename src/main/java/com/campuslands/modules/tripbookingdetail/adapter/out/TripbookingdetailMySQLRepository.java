@@ -26,12 +26,12 @@ public class TripbookingdetailMySQLRepository implements TripbookingdetailReposi
     @Override
     public void save(Tripbookingdetail tripbookingdetail) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO tripbookingdetail (idTripbooking, idCustomers, idFares, setNumber) VALUES (?,?,?,?)";
+            String query = "INSERT INTO tripbookingdetail (idTripbooking, idCustomers, idFares, seatNumber) VALUES (?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, tripbookingdetail.getIdTripbooking());
                 statement.setInt(2, tripbookingdetail.getIdCustomers());
                 statement.setInt(3, tripbookingdetail.getIdFares());
-                statement.setInt(4, tripbookingdetail.getSetNumber());
+                statement.setInt(4, tripbookingdetail.getSeatNumber());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
