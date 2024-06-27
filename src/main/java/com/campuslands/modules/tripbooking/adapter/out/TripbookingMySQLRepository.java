@@ -11,6 +11,7 @@ import java.util.Optional;
 
 import com.campuslands.modules.tripbooking.domain.Tripbooking;
 import com.campuslands.modules.tripbooking.infraestructure.TripbookingRepository;
+import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
 public class TripbookingMySQLRepository implements TripbookingRepository{
     private final String url;
@@ -109,5 +110,28 @@ public class TripbookingMySQLRepository implements TripbookingRepository{
             e.printStackTrace();
         }
         return tripbookings;
+    }
+
+    @Override
+    public List<Tripbooking> flightsAvailable(){
+        List<Tripbooking> flightsAvailable = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url,user, password)) {
+            String query = "SELECT DISTINCT tb.id as idTripbooking,  tb.date,  tb.idTrip FROM tripbooking as tb INNER JOIN trip as t ON t.id = tb.idTrip INNER JOIN flightconnection AS f ON f.idTrip = t.id INNER JOIN plane AS p ON f.idPlane = p.id WHERE p.capacity > (SELECT COUNT(tbd2.id) FROM tripbookingdetail as tbd2 WHERE tbd2.idTripbooking = tb.id)";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Tripbooking tripbooking = new Tripbooking(
+                            resultSet.getInt("idTripbooking"),
+                            resultSet.getDate("date"),
+                            resultSet.getInt("idTrip")
+                        );
+                        flightsAvailable.add(tripbooking);
+                    }
+                }                 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flightsAvailable;
     }
 }

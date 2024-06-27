@@ -26,11 +26,12 @@ public class TripbookingdetailMySQLRepository implements TripbookingdetailReposi
     @Override
     public void save(Tripbookingdetail tripbookingdetail) {
         try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "INSERT INTO tripbookingdetail (idTripbooking, idCustomers, idFares) VALUES (?,?,?)";
+            String query = "INSERT INTO tripbookingdetail (idTripbooking, idCustomers, idFares, setNumber) VALUES (?,?,?,?)";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setInt(1, tripbookingdetail.getIdTripbooking());
                 statement.setInt(2, tripbookingdetail.getIdCustomers());
                 statement.setInt(3, tripbookingdetail.getIdFares());
+                statement.setInt(4, tripbookingdetail.getSetNumber());
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
@@ -113,4 +114,50 @@ public class TripbookingdetailMySQLRepository implements TripbookingdetailReposi
         }
         return tripbookingdetails;
     }
+
+    @Override
+    public int planeCapacity(int id) {
+        int capacity = 0;
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT p.capacity from tripbooking as tb INNER JOIN trip as t ON tb.idTrip = t.id INNER JOIN flightconnection as fc ON fc.idTrip = t.id INNER JOIN plane as p ON p.id = fc.idPlane WHERE tb.id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, id);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        capacity = resultSet.getInt("capacity");
+                    }
+                } 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return capacity;
+    }
+
+    @Override
+    public List<Integer> SeatsOccupied() {
+        List<Integer> asientosOcupados = new ArrayList<>();
+        try (Connection connection = DriverManager.getConnection(url, user, password)) {
+            String query = "SELECT seatNumber FROM tripbookingdetail";
+            try (PreparedStatement statement = connection.prepareStatement(query);
+                ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    int seatOccupied = resultSet.getInt("seatNumber");
+                    asientosOcupados.add(seatOccupied);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return asientosOcupados;
+    }
+
+    @Override
+    public void printAvailableSeats(ArrayList<Integer> SeatsOccupied) {
+        
+        
+    }
+
+    
+
 }

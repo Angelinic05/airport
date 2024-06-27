@@ -6,16 +6,24 @@ public class Tripbookingdetail {
     private int idTripbooking;
     private int idCustomers;
     private int idFares;
+    private int setNumber; //numero de asiento
 
 
     public Tripbookingdetail() {}
 
-    public Tripbookingdetail(int id, int idTripbooking, int idCustomers, int idFares) {
+    public Tripbookingdetail(int id, int idTripbooking, int idCustomers, int idFares, int setNumber) {
         this.id = id;
         this.idTripbooking = idTripbooking;
         this.idCustomers = idCustomers;
         this.idFares = idFares;
+        this.setNumber = setNumber;
+    }
 
+    public Tripbookingdetail(int idTripbooking, int idCustomers, int idFares, int setNumber) {
+        this.idTripbooking = idTripbooking;
+        this.idCustomers = idCustomers;
+        this.idFares = idFares;
+        this.setNumber = setNumber;
     }
 
     public Tripbookingdetail(int idTripbooking, int idCustomers, int idFares) {
@@ -54,5 +62,13 @@ public class Tripbookingdetail {
 
     public void setIdFares(int idFares) {
         this.idFares = idFares;
+    }
+
+    public int getSetNumber() {
+        return setNumber;
+    }
+
+    public void setSetNumber(int setNumber) {
+        this.setNumber = setNumber;
     }
 }

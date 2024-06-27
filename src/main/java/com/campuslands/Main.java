@@ -281,8 +281,8 @@ public class Main {
                     tripbookingConsoleAdapter.start();
                     break;
                 case 21:
-                    System.out.println("tripboTripbooking");
-                    TripbookingdetailService tripbookingdetailService = new TripbookingdetailService(tripbookingdetailRepository);
+                    System.out.println("tripTripbookingdetail");
+                    TripbookingdetailService tripbookingdetailService = new TripbookingdetailService(tripbookingdetailRepository, tripbookingRepository);
                     TripbookingdetailConsoleAdapter tripbookingdetailConsoleAdapter = new TripbookingdetailConsoleAdapter(tripbookingdetailService);
                     tripbookingdetailConsoleAdapter.start();
                     break;

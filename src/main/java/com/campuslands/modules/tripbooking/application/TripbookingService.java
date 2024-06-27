@@ -32,5 +32,9 @@ public class TripbookingService {
     public List<Tripbooking> getAllTripbookings() {
         return tripbookingRepository.findAll();
     }
+
+    public List<Tripbooking> flightsAvailable(){
+        return tripbookingRepository.flightsAvailable();
+    }
 }
 

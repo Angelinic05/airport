@@ -1,8 +1,10 @@
 package com.campuslands.modules.tripbookingdetail.adapter.in;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
+import com.campuslands.modules.tripbooking.application.TripbookingService;
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
 import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
@@ -13,6 +15,7 @@ public class TripbookingdetailConsoleAdapter {
         this.tripbookingdetailService = tripbookingdetailService;
     }
 
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
         Boolean flag = true;
@@ -22,19 +25,27 @@ public class TripbookingdetailConsoleAdapter {
             int idTripbooking;
             int idCustomers;
             int idFares;
+            int setNumber;
 
             switch (choice) {
                 case 1:
-                    System.out.print("Ingrese el Id de la reserva de viaje: ");
-                    idTripbooking = scanner.nextInt();
 
+                    System.out.println("Vuelos disponibles: \n");
+                    tripbookingdetailService.flightsAvailable().forEach(p -> { //Listar los vuelos disponibles
+                        System.out.println("IdTripbooking: " + p.getId() + " date: " + p.getDate() + " idTrip: " + p.getIdTrip());
+                    });
+                    System.out.print("Ingrese el Id de la reserva de viaje: "); //Seleccionar vuelo disponible
+                    idTripbooking = scanner.nextInt();
                     System.out.print("Ingrese el Id del cliente: ");
                     idCustomers = scanner.nextInt();
-
                     System.out.print("Ingrese el Id de la tarifa: ");
                     idFares = scanner.nextInt();
-
-                    Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(idTripbooking, idCustomers, idFares);
+                    int capacity = tripbookingdetailService.planeCapacity(idTripbooking); //Capacidad que tiene el avion de la reserva de viaje elegida
+                    List<Integer> seatsOccupered = tripbookingdetailService.SeatsOccupied(); //Lista de asientos ocupados
+                    for (int i = 1; i <= capacity; i++) { if (!seatsOccupered.contains(i)) { System.out.println("Asiento disponible: " + i); } }
+                    System.out.println("Ingrese el numero de asiento: ");
+                    setNumber = scanner.nextInt();
+                    Tripbookingdetail newTripbookingdetail = new Tripbookingdetail(idTripbooking, idCustomers, idFares, setNumber);
                     tripbookingdetailService.createTripbookingdetail(newTripbookingdetail);
 
                     break;

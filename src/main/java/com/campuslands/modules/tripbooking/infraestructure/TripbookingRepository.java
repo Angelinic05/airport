@@ -11,4 +11,5 @@ public interface TripbookingRepository {
     Optional<Tripbooking> findById(int id);
     void delete(int id);
     List<Tripbooking> findAll();
+    List<Tripbooking> flightsAvailable(); //Vuelos disponibles
 }
