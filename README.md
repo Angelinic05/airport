@@ -66,7 +66,7 @@ La metodología de cascada, también conocida como modelo en cascada, es un enfo
 2. Gestionar los tipos de documentos de identidad aceptados para los clientes.
 
 ## Fase Diseño
-![image](DER.JPG)
+![image](DER.jpg)
 
 ### Fase Implementación
 
