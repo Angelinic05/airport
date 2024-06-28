@@ -1,14 +1,12 @@
 package com.campuslands.modules.flightconnection.adapter.in;
 
 
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
 
 import com.campuslands.modules.flightconnection.application.FlightconnectionService;
 import com.campuslands.modules.flightconnection.domain.Flightconnection;
-import com.campuslands.modules.trip.domain.Trip;
 
 public class FlightconnectionConsoleAdapter {
     private FlightconnectionService flightconnectionService;

@@ -48,6 +48,7 @@ public class TripcrewService{
     }
 
     public int selectEmployee(){
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         List<Employee> lista = employeeRepository.selectAvaliableEmployee();
         for (int i = 0; i < lista.size(); i++) {
@@ -79,6 +80,7 @@ public class TripcrewService{
     }
 
     public int selectFlightconnection(){
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         List<Flightconnection> lista = flightconnectionRepository.avaliableFlightsForTrip();
         

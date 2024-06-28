@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.campuslands.modules.flightconnection.domain.Flightconnection;
 import com.campuslands.modules.flightfare.domain.Flightfare;
 import com.campuslands.modules.flightfare.infrastructure.FlightfareRepository;
 

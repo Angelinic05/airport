@@ -1,12 +1,10 @@
 package com.campuslands.modules.gate.adapter.in;
 
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.gate.application.GateService;
 import com.campuslands.modules.gate.domain.Gate;
-import com.campuslands.modules.trip.domain.Trip;
 
 
 

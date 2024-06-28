@@ -1,10 +1,8 @@
 package com.campuslands.modules.tripcrew.adapter.in;
 
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.trip.domain.Trip;
 import com.campuslands.modules.tripcrew.application.TripcrewService;
 import com.campuslands.modules.tripcrew.domain.Tripcrew;
 
@@ -20,8 +18,6 @@ public class TripcrewConsoleAdapter {
         Boolean flag = true;
         while (flag) {
             int choice = menu(scanner);
-            int idEmployee;
-            int idConnection;
             switch (choice) {
                 case 1:
                     int createIdEmployee = tripcrewService.selectEmployee();

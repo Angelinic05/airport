@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.tripbooking.application.TripbookingService;
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
 import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 

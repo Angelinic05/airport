@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.campuslands.modules.flightfare.domain.Flightfare;
 import com.campuslands.modules.gate.domain.Gate;
 import com.campuslands.modules.gate.infrastructure.GateRepository;
 

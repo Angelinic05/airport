@@ -89,7 +89,6 @@ import com.campuslands.modules.model.adapter.out.ModelMySQLRepository;
 import com.campuslands.modules.model.adapter.in.ModelConsoleAdapter;
 
 import com.campuslands.modules.plane.application.PlaneService;
-import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 import com.campuslands.modules.plane.adapter.out.PlaneMySQLRepository;
 import com.campuslands.modules.plane.adapter.in.PlaneConsoleAdapter;
 
