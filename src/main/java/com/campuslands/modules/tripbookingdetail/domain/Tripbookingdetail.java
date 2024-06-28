@@ -11,7 +11,7 @@ public class Tripbookingdetail {
 
     public Tripbookingdetail() {}
 
-    public Tripbookingdetail(int id, int idTripbooking, int idCustomers, int idFares, int setNumber) {
+    public Tripbookingdetail(int id, int idTripbooking, int idCustomers, int idFares, int seatNumber) {
         this.id = id;
         this.idTripbooking = idTripbooking;
         this.idCustomers = idCustomers;

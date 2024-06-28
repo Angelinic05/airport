@@ -19,7 +19,6 @@ public class DocumenttypeConsoleAdapter {
         while (true) {
             int choice = menu(scanner);
             String desc;
-            int id;
             switch (choice) {
                 case 1:
                     System.out.print("Ingrese el nombre dele tipo de doc: ");

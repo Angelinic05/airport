@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import com.campuslands.modules.flightconnection.domain.Flightconnection;
 import com.campuslands.modules.plane.domain.Plane;
 import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 

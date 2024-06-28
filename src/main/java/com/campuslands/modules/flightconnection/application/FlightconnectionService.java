@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
-import com.campuslands.modules.employee.domain.Employee;
 import com.campuslands.modules.flightconnection.domain.Flightconnection;
 import com.campuslands.modules.flightconnection.infrastructure.FlightconnectionRepository;
 import com.campuslands.modules.plane.domain.Plane;
@@ -44,6 +43,7 @@ public class FlightconnectionService {
     }
 
     public int avaliableFlightsForTrip(){
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         List<Flightconnection> lista = flightconnectionRepository.avaliableFlightsForTrip();
         for (int i = 0; i < lista.size(); i++) {
@@ -73,6 +73,7 @@ public class FlightconnectionService {
         }
     }
     public int avaliableFlightsForPlane(){
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         List<Flightconnection> lista = flightconnectionRepository.avaliableFlightsForPlane();
         for (int i = 0; i < lista.size(); i++) {
@@ -103,6 +104,7 @@ public class FlightconnectionService {
     }
 
     public int avaliablePlanesForTrip(){
+        @SuppressWarnings("resource")
         Scanner sc = new Scanner(System.in);
         List<Plane> lista = planeRepository.avaliabPlanesForFlight();
         for (int i = 0; i < lista.size(); i++) {

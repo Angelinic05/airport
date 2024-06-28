@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.plane.domain.Plane;
-import com.campuslands.modules.trip.domain.Trip;
 import com.campuslands.modules.plane.application.PlaneService;
 
 public class PlaneConsoleAdapter {

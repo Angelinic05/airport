@@ -11,7 +11,6 @@ import java.util.Optional;
 
 import com.campuslands.modules.tripbooking.domain.Tripbooking;
 import com.campuslands.modules.tripbooking.infraestructure.TripbookingRepository;
-import com.campuslands.modules.tripbookingdetail.domain.Tripbookingdetail;
 
 public class TripbookingMySQLRepository implements TripbookingRepository{
     private final String url;

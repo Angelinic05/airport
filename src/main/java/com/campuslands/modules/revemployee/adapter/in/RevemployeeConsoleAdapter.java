@@ -1,11 +1,9 @@
 package com.campuslands.modules.revemployee.adapter.in;
 
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 import com.campuslands.modules.revemployee.application.RevemployeeService;
 import com.campuslands.modules.revemployee.domain.Revemployee;
-import com.campuslands.modules.trip.domain.Trip;
 
 public class RevemployeeConsoleAdapter {
     private final RevemployeeService revemployeeService;

@@ -1,12 +1,10 @@
 package com.campuslands.modules.employee.adapter.in;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.sql.Date;
 import com.campuslands.modules.employee.application.EmployeeService;
 import com.campuslands.modules.employee.domain.Employee;
-import com.campuslands.modules.trip.domain.Trip;
 
 public class EmployeeConsoleAdapter {
 

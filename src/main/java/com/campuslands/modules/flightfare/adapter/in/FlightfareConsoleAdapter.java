@@ -1,11 +1,9 @@
 package com.campuslands.modules.flightfare.adapter.in;
 
-import java.sql.Date;
 import java.util.Optional;
 import java.util.Scanner;
 
 import com.campuslands.modules.flightfare.domain.Flightfare;
-import com.campuslands.modules.trip.domain.Trip;
 import com.campuslands.modules.flightfare.application.FlightfareService;
 
 public class FlightfareConsoleAdapter {
