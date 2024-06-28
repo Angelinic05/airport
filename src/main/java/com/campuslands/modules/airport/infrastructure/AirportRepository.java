@@ -13,5 +13,5 @@ public interface AirportRepository {
     Optional<Airport> findById(int id);
     void delete(int id);
     List<Airport> findAll();
-    HashMap<Integer, List<Integer>> getAirportsByAirline();
+    HashMap<Integer, List<Integer>> getAirportsByAirline(); //
 }

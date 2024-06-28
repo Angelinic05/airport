@@ -29,7 +29,6 @@ public class TripbookingdetailConsoleAdapter {
 
             switch (choice) {
                 case 1:
-
                     System.out.println("Vuelos disponibles: \n");
                     tripbookingdetailService.flightsAvailable().forEach(p -> { //Listar los vuelos disponibles
                         System.out.println("IdTripbooking: " + p.getId() + " date: " + p.getDate() + " idTrip: " + p.getIdTrip());

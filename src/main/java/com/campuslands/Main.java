@@ -1,98 +1,72 @@
 package com.campuslands;
 
 import java.util.Scanner;
-
 import com.campuslands.modules.airline.adapter.in.AirlineConsoleAdapter;
 import com.campuslands.modules.airline.adapter.out.AirlineMySQLRepository;
 import com.campuslands.modules.airline.application.AirlineService;
-
 import com.campuslands.modules.airport.adapter.in.AirportConsoleAdapter;
 import com.campuslands.modules.airport.adapter.out.AirportMySQLRepository;
 import com.campuslands.modules.airport.application.AirportService;
-
 import com.campuslands.modules.airportAirline.adapter.in.AirportAirlineConsoleAdapter;
 import com.campuslands.modules.airportAirline.adapter.out.AirportAirlineMySQLRepository;
 import com.campuslands.modules.airportAirline.application.AirportAirlineService;
-
 import com.campuslands.modules.revision.adapter.in.RevisionConsoleAdapter;
 import com.campuslands.modules.revision.adapter.out.RevisionMySQLRepository;
 import com.campuslands.modules.revision.application.RevisionService;
-
 import com.campuslands.modules.revisiondetail.adapter.in.RevisiondetailConsoleAdapter;
 import com.campuslands.modules.revisiondetail.adapter.out.RevisiondetailMySQLRepository;
 import com.campuslands.modules.revisiondetail.application.RevisiondetailService;
-
-
 import com.campuslands.modules.status.adapter.in.StatusConsoleAdapter;
 import com.campuslands.modules.status.adapter.out.StatusMySQLRepository;
 import com.campuslands.modules.status.application.StatusService;
-
 import com.campuslands.modules.trip.adapter.in.TripConsoleAdapter;
 import com.campuslands.modules.trip.adapter.out.TripMySQLRepository;
 import com.campuslands.modules.trip.application.TripService;
-
 import com.campuslands.modules.tripbooking.adapter.in.TripbookingConsoleAdapter;
 import com.campuslands.modules.tripbooking.adapter.out.TripbookingMySQLRepository;
 import com.campuslands.modules.tripbooking.application.TripbookingService;
-
 import com.campuslands.modules.tripbookingdetail.adapter.in.TripbookingdetailConsoleAdapter;
 import com.campuslands.modules.tripbookingdetail.adapter.out.TripbookingdetailMySQLRepository;
 import com.campuslands.modules.tripbookingdetail.application.TripbookingdetailService;
-
 import com.campuslands.modules.tripcrew.adapter.in.TripcrewConsoleAdapter;
 import com.campuslands.modules.tripcrew.adapter.out.TripcrewMySQLRepository;
 import com.campuslands.modules.tripcrew.application.TripcrewService;
-
 import com.campuslands.modules.tripulationrol.adapter.in.TripulationrolConsoleAdapter;
 import com.campuslands.modules.tripulationrol.adapter.out.TripulationrolMySQLRepository;
 import com.campuslands.modules.tripulationrol.application.TripulationrolService;
-
 import com.campuslands.modules.city.adapter.in.CityConsoleAdapter;
 import com.campuslands.modules.city.adapter.out.CityMySQLRepository;
 import com.campuslands.modules.city.application.CityService;
-
 import com.campuslands.modules.country.adapter.in.CountryConsoleAdapter;
 import com.campuslands.modules.country.adapter.out.CountryMySQLRepository;
 import com.campuslands.modules.country.application.CountryService;
-
 import com.campuslands.modules.customer.adapter.in.CustomerConsoleAdapter;
 import com.campuslands.modules.customer.application.CustomerService;
 import com.campuslands.modules.customer.adapter.out.CustomerMySQLRepository;
-
 import com.campuslands.modules.documenttype.adapter.in.DocumenttypeConsoleAdapter;
 import com.campuslands.modules.documenttype.adapter.out.DocumenttypeMySQLRepository;
 import com.campuslands.modules.documenttype.application.DocumenttypeService;
-
 import com.campuslands.modules.employee.adapter.in.EmployeeConsoleAdapter;
 import com.campuslands.modules.employee.adapter.out.EmployeeMySQLRepository;
 import com.campuslands.modules.employee.application.EmployeeService;
-
-
 import com.campuslands.modules.flightconnection.adapter.in.FlightconnectionConsoleAdapter;
 import com.campuslands.modules.flightconnection.application.FlightconnectionService;
 import com.campuslands.modules.flightconnection.adapter.out.FlightconnectionMySQLRepository;
-
 import com.campuslands.modules.flightfare.adapter.in.FlightfareConsoleAdapter;
 import com.campuslands.modules.flightfare.application.FlightfareService;
 import com.campuslands.modules.flightfare.adapter.out.FlightfareMySQLRepository;
-
 import com.campuslands.modules.gate.adapter.in.GateConsoleAdapter;
 import com.campuslands.modules.gate.adapter.out.GateMySQLRepository;
 import com.campuslands.modules.gate.application.GateService;
-
 import com.campuslands.modules.manufacture.adapter.in.ManufactureConsoleAdapter;
 import com.campuslands.modules.manufacture.adapter.out.ManufactureMySQLRepository;
 import com.campuslands.modules.manufacture.application.ManufactureService;
-
 import com.campuslands.modules.model.application.ModelService;
 import com.campuslands.modules.model.adapter.out.ModelMySQLRepository;
 import com.campuslands.modules.model.adapter.in.ModelConsoleAdapter;
-
 import com.campuslands.modules.plane.application.PlaneService;
-import com.campuslands.modules.plane.infrastructure.PlaneRepository;
 import com.campuslands.modules.plane.adapter.out.PlaneMySQLRepository;
 import com.campuslands.modules.plane.adapter.in.PlaneConsoleAdapter;
-
 import com.campuslands.modules.revemployee.adapter.in.RevemployeeConsoleAdapter;
 import com.campuslands.modules.revemployee.adapter.out.RevemployeeMySQLRepository;
 import com.campuslands.modules.revemployee.application.RevemployeeService;

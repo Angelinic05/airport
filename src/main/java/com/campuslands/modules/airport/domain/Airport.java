@@ -72,4 +72,12 @@ public class Airport {
     public double distanceTo(Airport other) {
         return Math.sqrt(Math.pow(this.xPosition - other.xPosition, 2) + Math.pow(this.yPosition - other.yPosition, 2));
     }
+
+    /*distanceTo es una funcion para la implementacin de los grafos.
+     retorna el resultado de la funcion para calcular la distancia entre dos puntos en un plano bidimensional utilizando el teorema de Pitágoras. 
+    - Math.sqrt es la raiz 
+    - Marth.pow es la potencia (Math.pow(this.xPosition - other.xPosition, 2) 
+    this.xPosition es la posicion del aeropuerto 
+
+     */
 }
