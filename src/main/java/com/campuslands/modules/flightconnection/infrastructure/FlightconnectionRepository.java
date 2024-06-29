@@ -11,6 +11,8 @@ public interface FlightconnectionRepository {
     Optional<Flightconnection> findById(int id);
     void delete(int id);
     List<Flightconnection> findAll();
-    List<Flightconnection> avaliableFlightsForTrip();
-    List<Flightconnection> avaliableFlightsForPlane();
+    List<Flightconnection> avaliableFlightsForTrip(); //LISTA DE VUELOS DISPONIBLES PARA LA TABLA TRIP 
+    List<Flightconnection> avaliableFlightsForPlane(); //LISTA DE AVIONES DISPONIBLES PARA AVION
 }
+
+

@@ -3,7 +3,7 @@ package com.campuslands.modules.employee.domain;
 import java.sql.Date; //importacion de fecha en formato sql
 
 public class Employee {
-    int id;
+    int id; //ESTE ID NO ES AUTOINCREMENTAL, SE DEBE PEDIR SÍ O SÍ
     String name;
     int idRol;
     Date entryDate;

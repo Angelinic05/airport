@@ -133,13 +133,24 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
 
     @Override
     public List<Employee> selectAvaliableEmployee() {
-        List<Employee> employee = new ArrayList<>();
-        try (Connection connection = DriverManager.getConnection(url, user, password)) {
-            String query = "SELECT e.* FROM employee e WHERE e.id NOT IN (SELECT tc.idEmployee FROM tripcrew tc)";
+        List<Employee> employee = new ArrayList<>(); //inicializamos una lista tipo empleados
+        try (Connection connection = DriverManager.getConnection(url, user, password)) { //Generamos la connecion con la base de datos
+            String query = "SELECT e.* FROM employee e WHERE e.id NOT IN (SELECT tc.idEmployee FROM tripcrew tc)"; 
+            /*Realizamos la consulta que dice asi: 
+            SELECCIONAR todo 
+            DE empleado
+            DONDE el id del empleado NO ESTE EN (SELECCIONAR id empleado DE tripcrew)
+
+            "(SELECCIONAR id empleado DE tripcrew)" esto es una SUB-CONSULTA y retorna el valor de lo pedido, que es:
+
+            SELECCIONAR EL id empleado DE tripcrew, entonces va a devolver todos los id de los empleados que estan 
+            asociados a un tripcrew y con la condicion "NOT IN" con nuestra consulta principal vamos a filtrar
+            a todos los empleados que nos retorno la SUB-CONSULTA
+             */
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
-                        Employee employee2 = new Employee(
+                        Employee employee2 = new Employee( //CREAMOS EL EMPLEADO CON LAS CARACTERISTICAS
                             resultSet.getInt("id"),
                             resultSet.getString("name"),
                             resultSet.getInt("idRol"),
@@ -147,14 +158,14 @@ public class EmployeeMySQLRepository implements EmployeeRepository{
                             resultSet.getInt("idAirline"),
                             resultSet.getInt("idAirport")
                         );
-                        employee.add(employee2);
+                        employee.add(employee2); //LO AGREGAMOS A LA LISTA QUE CREAMOS ANTERIORMENTE
                     }
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return employee;
+        return employee; //RETORNAMOS LA LISTA
     }
 
 }

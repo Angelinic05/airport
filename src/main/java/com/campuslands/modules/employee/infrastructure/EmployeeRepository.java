@@ -11,5 +11,5 @@ public interface EmployeeRepository {
     Optional<Employee> findById(int id);
     void delete(int id);
     List<Employee> findAll();
-    List<Employee> selectAvaliableEmployee();
+    List<Employee> selectAvaliableEmployee(); //SELECCIONAR EMPLEADO DISPONIBLE
 }

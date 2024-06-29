@@ -14,12 +14,13 @@ public class AirportAirlineConsoleAdapter {
     }
 
     public void start() {
-        Scanner scanner = new Scanner(System.in);
-        int id;
+        Scanner scanner = new Scanner(System.in); //inicializamos el scanner 
+        int id; //Inicializamos las variables de forma global para utilizarlas en cada caso sin necesidad de volver a inicializarlas en cada caso
         int airlineId;
         int airportId;
+
         while (true) {
-            int choice = menu(scanner);
+            int choice = menu(scanner); //Al menu le pasamos el scanner
             
             switch (choice) {
                 case 1:
@@ -35,8 +36,7 @@ public class AirportAirlineConsoleAdapter {
                     System.out.print("Airport ID: ");
                     airportId = scanner.nextInt();
                     scanner.nextLine();
-                    
-                    AirportAirline airportAirline = new AirportAirline(airlineId, airportId);
+                    AirportAirline airportAirline = new AirportAirline(airlineId, airportId); //Despues de recolectar todos los datos llamamos al constructor
                     airportAirlineService.createAirportAirline(airportAirline);
                     break;
                 case 3:
@@ -44,12 +44,17 @@ public class AirportAirlineConsoleAdapter {
                     System.out.print("Ingrese el Id a actualizar: ");
                     int idToUpdate = scanner.nextInt();
                     scanner.nextLine();
-                    Optional<AirportAirline>  optionalAirportAirline= airportAirlineService.getAirportAirlineById(idToUpdate);
-                    optionalAirportAirline.ifPresentOrElse(updatedAirportAirline -> {
-                        int optSubMenu = -1;
+                    Optional<AirportAirline>  optionalAirportAirline = airportAirlineService.getAirportAirlineById(idToUpdate); //Aqui obtenemos el objeto que nos retorna el metodo getAirport... 
+                    //Lo guardamos en una variable llamada optionalAirportAirline 
+
+                    //Luego le decimos que si en la variable optionalAirportAirline hay algo presene, que ejecute lo primero, y si no, que devuelva un objeto vacio
+
+
+                    optionalAirportAirline.ifPresentOrElse(updatedAirportAirline -> {//updateAirportAirline se convierte en el objeto 
+                        int optSubMenu = -1; //inicializamos opcion en -1 para iniciar con un bucle hasta que la opcion sea salir 
                         String submenu = "¿Qué desea actualizar?\n1. id de la aerolinea\n2. id del aeropuerto\n0.Salir\n";
                 
-                        while (optSubMenu != 0) {
+                        while (optSubMenu != 0) { //Si optSubMenu es distinta a cero inicia a pedir los datos uno por uno
                             System.out.println(submenu);
                             optSubMenu = Integer.parseInt(scanner.nextLine());
                 
@@ -57,8 +62,8 @@ public class AirportAirlineConsoleAdapter {
                                 case 1:
                                     System.out.print("Ingrese el id de la aerolinea: ");
                                     int setIdAirline = Integer.parseInt(scanner.nextLine());
-                                    updatedAirportAirline.setIdAirline(setIdAirline);
-                                    break;
+                                    updatedAirportAirline.setIdAirline(setIdAirline); //Es por eso que podemos llamar a los metodos para cambiar los valores
+                                    break; //cuando ya el valor esta cambiado el caso se rompe e inicia un nuevo bucle 
                                 case 2:
                                     System.out.print("Ingrese el id del aeropuerto: ");
                                     int setIdAirport = Integer.parseInt(scanner.nextLine());
@@ -66,7 +71,7 @@ public class AirportAirlineConsoleAdapter {
                                     break;
                             }
                         }
-                        airportAirlineService.updateAirportAirline(updatedAirportAirline);
+                        airportAirlineService.updateAirportAirline(updatedAirportAirline); //una vez el bucle se rompe por completo, le pasamos el objeto con los cambios realizados y llamamos al metodo que creamos y le pasamos el objeto nuevo
                     }
                         , () -> System.out.println("No se encontro el id " + idToUpdate));
                     break;
@@ -75,7 +80,6 @@ public class AirportAirlineConsoleAdapter {
                     System.out.print("Id: ");
                     id = scanner.nextInt();
                     scanner.nextLine();
-                    
                     airportAirlineService.deleteAirportAirline(id);
                     break;
                 case 5:
@@ -105,17 +109,17 @@ public class AirportAirlineConsoleAdapter {
         System.out.println("0. Salir");
         System.out.println("");
         System.out.print("Ingrese la opcion: ");
-        int choice = -1;
-        while (choice < 0 || choice > 5) {
+        int choice = -1; //Inicializamos la opcion en -1
+        while (choice < 0 || choice > 5) { //creamos condicion "Mientras que choice sea menor a 0 o choice sea mayor a 5 entra"
             try {
-                choice = Integer.parseInt(scanner.nextLine());
-                if (choice > 6) {                    
+                choice = Integer.parseInt(scanner.nextLine()); // pedimos al usuario que ingrese la opcion
+                if (choice > 6) { //Si choice es mayor a 6 entonces 
                     System.out.println("Ingrese una opcion valida (1 - 4).");
                 }
             } catch (Exception e) {
                 System.out.println("Ingrese una opcion valida (1 - 4).");
             }
         }
-        return choice;
+        return choice; //Aqui devolvemos la opcion VALIDA que el usuario ingrese
     }
 }
